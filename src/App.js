@@ -3,6 +3,7 @@ import L from "leaflet";
 import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Soil from "./Soil";
+import Planting from "./Planting";
 import SoilContainer from "./SoilContainer";
 import {
   MapContainer,
@@ -19,6 +20,8 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "./App.css";
 import Information from "./information";
+import { LinearProgress, Typography, Box } from "@mui/material";
+import Crop from "./Crop";
 
 const icons = {
   defaultIcon: new L.Icon({
@@ -42,7 +45,7 @@ function App() {
         [2.019858963264568, 103.22156929584389],
         [2.029858963264568, 103.23156929584389],
       ], // Coordinates for a polygon
-      crops: [{ name: "Crop 1" }, { name: "Crop 2" }], // Example crops
+      crops: { name: "Crop 1" },
       soilType: {
         texture: "Loamy",
         ph: "6.5",
@@ -68,7 +71,7 @@ function App() {
         [2.029858963264568, 103.23156929584389],
         [2.024858963264568, 103.24156929584389],
       ], // Coordinates for another polygon
-      crops: [{ name: "Crop 3" }, { name: "Crop 4" }], // Example crops
+      crops: { name: "Crop 4" },
       soilType: {
         texture: "Sandy",
         ph: "7.0",
@@ -90,6 +93,7 @@ function App() {
   ]);
   const [selectedLand, setSelectedLand] = useState(null);
   const [showLandInfo, setShowLandInfo] = useState(false);
+  const [showAddCrop, setShowAddCrop] = useState(false);
   const [id, setID] = useState("");
   const [latlngs, setlatlngs] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(null);
@@ -102,16 +106,8 @@ function App() {
     setSelectedIcon(icons[selectedValue]);
   };
 
-  const handleAddCrop = (landId) => {
-    const newCrop = {
-      name: prompt("Enter plant name:"),
-    };
-
-    setMapLayers((layers) =>
-      layers.map((land) =>
-        land.id === landId ? { ...land, crops: [...land.crops, newCrop] } : land
-      )
-    );
+  const handleAddCrop = () => {
+    setShowAddCrop(true);
   };
   // const MapEvents = () => {
   //   useMapEvents({
@@ -194,12 +190,11 @@ function App() {
             onDeleted={_onDeleted}
             onEdited={_onEdited}
             draw={{
-              circle: true,
-              circlemarker: true,
+              circle: false,
+              circlemarker: false,
               rectangle: true,
               polyline: true,
               polygon: true,
-              marker: false,
             }}
           />
         </FeatureGroup>
@@ -230,11 +225,9 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {land.crops.map((crop, index) => (
-                      <tr key={index}>
-                        <td>{crop.name}</td>
-                      </tr>
-                    ))}
+                    <tr>
+                      <td>{selectedLand && selectedLand.crops.name}</td>
+                    </tr>
                   </tbody>
                 </Table>
                 <button onClick={() => handleAddCrop(land.id)}>Add Crop</button>
@@ -289,13 +282,30 @@ function App() {
               id: id, // Generate a random ID；
               latlngs: latlngs, // You can add the actual latlngs data here
               soilType: soilType,
-              crops: [],
+              crops: null,
               markerPosition: calculateCenter(latlngs),
             };
             setMapLayers((prevLayers) => [...prevLayers, newLand]);
             // setSelectedLand(newLand);
           }}
           onClose={() => setShowLandInfo(false)}
+        />
+      </div>
+      <div id="cropPortal">
+        <Crop
+          id={selectedLand && selectedLand.id}
+          open={showAddCrop}
+          onCropSubmit={(newCrop) => {
+            setMapLayers((layers) =>
+              layers.map((land) =>
+                land.id === selectedLand.id
+                  ? { ...land, crops: { name: newCrop.name } }
+                  : land
+              )
+            );
+            // setSelectedLand(newLand);
+          }}
+          onClose={() => setShowAddCrop(false)}
         />
       </div>
       <div className="tabs-container">
@@ -342,9 +352,9 @@ function App() {
         {/* Content based on active tab */}
         <div className="tab-content">
           {activeTab === "soil" && selectedLand && (
-            <SoilContainer soilData={selectedLand.soilType}></SoilContainer>
+            <SoilContainer></SoilContainer>
           )}
-          {activeTab === "crops" && <div>Crops content goes here...</div>}
+          {activeTab === "crops" && <Planting></Planting>}
           {activeTab === "fertilization" && <div>pH content goes here...</div>}
           {activeTab === "pest management" && (
             <div>Weather content goes here...</div>
