@@ -1,0 +1,126 @@
+.AddPostcontainer{
+    background-color: #F7F8F9;
+    /*background-color: red;*/
+    z-index: -1;
+    padding-top: 13px;
+    padding-left: 5px;
+    padding-right: 15px;
+}
+
+.underContent-add{
+    margin-top: 10px;
+}
+
+.sendBtn{
+    border: transparent;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.sendBtn:hover{
+    filter: brightness(100) invert(1);
+}
+
+/*.sendBtn, .delete-btn{*/
+/*    border: transparent;*/
+/*    background-color: transparent;*/
+/*    width: 40px;*/
+/*    height: 40px;*/
+/*    padding-top: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.sendBtn:hover, .delete-btn:hover{*/
+/*    filter: brightness(100) invert(1);*/
+/*}*/
+
+.sendPost{
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.Post-Info-Add{
+    margin-right: 40px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.buttons-AddPost{
+   border-color: transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.attachAddBtn, .UploadImageBtn, .GIFAddBtn{
+    width: 30px;
+    height: 30px;
+}
+
+.attachAddBtn:hover, .UploadImageBtn:hover, .GIFAddBtn:hover {
+    filter: brightness(100) invert(1);
+}
+/* AddNewPost.css or any other CSS file */
+.upload-container {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #A0A0A0;
+}
+.upload-container:hover{
+    background-color: #F7F8F9;
+    color: #A0A0A0;
+}
+
+.upload-container p {
+    margin: 10px 0;
+}
+
+.upload-container div {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Style for active state */
+.upload-container.active {
+    background-color: #f0f0f0; /* Change background color when active */
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width as needed */
+    grid-gap: 10px; /* Adjust gap between images */
+}
+
+.image-preview {
+    overflow: hidden; /* Ensure images don't overflow their containers */
+    border-radius: 8px; /* Optional: Add rounded corners to images */
+}
+
+.uploaded-image {
+    max-width: 100%; /* Set a maximum width */
+    max-height: 100%; /* Set a maximum height */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.delete-btn {
+    background-color: #A0A0A0;
+    color: white;
+    border: none;
+    border-radius: 30%;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+
+
+

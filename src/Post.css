@@ -1,0 +1,142 @@
+
+.headerPostPage{
+    /*padding-left: 20px;*/
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.searchBox{
+    padding-left: 15px;
+    border: transparent;
+    /*background-color: #B4D18E;*/
+    border-radius: 30px;
+    height: 40px;
+    width: 350px;
+}
+
+.EachSingleAccount{
+    padding: 10px;
+}
+
+.searchBox::placeholder{
+    /*color: white;*/
+    font-weight: bold;
+}
+
+.searchBox:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.addPost{
+    background-color: transparent;
+    border: transparent;
+}
+
+.addNewBtn{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.addNewBtn:hover{
+    filter: brightness(100) invert(1);
+}
+
+.sidebarPost{
+    height: auto;
+    width: 200px;
+    background-color: #B4D18E;
+}
+
+.containerPostUnder{
+    background-color: #F7F8F9;
+}
+
+.EachSinglePost{
+    padding: 10px;
+}
+
+.username{
+    font-weight: bold;
+}
+
+.postTime, .signs{
+    color: #A0A0A0;
+    font-size: 13px;
+}
+
+.post-content, .account-details{
+    padding: 10px;
+}
+
+.commentBox{
+    padding-left: 20px;
+    height: 29px;
+    width: 250px;
+    border-radius: 20px;
+    border: transparent;
+    background-color: #EFEFEF;
+}
+
+.commentBox::placeholder{
+    color: #8E8E8E;
+}
+
+.commentBox::placeholder:hover{
+    color: white;
+}
+
+
+.commentBox:hover{
+    background-color: #C0BEBE;
+    color: white;
+}
+
+.buttonInteraction{
+    border: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+/* Style for modal content */
+.modalContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the modal content height to fill the viewport */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    backdrop-filter: blur(5px); /* Optional: Apply a blur effect to the background */
+}
+
+/* Style for modal image */
+.modalImage {
+    max-width: 90%; /* Set maximum width to 90% of modal content */
+    max-height: 90vh; /* Set maximum height to 90% of viewport height */
+    object-fit: contain; /* Maintain aspect ratio and fit within the container */
+}
+
+.followBtn, .searchBtn{
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border-color: transparent;
+    background-color: #8BA766;
+    font-weight: bold;
+}
+
+.flwSection{
+    padding-top: 10px;
+}
+
+.followBtn:hover{
+    border-color: #8BA766;
+    background-color: transparent;
+}
+
+.searchBtn:hover{
+    background-color: black;
+    color: white;
+}
