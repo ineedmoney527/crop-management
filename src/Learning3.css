@@ -1,0 +1,69 @@
+/* Learning3.css */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 389px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+.video-player {
+    width: 100%;
+}
+
+.L3-Content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.L3-Title{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.L3-Note-Content{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    /*justify-content: center;*/
+}
+
+.L3-Note-Title{
+    /*display: flex;*/
+    /*justify-content: center;*/
+    font-weight: bold;
+    font-size: 20px;
+    flex-grow: 1; /* Allow the title to grow and take up available space */
+    text-align: center;
+    margin-right: -100px;
+}
+
+.L3-Print-Button{
+    width: 110px;
+    height: 25px;
+    display: flex;
+    border-radius: 20px;
+    border-color: transparent;
+    color: #F2F3C0;
+    background-color:darkslategray;
+    margin-left: auto;
+    margin-right: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.L3-Detail{
+    margin-left: 20px;
+
+}

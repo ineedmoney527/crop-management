@@ -1,0 +1,173 @@
+.sd-chat-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sd-chat_sidebar{
+    display: flex;
+    width: 200px;
+    height: 100vh;
+    background-color: #F2F3C0;
+}
+
+.sd-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    align-items: center;
+    padding: 10px;
+}
+
+.sd-message-received {
+    /*background-color: #f0f0f0;*/
+    align-self: flex-start;
+}
+
+.sd-input-container {
+    margin-top: 80px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 100%;
+}
+
+.sd-input-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.sd-input-container button {
+    padding: 8px 15px;
+    background-color: darkslategray;
+    border: none;
+    border-radius: 5px;
+    color: #F2F3C0;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.sd-input-container button:hover {
+    background-color: #0056b3;
+}
+
+.sd-dropdown {
+    float: left;
+    position: relative;
+    display: inline-block;
+}
+
+.sd-dropbtn {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: transparent;
+    font-family: inherit;
+    margin: 0;
+}
+
+.sd-dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.sd-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.sd-dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.sd-dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.sd-show {
+    display: block;
+}
+
+.sd-user-message{
+    display: flex;
+    flex-direction: column;
+}
+
+.sd-user{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    padding:12px;
+    font-weight: bold;
+}
+
+.sd-user .sd-label{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.sd-icon{
+    width: 35px;
+    height: 35px;
+}
+
+.sd-question{
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.sd-message{
+    display: flex;
+    flex-direction: column;
+}
+
+.smart-doctor{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    padding:12px;
+    font-weight: bold;
+}
+
+.smart-doctor-icon{
+    width: 35px;
+    height: 35px;
+}
+
+.sdd-answer{
+    font-size: 14px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.smart-doctor .sd-label{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.camera-button{
+    background-color: transparent;
+    border-color: black;
+    border-radius: 20px;
+    margin-right: 20px;
+}
+
+.plant{
+    width: 80px;
+    height: 90px;
+}

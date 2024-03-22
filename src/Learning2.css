@@ -1,0 +1,214 @@
+.chat-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat-sidebar-box{
+    margin-top: 100px;
+}
+
+.sidebar-button{
+    margin-bottom: 15px;
+    width: 200px;
+    height: 45px;
+    border: transparent;
+    background-color: transparent;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.sidebar-button:hover{
+    background-color: white;
+}
+
+.chat_sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100vh
+;
+    background-color: #F2F3C0;
+}
+
+.chat-messages {
+    /*flex: 1;*/
+    overflow-y: auto;
+    /*align-items: center;*/
+    padding: 10px;
+    margin-left: 35px;
+}
+
+.message {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+.message.received {
+    /*background-color: #f0f0f0;*/
+    align-self: flex-start;
+}
+
+.message.sent {
+    font-weight: bold;
+    display: flex;
+    color: black;
+    font-size: 25px;
+    justify-content: center;
+    margin-top: 120px;
+
+    /*align-self: flex-end;*/
+}
+
+.message-sent-label{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.L2-learning-column{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+
+}
+
+.L2-learning-column-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.L2-learning-column-2{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.L2-learning-button{
+    width: 330px;
+    height: 170px;
+    background-color: transparent;
+    color:black;
+    margin-bottom: 18px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.L2-learning-button:hover{
+    background-color: #dddddd;
+}
+
+.L2-button-name{
+    font-weight: bold;
+}
+
+.L2-title{
+    font-size: 23px;
+    font-weight: bold;
+    display: flex;
+    margin-left: 50px;
+    /*justify-content: center;*/
+}
+
+
+.progress-bar-container {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50; /* Green */
+    border-radius: 10px;
+}
+
+.L2-learning-column-2-label{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.L2-learning-column-2-icon{
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.L2-Lessons{
+    margin-left: 50px;
+}
+
+.L2-Lessons-Title{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    color: #595959;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.L2-Lessons-Title-Label{
+    /*margin-right: 400px;*/
+}
+
+.line {
+    margin-top: 10px;
+    width: 100%;
+    height: 1.2px;
+    background-color: #BBBBBB;
+}
+
+.L2-Lessons-Column{
+    display: flex;
+    flex-direction: column;
+}
+
+.L2-Lessons-small-title{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #595959;
+}
+
+.L2-Lessons-Title-button{
+    font-size: 12px;
+    width: 50px;
+    margin-left: 450px;
+    background-color: darkslategray;
+    color: #F2F3C0;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.L2-Lessons-Small-Title-button{
+    font-size: 12px;
+    width: 50px;
+    margin-left: 480px;
+    background-color: darkslategray;
+    color: #F2F3C0;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.L2-Lessons-quiz-button{
+    font-size: 12px;
+    width: 50px;
+    margin-left: 543px;
+    background-color: darkslategray;
+    color: #F2F3C0;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+}

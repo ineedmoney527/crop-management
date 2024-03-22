@@ -1,0 +1,180 @@
+
+.cba-chat-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.cba-chat_sidebar{
+    display: flex;
+    width: 200px;
+    height: 100vh;
+    background-color: #F2F3C0;
+}
+
+.cba-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    align-items: center;
+    padding: 10px;
+}
+
+.cba-message {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+.cba-message.received {
+    align-self: flex-start;
+}
+
+.cba-message.sent {
+    font-weight: bold;
+    display: flex;
+    color: black;
+    font-size: 25px;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+.cba-message-sent-label{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.cba-input-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 90%;
+    margin-left: 40px;
+}
+
+.cba-input-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.cba-input-container button {
+    padding: 8px 15px;
+    background-color: gray;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.cba-input-container button:hover {
+    background-color: #0056b3;
+}
+
+.cba-dropdown {
+    float: left;
+    position: relative;
+    display: inline-block;
+}
+
+.cba-dropbtn {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: transparent;
+    font-family: inherit;
+    margin: 0;
+}
+
+.cba-dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.cba-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.cba-dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.cba-dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.cba-show {
+    display: block;
+}
+
+.cba-user-message{
+    display: flex;
+    flex-direction: column;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    padding:10px;
+    font-weight: bold;
+}
+
+.user .label{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.icon{
+    width: 35px;
+    height: 35px;
+}
+
+.question{
+    font-size: 14px;
+    margin-left: 50px;
+    margin-bottom: 15px;
+}
+
+.chatbot{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    padding:12px;
+    font-weight: bold;
+}
+
+.chatbot-icon{
+    width: 35px;
+    height: 35px;
+}
+
+.cba-answer{
+    font-size: 14px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.chatbot .cba-label{
+    margin-top: 5px;
+    margin-left: 5px;
+}
