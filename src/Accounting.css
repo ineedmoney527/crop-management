@@ -1,0 +1,68 @@
+.tags {
+    display: flex;
+    font-size: 15px;
+    font-family: Inter;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+}
+.revenue,
+.profit{
+    background-color: rgb(18, 184, 18);
+    border-radius: 20px;
+    padding: 8px;
+    margin-right: 10px;
+}
+.expenses{
+    background-color: rgb(212, 23, 23);
+    border-radius: 20px;
+    padding: 8px;
+    margin-right: 10px;
+}
+.transaction-summary-container{
+    display: flex;
+    flex-direction: flex-start;
+    margin-top: 20px;
+}
+.summary-graphs{
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+.summary-pie-chart{
+    display: flex;
+    width:40%;
+    align-items: flex-start;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+.summary-bar-chart{
+    display: flex;
+    width:50%;
+    align-items: flex-start;
+    padding-left: 25px;
+    padding-top: 25px;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+.add-transaction{
+    display: flex;
+    margin-left: auto;
+}
+.add-transaction-button{
+    background-color: rgb(18, 184, 18);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-family: Inter;
+    cursor: pointer;
+}
+.transaction-table{
+    border: 1px solid rgba(0, 0, 0, 0.607);
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+}

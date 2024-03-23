@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .sub-container {
+    display: flex;
+    direction: row;
+    margin-left: 5px;
+    width:100%
+  }
+  .back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-start;
+  }

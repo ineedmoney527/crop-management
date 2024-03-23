@@ -1,0 +1,161 @@
+
+  .details-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .details-middle {
+    display: flex;
+    direction: row;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .details-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+    text-wrap: wrap;
+}
+  
+  .crop-image {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 283.547px;
+  }
+  
+  .details-content {
+    display: flex;
+    direction: column;
+    align-items: flex-start;
+  }
+  
+  .crop-name {
+    color: #495D44;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .scientific-name {
+    color: rgba(0, 0, 0, 0.60);
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .other-names {
+    color: rgba(0, 0, 0, 0.60);
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .description {
+    margin-top: 10px;
+    font-size: 18px;
+    margin-bottom: 24px;
+    font-family: Inter;
+    font-weight: bold;
+  }
+  
+  .details-care-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .details-care-button {
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #F1DDA8;
+    margin-right: 10px;
+    padding:10px
+  }
+  .details-care-button:hover,
+  .details-care-button:active {
+    background-color: #efd17e;
+    cursor: pointer;
+}
+  
+  .details-attributes-container {
+    display: flex;
+    direction: column;
+    width: 100%;
+  }
+  
+  .details-attributes {
+    display: flex;
+    direction: column;
+    align-items: flex-start;
+    width: 50%;
+  }
+  .button-components{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .button-text1{
+    color: rgba(0, 0, 0, 0.60);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .button-text2{
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .attributes-title{
+    display: flex;
+    align-items: center;
+  }
+  .attributes-title-text{
+    color: #000;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .attributes-container{
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    font-family: Inter;
+    line-height: normal;
+  }
+  .attribute {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 15px;
+    padding-left: 25px;
+    width:90%;
+    text-align: start;
+  }
+  .attribute-name {
+    color: rgba(0, 0, 0, 0.60);
+    width:40%;
+  }
+  .attribute-value {
+    color: #000;
+    width:60%;
+    font-size: 20px;
+  }
