@@ -1,0 +1,44 @@
+.marketStorePage{
+    background-color: #F7F8F9;
+    padding: 20px 20px 10px 20px;
+}
+
+.StoreTitle{
+    color: #3F4736;
+}
+
+.Header2, .smallText{
+    color: #3F4736;
+}
+
+.smallText{
+    color: #495D44;
+}
+
+.cardButtons{
+    padding: 10px;
+}
+
+.searchStore {
+    width: 550px;
+    height: 50px;
+    padding: 10px;
+    border: 2px solid transparent; /* Initially, the border is transparent */
+    border-radius: 20px; /* Rounded corners */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition for border and box-shadow */
+
+    /* Additional styles */
+    font-size: 16px;
+    outline: none; /* Remove outline */
+}
+
+/* Hover effect */
+.searchStore:hover {
+    border-color: #8BA766; /* Border color on hover */
+}
+
+/* Click effect */
+.searchStore:focus {
+    border-color: #8BA766; /* Border color when input is clicked */
+    box-shadow: 0px 0px 10px #495D44; /* Box shadow for water droplet effect */
+}
