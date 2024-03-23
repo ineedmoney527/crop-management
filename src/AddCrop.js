@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Crop.css";
+import "./AddFertilization.css";
 import Planting from "./Planting";
 import blueberry from "./images/blueberry.png";
 import tomato from "./images/tomato.png";
@@ -9,7 +9,7 @@ import banana from "./images/banana.png";
 import broccoli from "./images/broccoli.png";
 
 import { blue } from "@mui/material/colors";
-export default function Crop({ id, open, onCropSubmit, onClose }) {
+export default function Crop({ open, onCropSubmit, onClose }) {
   const crops = [
     {
       name: "Blueberry",
@@ -42,7 +42,6 @@ export default function Crop({ id, open, onCropSubmit, onClose }) {
   const handleAdd = (crop) => {
     onCropSubmit(crop); // Pass the selected crop to the onSubmit function
     onClose();
-    <Planting />;
   };
 
   const handleViewDetail = (crop) => {
@@ -56,7 +55,7 @@ export default function Crop({ id, open, onCropSubmit, onClose }) {
           &times;
         </span>
         <img src={crop.image} alt={crop.name} />
-        <h2>{crop.name}</h2>
+        <label>{crop.name}</label>
         <button className="select" onClick={() => handleAdd(crop)}>
           Select
         </button>{" "}

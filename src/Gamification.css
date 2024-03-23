@@ -1,210 +1,211 @@
-.gamification-row{
-    display: flex;
-    flex-direction: row;
+.chat-container {
+  margin-left: 10%;
+  display: flex;
+}
+.gamification-row {
+  justify-content: space-around;
+  gap: 100px;
+  display: flex;
 }
 
-.gamification-content{
-    display: flex;
-    flex-direction: column;
-    margin-left: 100px;
+.gamification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
 }
-.personal{
-    display: flex;
-    flex-direction: row;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.personal-icon{
-    width: 220px;
-    height: 150px;
-    margin-right: 50px;
+.personal {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.medal{
-    width: 80px;
-    height: 80px;
-}
-.personal-information{
-    display: flex;
-    flex-direction: column;
+.personal-icon {
+  width: 220px;
+  height: 150px;
+  margin-right: 50px;
 }
 
-.personal-information label,progress{
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.medal {
+  width: 80px;
+  height: 80px;
+}
+.personal-information {
+  display: flex;
+  flex-direction: column;
 }
 
-.accomplishment-button{
-    /*border-radius: 1px;*/
-    border-color: transparent;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    width: 600px;
-    height: 25px;
-    background-color: lightgray;
-    color: black;
-    cursor: pointer;
-    justify-content: center;
+.personal-information label,
+progress {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.accomplishment-button-not-select{
-    border-color: transparent;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    width: 600px;
-    height: 25px;
-    background-color: white;
-    color: grey;
-    cursor: pointer;
-    justify-content: center;
-
+.accomplishment-button {
+  /*border-radius: 1px;*/
+  border-color: transparent;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 600px;
+  height: 25px;
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  justify-content: center;
 }
 
-.current-accomplishment{
-    height: 250px;
-    overflow-y: auto;
+.accomplishment-button-not-select {
+  border-color: transparent;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 600px;
+  height: 25px;
+  background-color: white;
+  color: grey;
+  cursor: pointer;
+  justify-content: center;
 }
 
-.current-1{
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    width: 100vh;
-    height: 80px;
+.current-accomplishment {
+  height: 250px;
+  overflow-y: auto;
 }
 
-.current-1-info{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
+.current-1 {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  width: 100vh;
+  height: 80px;
 }
 
-.current-1-info-column{
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-
-}
-.current-1-info-title{
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.current-1-info {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
 }
 
-.current-1-info-icon{
-    width: 65px;
-    height: 75px;
+.current-1-info-column {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.current-1-info-title {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.current-1-info-title label{
-    font-weight: bold;
+.current-1-info-icon {
+  width: 65px;
+  height: 75px;
 }
 
-.level-progress{
-    width: 250px;
-    height: 15px;
-    background-color: lightgray;
+.current-1-info-title label {
+  font-weight: bold;
+}
 
+.level-progress {
+  width: 250px;
+  height: 15px;
+  background-color: lightgray;
 }
 
 .level-progress::-webkit-progress-bar {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .level-progress::-webkit-progress-value {
-    background-color: darkseagreen;
+  background-color: darkseagreen;
 }
 
 progress {
-    width: 450px;
-    height: 15px;
-    background-color: lightgray;
-    border-radius: 20px;
+  width: 450px;
+  height: 15px;
+  background-color: lightgray;
+  border-radius: 20px;
 }
 
 progress::-webkit-progress-bar {
-    background-color: lightgray;
-    border-radius: 20px;
+  background-color: lightgray;
+  border-radius: 20px;
 }
 
 progress::-webkit-progress-value {
-    background-color: gold;
-    border-radius: 20px;
+  background-color: gold;
+  border-radius: 20px;
 }
 
-.ranking-bar{
-    height: 550px;
-    width: 230px;
-    margin-top: 30px;
-    margin-left: 40px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
+.ranking-bar {
+  height: 550px;
+  width: 230px;
+  flex: 1;
+  margin-top: 30px;
 
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-.ranking-person{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 15px;
-
+.ranking-person {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .ranking-level {
-    margin-left: auto;
+  margin-left: auto;
 }
 
-.ranking-person label{
+.ranking-person label {
 }
 
-.ranking-title{
-    font-weight: bold;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.ranking-title {
+  font-weight: bold;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.ranking-icon{
-    width: 35px;
-    height: 35px;
-    margin-left: 20px;
+.ranking-icon {
+  width: 35px;
+  height: 35px;
+  margin-left: 20px;
 }
 
-
-.goal-1-info{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    margin-right: 75px;
-    align-items: center;
+.goal-1-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-right: 75px;
+  align-items: center;
 }
 
-.goal-1-info-icon{
-    width: 100px;
-    height: 120px;
+.goal-1-info-icon {
+  width: 100px;
+  height: 120px;
 }
 
-.goal-1-info-title label{
-    font-size: 13px;
-    font-weight: bold;
-    z-index: 1;
+.goal-1-info-title label {
+  font-size: 13px;
+  font-weight: bold;
+  z-index: 1;
 }
 
-.goal-1-info-row{
-    display: flex;
-    flex-direction: row;
-    margin-left: 35px;
+.goal-1-info-row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 35px;
 }
 
-.goals-1{
-    height: 250px;
-    overflow-y: auto;
-
+.goals-1 {
+  height: 250px;
+  overflow-y: auto;
 }

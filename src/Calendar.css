@@ -1,0 +1,92 @@
+/* Calendar.css */
+
+/* Style for tooltip */
+.MuiTooltip-tooltip {
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+/* Style for badge */
+.MuiBadge-badge {
+  background-color: lightyellow;
+  color: #fff;
+}
+
+/* Style for badge content */
+.MuiBadge-badgeContent {
+  font-size: 12px;
+}
+
+/* Style for loading skeleton */
+.MuiSkeleton-root {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+/* Main calendar container */
+.fc {
+  font-family: Arial, sans-serif;
+  color: green; /* Text color */
+}
+
+/* Calendar header */
+.fc-toolbar {
+  /* background-color: #4caf50; Green background for header */
+  color: #fff; /* Text color for header */
+}
+
+/* Calendar header buttons */
+.fc-toolbar button {
+  color: #fff; /* Text color for header buttons */
+}
+
+/* Event container */
+/* Event container */
+.fc-event {
+  background-color: lightgreen; /* Light yellow background for events */
+  border-color: #fff59d; /* Border color for events */
+  color: #4caf50; /* Green font color for events */
+}
+
+/* Event hover */
+.fc-event:hover {
+  background-color: #ffee58; /* Lighter yellow background on hover */
+  border-color: #ffee58; /* Lighter border color on hover */
+}
+
+/* Event title */
+.fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Event popover */
+.fc-popover {
+  background-color: #4caf50; /* Green background for popover */
+  color: #fff; /* Text color for popover */
+}
+
+/* Event popover arrow */
+.fc-popover:before {
+  border-bottom-color: #4caf50 !important; /* Green arrow color */
+}
+
+/* Today's date */
+.fc-day-today {
+  background-color: #e8f5e9; /* Light green background for today's date */
+}
+
+/* Date cell */
+.fc-day,
+.fc-day-top {
+  border-color: #e0e0e0; /* Border color for date cells */
+}
+
+/* Date cell hover */
+.fc-day:hover,
+.fc-day-top:hover {
+  background-color: #f5f5f5; /* Light grey background on hover */
+}

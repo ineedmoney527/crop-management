@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "./Planting.css";
 
-const Planting = () => {
+const Planting = ({ open, onCropSubmit, onClose }) => {
   const [cropName, setCropName] = useState("");
   const [cultivar, setCultivar] = useState("");
   const [plantingMethod, setPlantingMethod] = useState("");
@@ -17,35 +18,6 @@ const Planting = () => {
   const [spacingOnRows, setSpacingOnRows] = useState(0);
   const [bedVisualization, setBedVisualization] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Generate bed visualization based on row spacing
-    const bedRows = [];
-    for (let i = 0; i < noOfRows; i++) {
-      const row = [];
-      for (let j = 0; j < spacingOnRows; j++) {
-        row.push("*");
-      }
-      bedRows.push(row.join(""));
-    }
-    setBedVisualization(bedRows.join("\n"));
-
-    // Reset form after submission
-    setCropName("");
-    setCultivar("");
-    setPlantingMethod("");
-    setSeedTreatment("");
-    setPlantingAmount(0);
-    setNurseryStartDate("");
-    setNurseryDays(0);
-    setPlantingDate("");
-    setDaysToMature(0);
-    setFirstHarvestDay("");
-    setNoOfRows(0);
-    setRowSpacing(0);
-    setSpacingOnRows(0);
-  };
   useEffect(() => {
     if (plantingDate && daysToMature) {
       const maturityDate = new Date(plantingDate);
@@ -54,9 +26,52 @@ const Planting = () => {
     }
   }, [plantingDate, daysToMature]);
 
+  useEffect(() => {
+    if (rowSpacing && spacingOnRows && plantingAmount && noOfRows) {
+      const bedRows = [];
+      const seedPerRow = Math.floor(plantingAmount / noOfRows); // Ensure integer number of seeds per row
+      const seedSymbol = "*"; // Use '*' for seeds
+
+      for (let i = 0; i < noOfRows; i++) {
+        const row = [];
+
+        // Add seeds in the row with spacing
+        for (let j = 0; j < seedPerRow; j++) {
+          row.push(seedSymbol + " ".repeat(rowSpacing)); // Add row spacing between seeds
+        }
+        bedRows.push(row.join("")); // Combine seeds in a row without extra spacing
+      }
+
+      // Add vertical spacing between rows
+      let spacedRows = [];
+      for (let k = 0; k < bedRows.length; k++) {
+        spacedRows.push(bedRows[k]);
+        if (k < bedRows.length - 1) {
+          // Add spacing on rows between each row except the last one
+          spacedRows.push("\n".repeat(spacingOnRows)); // Add spacing on rows
+        }
+      }
+
+      // Remove excess vertical spacing at the end of the bed visualization
+      const lastRow = spacedRows[spacedRows.length - 1];
+      if (lastRow && lastRow.trim().length === 0) {
+        spacedRows.pop(); // Remove the last empty row
+      }
+
+      setBedVisualization(spacedRows.join("\n"));
+    }
+  }, [rowSpacing, spacingOnRows, plantingAmount, noOfRows]);
+  if (!open) return null;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onClose();
+  };
   return (
-    <div>
-      <h1>Input Page</h1>
+    <div className="planting-modal">
+      <span className="close" onClick={onClose}>
+        &times;
+      </span>
+      <h1>Planting Page - You selected Blueberry</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="cropName">Crop Name:</label>
@@ -78,14 +93,12 @@ const Planting = () => {
         </div>
         <div>
           <label htmlFor="plantingMethod">Planting Method:</label>
-          <select
-            id="plantingMethod"
-            value={plantingMethod}
-            onChange={(e) => setPlantingMethod(e.target.value)}
-          >
-            <option value="">Select Planting Method</option>
-            <option value="method1">Method 1</option>
-            <option value="method2">Method 2</option>
+          <select name="plantingMethod">
+            <option value="broadcasting">Broadcasting</option>
+            <option value="rowPlanting">Row Planting</option>
+            <option value="drilling">Drilling</option>
+            <option value="transplanting">Transplanting</option>
+            <option value="ridgeAndFurrow">Ridge and Furrow Planting</option>
           </select>
         </div>
         <div>
@@ -95,9 +108,11 @@ const Planting = () => {
             value={seedTreatment}
             onChange={(e) => setSeedTreatment(e.target.value)}
           >
-            <option value="">Select Seed Treatment</option>
-            <option value="treatment1">Treatment 1</option>
-            <option value="treatment2">Treatment 2</option>
+            <option value="treatment1">Treatment 1 - Seed Coating</option>
+            <option value="treatment2">Treatment 2 - Seed Priming</option>
+            <option value="treatment3">Treatment 3 - Seed Pelleting</option>
+            <option value="treatment4">Treatment 4 - Seed Inoculation</option>
+            <option value="treatment5">Treatment 5 - Seed Disinfection</option>
           </select>
         </div>
         <div>
@@ -123,6 +138,7 @@ const Planting = () => {
           <input
             type="number"
             id="nurseryDays"
+            min={0}
             value={nurseryDays}
             onChange={(e) => setNurseryDays(parseInt(e.target.value))}
           />
@@ -140,12 +156,13 @@ const Planting = () => {
           <label htmlFor="daysToMature">Days to Mature:</label>
           <input
             type="number"
+            min={1}
             id="daysToMature"
             value={daysToMature}
             onChange={(e) => setDaysToMature(parseInt(e.target.value))}
           />
           <br></br>
-          <label>First Harvest Day:{firstHarvestDay}</label>
+          <label className="first">First Harvest Day:{firstHarvestDay}</label>
         </div>
 
         <div>
@@ -153,34 +170,36 @@ const Planting = () => {
           <input
             type="number"
             id="noOfRows"
+            min={0}
             value={noOfRows}
             onChange={(e) => setNoOfRows(parseInt(e.target.value))}
           />
         </div>
         <div>
-          <label htmlFor="rowSpacing">Spacing between Rows:</label>
+          <label htmlFor="Spacing in a row">Spacing in a row:</label>
           <input
             type="number"
             id="rowSpacing"
+            min={0}
             value={rowSpacing}
             onChange={(e) => setRowSpacing(parseInt(e.target.value))}
           />
         </div>
         <div>
-          <label htmlFor="spacingOnRows">Spacing on Rows:</label>
+          <label htmlFor="Spacing between rows ">Spacing between rows:</label>
           <input
             type="number"
+            min={0}
             id="spacingOnRows"
             value={spacingOnRows}
             onChange={(e) => setSpacingOnRows(parseInt(e.target.value))}
           />
         </div>
+        <h2>Bed Visualization:</h2>
+        <pre>{bedVisualization}</pre>
 
         <button type="submit">Submit</button>
       </form>
-
-      <h2>Bed Visualization:</h2>
-      <pre>{bedVisualization}</pre>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { Chart } from "chart.js/auto";
 import { Radar } from "react-chartjs-2";
 import GaugeComponent from "react-gauge-component";
 import ReactApexChart from "react-apexcharts";
+
 const SoilContainer = () => {
   const [soilData, setSoilData] = useState(null);
 
@@ -250,7 +251,7 @@ const SoilContainer = () => {
                 subArcs: [
                   { limit: 2, color: "red", showTick: true }, // pH between 0 and 3 (Red)
                   { limit: 4, color: "orange", showTick: true }, // pH between 3 and 5 (Orange)
-                  { limit: 6, color: "yellow", showTick: true }, // pH between 5 and 7 (Yellow)
+                  { limit: 6, color: "yellow", showTick: true }, // pH betcween 5 and 7 (Yellow)
                   { limit: 8, color: "green", showTick: true }, // pH between 7 and 9 (Green)
                   { limit: 10, color: "#0496C7", showTick: true }, // pH between 9 and 11 (Blue)
                   { limit: 12, color: "BLUE", showTick: true }, // pH between 11 and 14 (Violet)

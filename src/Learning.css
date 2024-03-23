@@ -1,114 +1,111 @@
 .chat-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  margin-right: 6%;
 }
 
-.chat-sidebar-box{
-    margin-top: 100px;
+.chat-sidebar-box {
+  margin-top: 100px;
 }
 
-.sidebar-button{
-    margin-bottom: 15px;
-    width: 200px;
-    height: 45px;
-    border: transparent;
-    background-color: transparent;
-    color: black;
-    font-size: 15px;
-    cursor: pointer;
+.sidebar-button {
+  margin-bottom: 15px;
+  width: 200px;
+  height: 45px;
+  border: transparent;
+  background-color: transparent;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.sidebar-button:hover{
-    background-color: white;
+.sidebar-button:hover {
+  background-color: white;
 }
 
-.chat_sidebar{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: 100vh
-;
-    background-color: #F2F3C0;
+.chat_sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100vh;
+  background-color: #f2f3c0;
 }
 
 .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    align-items: center;
-    padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+  align-items: center;
+  padding: 10px;
 }
 
 .message {
-    padding: 5px 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  max-width: 100%;
 }
 
 .message.received {
-    /*background-color: #f0f0f0;*/
-    align-self: flex-start;
+  /*background-color: #f0f0f0;*/
+  align-self: flex-start;
 }
 
 .message.sent {
-    font-weight: bold;
-    display: flex;
-    color: black;
-    font-size: 25px;
-    justify-content: center;
-    margin-top: 120px;
+  font-weight: bold;
+  display: flex;
+  color: black;
+  font-size: 25px;
+  justify-content: center;
+  margin-top: 120px;
 
-    /*align-self: flex-end;*/
+  /*align-self: flex-end;*/
 }
 
-.message-sent-label{
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-
+.message-sent-label {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.learning-column{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.learning-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.learning-column-1{
-    display: flex;
-    flex-direction: column;
-    margin-right: 80px;
+.learning-column-1 {
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
 }
 
-.learning-column-2{
-    display: flex;
-    flex-direction: column;
+.learning-column-2 {
+  display: flex;
+  flex-direction: column;
 }
 
-.learning-button{
-    width: 330px;
-    height: 145px;
-    background-color: transparent;
-    color:black;
-    margin-bottom: 18px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    cursor: pointer;
+.learning-button {
+  width: 330px;
+  height: 145px;
+  background-color: transparent;
+  color: black;
+  margin-bottom: 18px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  cursor: pointer;
 }
 
-.learning-button:hover{
-    background-color: #dddddd;
+.learning-button:hover {
+  background-color: #dddddd;
 }
 
-.button-name{
-    font-weight: bold;
+.button-name {
+  font-weight: bold;
 }
 
-.title{
-    font-size: 23px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
+.title {
+  font-size: 23px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
-
