@@ -8,20 +8,10 @@ import {
   TableRow,
   Paper,
   IconButton,
-  TextField,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { styled } from "@mui/system";
-
-// Styled InputField component
-const InputField = styled(TextField)`
-  width: 100%;
-  border-radius: ${({ theme }) => theme.shape.borderRadius};
-  padding: 8px;
-  box-sizing: border-box;
-`;
 
 const headCells = [
   { id: "date", label: "Date", type: "date" },
@@ -75,7 +65,7 @@ const TransactionTable = ({ transactions, onDelete, setTransactions }) => {
     if (editableId === id) {
       if (type === "date") {
         return (
-          <InputField
+          <input
             type="date"
             name={name}
             value={row[name]}
@@ -84,10 +74,11 @@ const TransactionTable = ({ transactions, onDelete, setTransactions }) => {
         );
       } else {
         return (
-          <InputField
+          <input
             type="text"
             name={name}
             value={row[name]}
+            style={{ width: "100px" }}
             onChange={(e) => handleChange(e, id, type)}
           />
         );
