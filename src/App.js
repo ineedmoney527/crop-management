@@ -11,14 +11,13 @@ import Learning from "./Learning.js";
 import Learning2 from "./Learning2.js";
 import Learning3 from "./Learning3.js";
 import MarketStore from "./MarketStore.js";
-import Post from "./Post.js";
-import WithNavigate from "./PostList.js";
+import PostList from "./PostList.js";
 import SearchPostList from "./SearchPostList.js";
 import AddPost from "./AddNewPost.js";
+import Irrigation from "./Irrigation.js";
 import Scheduler from "./Scheduler.js";
 import Encyclopedia from "./Encyclopedia.js";
 import Details from "./CropDetails/Details";
-import SideBar from "./SideBar.js";
 import Weather from "./Weather.js";
 import Accounting from "./Accounting.js";
 import CropSummary from "./CropSummary.js";
@@ -44,12 +43,13 @@ function App() {
             path="/Encyclopedia"
             element={<Encyclopedia setName={setName} />}
           />
+          <Route path="/Irrigation" element={<Irrigation />} />
           <Route path="CropDetails/Details" element={<Details name={name} />} />
           <Route path="/Learning" element={<Learning />} />
           <Route path="/Learning2" element={<Learning2 />} />
           <Route path="/Learning3" element={<Learning3 />} />
           <Route path="/Market" element={<MarketStore />} />
-          <Route path="/Forum" element={<WithNavigate />} />
+          <Route path="/Forum" element={<PostList />} />
           <Route path="/SearchPostList" element={<SearchPostList />} />
           <Route path="/AddNewPost" element={<AddPost />} />
           <Route path="/Scheduler" element={<Scheduler />} />

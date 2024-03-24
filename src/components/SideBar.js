@@ -20,7 +20,13 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Smart Doctor",
+    title: "Irrigation",
+    path: "/Irrigation",
+    icon: <IoIcons.IoMdWater style={style} />,
+    cName: "nav-text",
+  },
+  {
+    title: "Chatbot",
     path: "/Chatbot",
     icon: <FaIcons.FaUserDoctor style={style} />,
     cName: "nav-text",

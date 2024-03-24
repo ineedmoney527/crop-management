@@ -119,12 +119,15 @@
 }
 
 .followBtn, .searchBtn{
-    border-radius: 20px;
-    width: 70px;
-    height: 30px;
+    border-radius: 25px;
+    /* width: 70px;
+    height: 30px; */
     border-color: transparent;
     background-color: #8BA766;
     font-weight: bold;
+    padding:0px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .flwSection{
@@ -134,6 +137,7 @@
 .followBtn:hover{
     border-color: #8BA766;
     background-color: transparent;
+    color:#000000;
 }
 
 .searchBtn:hover{

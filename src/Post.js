@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import { FaHeart, FaComment, FaStar, FaRegComment } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 import moment from "moment";
 import Avatar from "@mui/material/Avatar";
 import "./Post.css";
 import Stack from "@mui/material/Stack";
 import { CiHeart, CiStar } from "react-icons/ci";
-import Button from "@mui/material/Button";
 import { ImageList, ImageListItem, Modal } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-const Post = ({ post, onLike, onComment, onStar }) => {
-  const navigate = useNavigate();
-  const handleCommentClick = () => {
-    navigate("/Irrigation");
-  };
+const Post = ({ post, onLike, onStar }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const imageSize = {
@@ -30,12 +24,6 @@ const Post = ({ post, onLike, onComment, onStar }) => {
   const handleCloseModal = () => {
     setOpenModal(false);
     setSelectedImage(null);
-  };
-
-  const handleModalClose = (event) => {
-    if (event.target === event.currentTarget) {
-      handleCloseModal();
-    }
   };
 
   const handleKeyDown = (event) => {
@@ -131,7 +119,7 @@ const Post = ({ post, onLike, onComment, onStar }) => {
           <Stack direction="row" spacing={2} className={"buttonsAction"}>
             <button
               className={"buttonInteraction"}
-              onClick={handleCommentClick}
+              // onClick={handleCommentClick}
               type="submit"
             >
               <FaRegComment size={15} /> Comments

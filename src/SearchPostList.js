@@ -1,23 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Post.css";
 import addIcon from "./images/Add.png"; // Import addIcon correctly
 import "./Post.css";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Drawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Dman from "./images/Dman.jpg";
 import Aman from "./images/Aman.jpg";
 import Bman from "./images/bMan.jpg";
-import Cman from "./images/Cman.jpg";
 import veg1 from "./images/veg1.jpg";
 import veg2 from "./images/veg2.jpg";
 import veg3 from "./images/veg3.jpg";
@@ -27,8 +15,6 @@ import Post from "./Post"; // Import the Post component
 import SearchPost from "./SearchPost";
 
 function SearchPostList() {
-  const drawerWidth = 240;
-
   const postersInfo = [
     {
       id: 1,
@@ -86,35 +72,6 @@ function SearchPostList() {
 
   return (
     <Stack direction="row" spacing={2} className={"containerPostUnder"}>
-      {/* <Drawer
-        className="sidebarPost"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar />
-        <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer> */}
-
       <Stack
         direction="column"
         spacing={2}

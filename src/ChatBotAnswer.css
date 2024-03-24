@@ -60,6 +60,8 @@
   margin-right: 10px;
   border-radius: 10px;
   font-size: 15px;
+  text-justify: auto;
+  align-self: center;
 }
 
 .cba-input-container button {
@@ -69,6 +71,8 @@
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  text-justify: auto;
+  align-self: center;
 }
 
 .cba-input-container button:hover {

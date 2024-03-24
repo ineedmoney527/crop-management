@@ -64,14 +64,14 @@ const SmartDoctor = () => {
 
   return (
     <div className="sd-chat-container">
-      {/* <div className={"sd-chat_sidebar"}>
+      <div className={"sd-chat_sidebar"}>
         <div className={"chat-sidebar-box"}>
           <button className={"sidebar-button"}>AI Tools</button>
           <button className={"sidebar-button"} onClick={handleLearningClick}>
             Learning
           </button>
         </div>
-      </div> */}
+      </div>
 
       <div className="sd-chat-messages">
         <div className="sd-message-received">
@@ -81,7 +81,7 @@ const SmartDoctor = () => {
           <div
             className={`sd-dropdown-content ${dropdownOpen ? "sd-show" : ""}`}
           >
-            <a href="./"> Chat Bot 1.0</a>
+            <a href="./Chatbot"> Chat Bot 1.0</a>
           </div>
         </div>
 
