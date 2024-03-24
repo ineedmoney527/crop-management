@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.gauge-radar-container {
+  width: 100%;
+  display: flex;
+
+  flex: 1;
+}
+
+.gauge-container,
+.radar-container {
+  border-radius: 20%;
+  border: 2px solid #000;
+}
+
+.temperature-moisture-chart {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #000;
+}
+.alert-container {
+  margin-left: 100px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
