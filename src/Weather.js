@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Stack } from "@mui/material";
 import weather1 from "./images/weather1.png";
 import weather2 from "./images/weather2.png";
@@ -7,8 +7,32 @@ import weather4 from "./images/weather4.png";
 // import WeatherGraph from "./WeatherGraph";
 import "./Weather.css";
 import TransactionBarChart from "./TransactionBarChart";
-
+import { useNavigate } from "react-router-dom";
+import WeatherGraph from "./WeatherGraph";
 const Weather = () => {
+  const [pageTitle, setPageTitle] = useState("Weather");
+  const navigate = useNavigate();
+  const handleTitleChange = (e) => {
+    setPageTitle(e.target.value);
+  };
+
+  useEffect(() => {
+    // Navigate to a specific page based on the selected title
+    switch (pageTitle) {
+      case "Crop Summary":
+        navigate("/CropSummary");
+        break;
+
+      case "Weather":
+        navigate("/Weather");
+        break;
+      // Add more cases for additional options if needed
+      default:
+        navigate("/Accounting");
+        break;
+    }
+  }, [pageTitle]);
+
   const transactions = [
     {
       id: 1,
@@ -166,6 +190,17 @@ const Weather = () => {
 
   return (
     <Stack className="weather-container">
+      <select
+        value={pageTitle}
+        onChange={handleTitleChange}
+        style={{ fontWeight: "bold", fontSize: "24px" }}
+      >
+        {" "}
+        <option value="Accounting">Accounting</option>
+        <option value="Crop Summary">Farm Summary</option>
+        <option value="Weather">Weather</option>
+        {/* Add options for the select dropdown here */}
+      </select>
       <div className="weather-details">
         <Stack className="detail-left">
           <div className="card-title">Weather</div>
@@ -215,8 +250,8 @@ const Weather = () => {
         </Stack>
       </div>
       <Stack className="weather-reports">
-        <div className="card-title">2023 Income VS Expenses</div>
-        <TransactionBarChart transactions={transactions} />
+        <div className="card-title">Wind Speed / Tempearture Graph</div>
+        <WeatherGraph></WeatherGraph>
         {/* <WeatherGraph /> */}
       </Stack>
     </Stack>

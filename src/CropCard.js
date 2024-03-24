@@ -16,7 +16,7 @@ const CropCard = ({
   const handleCropClick = () => {
     console.log(name);
     setName(name);
-    navigate(`/CropDetails/Details`);
+    navigate("/CropDetails/Details");
   };
   return (
     <button

@@ -3,6 +3,7 @@ import TransactionTable from "./TransactionTable";
 import TransactionBarChart from "./TransactionBarChart";
 import TransactionPieChart from "./TransactionPieChart";
 import AddTransactionForm from "./AddTransactionForm";
+import { useNavigate } from "react-router-dom";
 // import { Stack } from "@mui/material";
 import {
   Stack,
@@ -108,13 +109,14 @@ const Accounting = () => {
       amount: 150.0,
     },
   ];
-
+  const [pageTitle, setPageTitle] = useState("Accounting");
   const [transactions, setTransactions] = useState(dummy_transactions);
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
-
+  const [selectedYear, setSelectedYear] = useState("2023");
+  const years = ["2021", "2022", "2023", "2024", "2025"]; // Add more years as needed
   const handleAddTransaction = (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
     setOpenAddTransaction(false); // Close the dialog after adding transaction
@@ -125,6 +127,10 @@ const Accounting = () => {
       (transaction) => transaction.id !== id
     );
     setTransactions(updatedTransactions); // Update transactions state
+  };
+  const navigate = useNavigate();
+  const handleTitleChange = (e) => {
+    setPageTitle(e.target.value);
   };
 
   useEffect(() => {
@@ -144,44 +150,73 @@ const Accounting = () => {
     setTotalExpenses(expenses);
     setTotalProfit(profit);
   }, [transactions]);
+  useEffect(() => {
+    // Navigate to a specific page based on the selected title
+    switch (pageTitle) {
+      case "Crop Summary":
+        navigate("/CropSummary");
+        break;
+
+      case "Weather":
+        navigate("/Weather");
+        break;
+      // Add more cases for additional options if needed
+      default:
+        navigate("/Accounting");
+        break;
+    }
+  }, [pageTitle]);
 
   //  { totalRevenue, totalExpenses, totalProfit } : {calculateRevenueExpensesProfit()};
 
   return (
     <div>
-      <div
-        className="page-title"
-        style={{ textAlign: "left", fontWeight: "bold", fontSize: "24px" }}
+      <select
+        value={pageTitle}
+        onChange={handleTitleChange}
+        style={{ fontWeight: "bold", fontSize: "24px" }}
       >
-        Accounting
-      </div>
-      <Stack className="transaction-summary-container">
-        <div
-          className="summary-year"
-          style={{
-            textAlign: "left",
-            fontWeight: "bold",
-            fontSize: "20px",
-            fontFamily: "Inter",
-          }}
+        <option value="Accounting">Accounting</option>
+        <option value="Crop Summary">Farm Summary</option>
+        <option value="Weather">Weather</option>
+        {/* Add more options as needed */}
+      </select>
+      <div
+        className="summary-year"
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: "20px",
+          fontFamily: "Inter",
+        }}
+      >
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+          style={{ width: "80px", padding: "5px", marginTop: "10px" }}
         >
-          2023 Summary
-        </div>
-        <div className="summary-graphs">
-          <Stack className="summary-bar-chart">
-            <div className="pie-chart-title" style={{ fontWeight: "bold" }}>
-              Income VS Expenses
-            </div>
-            <TransactionBarChart transactions={transactions} />
-          </Stack>
-          <Stack className="summary-pie-chart">
-            <div className="pie-chart-title" style={{ fontWeight: "bold" }}>
-              Expenses by Category
-            </div>
-            <TransactionPieChart transactions={transactions} />
-          </Stack>
-        </div>
-      </Stack>
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+        {" Summary"}
+      </div>
+      <div className="summary-graphs">
+        <Stack className="summary-bar-chart">
+          <div className="pie-chart-title" style={{ fontWeight: "bold" }}>
+            Income VS Expenses
+          </div>
+          <TransactionBarChart transactions={transactions} />
+        </Stack>
+        <Stack className="summary-pie-chart">
+          <div className="pie-chart-title" style={{ fontWeight: "bold" }}>
+            Expenses by Category
+          </div>
+          <TransactionPieChart transactions={transactions} />
+        </Stack>
+      </div>
       <div className="transaction-table-container">
         <div className="tags">
           <div className="revenue">Revenue: RM {totalRevenue}</div>
