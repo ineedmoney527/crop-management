@@ -97,29 +97,29 @@ export default function AddFertilizer({
         </span>
         <img src={fertilizer.image} alt={fertilizer.name} />
         <label>{fertilizer.name}</label>
-        <div className="progress-bars">
-          <div className="progress-bar">
+        <div>
+          <div>
             <p>Nitrogen (N): {fertilizer.npk.nitrogen}</p>
             <LinearProgress
               variant="determinate"
               value={calculateRatio(fertilizer.npk.nitrogen)}
             />
           </div>
-          <div className="progress-bar">
+          <div>
             <p>Phosphorus (P): {fertilizer.npk.phosphorus}</p>
             <LinearProgress
               variant="determinate"
               value={calculateRatio(fertilizer.npk.phosphorus)}
             />
           </div>
-          <div className="progress-bar">
+          <div>
             <p>Potassium (K): {fertilizer.npk.potassium}</p>
             <LinearProgress
               variant="determinate"
               value={calculateRatio(fertilizer.npk.potassium)}
             />
           </div>
-          <div className="progress-bar">
+          <div>
             <p>Environmental Rating: {fertilizer.environmentalRating}/10</p>
             <LinearProgress
               variant="determinate"

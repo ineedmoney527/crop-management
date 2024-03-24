@@ -35,10 +35,7 @@ function App() {
           <Route path="/ChatBot" element={<ChatBot />} />
           <Route path="/Chatbot/ChatBotAnswer" element={<ChatBotAnswer />} />
           <Route path="/game" element={<Gamification />} />
-          <Route
-            path="/Learning"
-            element={<Encyclopedia setName={setName} />}
-          />
+
           <Route
             path="/Encyclopedia"
             element={<Encyclopedia setName={setName} />}

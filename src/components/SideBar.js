@@ -19,12 +19,7 @@ export const SidebarData = [
     icon: <RiIcons.RiPlantFill style={style} />,
     cName: "nav-text",
   },
-  {
-    title: "Irrigation",
-    path: "/Irrigation",
-    icon: <IoIcons.IoMdWater style={style} />,
-    cName: "nav-text",
-  },
+
   {
     title: "Chatbot",
     path: "/Chatbot",

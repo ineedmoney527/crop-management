@@ -12,9 +12,20 @@ const Learning = () => {
   const handleAIClick = () => {
     navigate("/");
   };
+  const handleLearningClick = () => {
+    navigate("/Encyclopedia");
+  };
 
   return (
     <div className="chat-container">
+      <div className={"chat_sidebar"}>
+        <div className={"chat-sidebar-box"}>
+          <button className={"sidebar-button"}>AI Tools</button>
+          <button className={"sidebar-button"} onClick={handleLearningClick}>
+            Learning
+          </button>
+        </div>
+      </div>
       <div className="chat-messages">
         <div className="title">
           <p>Crop Management Lectures</p>

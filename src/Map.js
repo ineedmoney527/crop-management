@@ -48,31 +48,6 @@ function Map() {
   const [selectedIcon, setSelectedIcon] = useState(icons.defaultIcon);
   const [mapLayers, setMapLayers] = useState([
     {
-      id: "1",
-      latlngs: [
-        [2.019858963264568, 103.22156929584389],
-        [2.029858963264568, 103.23156929584389],
-      ], // Coordinates for a polygon
-      crops: { name: "Crop 1" },
-      soilType: {
-        texture: "Loamy",
-        ph: "6.5",
-        nitrogen: "30 ppm",
-        potassium: "20 ppm",
-        phosphorus: "15 ppm",
-        tilage: "Minimal",
-        depth: "30 cm",
-        time: "Spring",
-        name: "Sample Soil 1",
-        address: "123 Soil St, Earth",
-      },
-      markerPosition: calculateCenter([
-        [2.019858963264568, 103.22156929584389],
-        [2.029858963264568, 103.23156929584389],
-        [2.024858963264568, 103.24156929584389],
-      ]),
-    },
-    {
       id: "2",
       latlngs: [
         [2.019858963264568, 103.22156929584389],
@@ -225,11 +200,10 @@ function Map() {
               }}
             >
               <Popup class="pop">
-                <h2>Land Information</h2>
+                <h3>ID:{selectedLand?.id}</h3>
                 <Table bordered>
                   <thead>
                     <tr>
-                      <th>Land Name</th>
                       <th>Plant Name</th>
                     </tr>
                   </thead>

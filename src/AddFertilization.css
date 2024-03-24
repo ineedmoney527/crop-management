@@ -74,10 +74,8 @@
   border: 3px solid #75e0c5;
   border-radius: 20px;
 }
-.select:hover {
+/* .select:hover {
   background-color: #2ecc71; /* Green on hover */
-  color: #fff;
-}
 
 .fertilizer-card button:disabled {
   background-color: #ccc;
@@ -94,7 +92,7 @@ button[type="submit"] {
   display: block;
   width: 100%;
   padding: 14px;
-  background-color: #2ecc71; /* Green for submit button */
+  background-color: #2ecc71;
   color: #fff;
   border: width 2px;
   border-radius: 8px;
@@ -106,5 +104,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #27ae60; /* Darker green on hover */
+  background-color: #27ae60;
 }
