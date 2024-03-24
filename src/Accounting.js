@@ -138,10 +138,11 @@ const Accounting = () => {
     let expenses = 0;
 
     transactions.forEach((transaction) => {
+      const amount = parseFloat(transaction.amount || 0);
       if (transaction.type === "Income") {
-        revenue += transaction.amount;
+        revenue += amount;
       } else if (transaction.type === "Expense") {
-        expenses += transaction.amount;
+        expenses += amount;
       }
     });
     const profit = revenue - expenses;
@@ -167,14 +168,12 @@ const Accounting = () => {
     }
   }, [pageTitle]);
 
-  //  { totalRevenue, totalExpenses, totalProfit } : {calculateRevenueExpensesProfit()};
-
   return (
     <div>
       <select
         value={pageTitle}
         onChange={handleTitleChange}
-        style={{ fontWeight: "bold", fontSize: "24px" }}
+        style={{ fontWeight: "bold", fontSize: "24px", width: "200px" }}
       >
         <option value="Accounting">Accounting</option>
         <option value="Crop Summary">Farm Summary</option>
@@ -217,11 +216,16 @@ const Accounting = () => {
           <TransactionPieChart transactions={transactions} />
         </Stack>
       </div>
-      <div className="transaction-table-container">
+      <div
+        className="transaction-table-container"
+        style={{ paddingLeft: "50px", paddingRight: "50px" }}
+      >
         <div className="tags">
-          <div className="revenue">Revenue: RM {totalRevenue}</div>
-          <div className="expenses">Expenses: RM {totalExpenses}</div>
-          <div className="profit">Profit: RM {totalProfit}</div>
+          <div className="revenue">Revenue: RM {totalRevenue.toFixed(2)}</div>
+          <div className="expenses">
+            Expenses: RM {totalExpenses.toFixed(2)}
+          </div>
+          <div className="profit">Profit: RM {totalProfit.toFixed(2)}</div>
           <div className="add-transaction">
             <Button
               className="add-transaction-button"

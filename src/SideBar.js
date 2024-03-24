@@ -5,19 +5,21 @@ import { Stack } from "@mui/material";
 
 const Sidebar = () => {
   const [selectedPage, setSelectedPage] = useState("encyclopedia");
-  const pages = ["weather", "encyclopedia", "accounting"];
+  const pages = [
+    "encyclopedia",
+    "learning",
+    // "learning2",
+    // "learning3",
+  ];
   let navigate = useNavigate();
 
   useEffect(() => {
     switch (selectedPage) {
-      case "weather":
-        navigate("/Weather");
-        break;
       case "encyclopedia":
         navigate("/Encyclopedia");
         break;
-      case "accounting":
-        navigate("/Accounting");
+      case "learning":
+        navigate("/Learning");
         break;
       default:
         navigate("/Encyclopedia");

@@ -13,7 +13,13 @@ const AddTransactionForm = ({ onAddTransaction }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTransaction({ ...transaction, [name]: value });
+
+    // If the field is 'amount' and value is empty, set it to '0'
+    const newValue =
+      name === "amount" ? (value === "" ? 0 : parseFloat(value)) : value;
+
+    // Update the transaction state with the updated value
+    setTransaction({ ...transaction, [name]: newValue });
   };
 
   const handleSubmit = (e) => {
@@ -35,6 +41,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
+            className="date-input-form"
             fullWidth
             type="date"
             label="Date"
@@ -48,6 +55,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            className="payee-input"
             fullWidth
             name="payee"
             label="Payee"
@@ -57,6 +65,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            className="category-input"
             fullWidth
             name="category"
             label="Category"
@@ -66,6 +75,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            className="description-input"
             fullWidth
             name="description"
             label="Description"
@@ -75,6 +85,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            className="type-input"
             fullWidth
             name="type"
             label="Type"
@@ -85,6 +96,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
         <Grid item xs={12}>
           <TextField
             fullWidth
+            className="amount-input"
             name="amount"
             label="Amount"
             type="text"

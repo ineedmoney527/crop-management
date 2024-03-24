@@ -14,7 +14,6 @@ const CropCard = ({
 }) => {
   const navigate = useNavigate();
   const handleCropClick = () => {
-    console.log(name);
     setName(name);
     navigate("/CropDetails/Details");
   };

@@ -56,7 +56,7 @@ const GoldenPothosFaq = ({ name }) => {
         >
           <button
             onClick={() => handleToggle(question.id)}
-            className={`question ${expanded[question.id] ? "active" : ""}`}
+            className={`faq-question ${expanded[question.id] ? "active" : ""}`}
           >
             {question.question}{" "}
             <span
@@ -65,7 +65,9 @@ const GoldenPothosFaq = ({ name }) => {
               +
             </span>
           </button>
-          <div className={`answer ${expanded[question.id] ? "visible" : ""}`}>
+          <div
+            className={`faq-answer ${expanded[question.id] ? "visible" : ""}`}
+          >
             {question.answer}
           </div>
         </div>

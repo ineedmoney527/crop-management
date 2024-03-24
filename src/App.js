@@ -17,11 +17,14 @@ import SearchPostList from "./SearchPostList.js";
 import AddPost from "./AddNewPost.js";
 import Scheduler from "./Scheduler.js";
 import Encyclopedia from "./Encyclopedia.js";
+import Details from "./CropDetails/Details";
 import SideBar from "./SideBar.js";
 import Weather from "./Weather.js";
 import Accounting from "./Accounting.js";
 import CropSummary from "./CropSummary.js";
+import { useState } from "react";
 function App() {
+  const [name, setName] = useState("");
   return (
     <>
       <Router>
@@ -33,8 +36,16 @@ function App() {
           <Route path="/ChatBot" element={<ChatBot />} />
           <Route path="/Chatbot/ChatBotAnswer" element={<ChatBotAnswer />} />
           <Route path="/game" element={<Gamification />} />
-          <Route path="/Learning" element={<Encyclopedia />} />
-          <Route path="/Encyclopedia" element={<Encyclopedia />} />
+          <Route
+            path="/Learning"
+            element={<Encyclopedia setName={setName} />}
+          />
+          <Route
+            path="/Encyclopedia"
+            element={<Encyclopedia setName={setName} />}
+          />
+          <Route path="CropDetails/Details" element={<Details name={name} />} />
+          <Route path="/Learning" element={<Learning />} />
           <Route path="/Learning2" element={<Learning2 />} />
           <Route path="/Learning3" element={<Learning3 />} />
           <Route path="/Market" element={<MarketStore />} />

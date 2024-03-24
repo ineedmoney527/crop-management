@@ -22,7 +22,10 @@
   .crop-image {
     margin-left: 10px;
     margin-right: 10px;
+    height: 283.547px;
     width: 283.547px;
+    border: 1px solid #000;
+    border-radius: 25px;
   }
   
   .details-content {

@@ -189,72 +189,82 @@ const Weather = () => {
   ];
 
   return (
-    <Stack className="weather-container">
+    <div>
       <select
         value={pageTitle}
         onChange={handleTitleChange}
         style={{ fontWeight: "bold", fontSize: "24px" }}
       >
-        {" "}
+        {/* {" "} */}
         <option value="Accounting">Accounting</option>
         <option value="Crop Summary">Farm Summary</option>
         <option value="Weather">Weather</option>
         {/* Add options for the select dropdown here */}
       </select>
-      <div className="weather-details">
-        <Stack className="detail-left">
-          <div className="card-title">Weather</div>
-          <div className="main-temperature-container">
-            <div className="main-temperature">29˚C</div>
-            <img
-              className="main-temperature-icon"
-              src={weather1}
-              alt="weather"
-            ></img>
-          </div>
-          <div className="weather-description">Light Rain - H 33˚C L 28˚C</div>
-          <div className="weather-description">Wind: 6.5 km/h</div>
-          <div className="weather-description">Humidity: 60%</div>
-        </Stack>
-        <Stack className="detail-right">
-          <div className="frequency-container">
-            <button
-              className="frequency-button"
-              onClick={() => setIsHourly(true)}
-              style={{ borderBottom: isHourly ? "2px solid #000" : "none" }}
-            >
-              Hourly
-            </button>
-            <button
-              className="frequency-button"
-              onClick={() => setIsHourly(false)}
-              style={{ borderBottom: isHourly ? "none" : "2px solid #000" }}
-            >
-              Daily
-            </button>
-          </div>
-          <div className="detail-right-contents">
-            {(isHourly ? hourly_data : daily_data).map((data) => (
-              <Stack
-                key={isHourly ? data.time : data.date}
-                className="detail-right-content"
+      <Stack className="weather-container">
+        <div className="weather-details">
+          <Stack className="detail-left">
+            <div className="card-title">Weather</div>
+            <div className="main-temperature-container">
+              <div className="main-temperature">29˚C</div>
+              <img
+                className="main-temperature-icon"
+                src={weather1}
+                alt="weather"
+              ></img>
+            </div>
+            <div className="weather-description">
+              Light Rain - H 33˚C L 28˚C
+            </div>
+            <div className="weather-description">Wind: 6.5 km/h</div>
+            <div className="weather-description">Humidity: 60%</div>
+          </Stack>
+          <Stack className="detail-right">
+            <div className="frequency-container">
+              <button
+                className="frequency-button"
+                onClick={() => setIsHourly(true)}
+                style={{
+                  borderBottom: isHourly ? "2px solid #000" : "none",
+                  color: "black",
+                }}
               >
-                <div className="time">{isHourly ? data.time : data.day}</div>
-                <img className="weather-icon" src={data.icon} alt="weather" />
-                <div className="temperature">{data.temperature}</div>
-                <div className="wind">{data.wind}</div>
-                <div className="humidity">{data.humidity}</div>
-              </Stack>
-            ))}
-          </div>
+                Hourly
+              </button>
+              <button
+                className="frequency-button"
+                onClick={() => setIsHourly(false)}
+                style={{
+                  borderBottom: isHourly ? "none" : "2px solid #000",
+                  color: "black",
+                }}
+              >
+                Daily
+              </button>
+            </div>
+            <div className="detail-right-contents">
+              {(isHourly ? hourly_data : daily_data).map((data) => (
+                <Stack
+                  key={isHourly ? data.time : data.date}
+                  className="detail-right-content"
+                >
+                  <div className="time">{isHourly ? data.time : data.day}</div>
+                  <img className="weather-icon" src={data.icon} alt="weather" />
+                  <div className="temperature">{data.temperature}</div>
+                  <div className="wind">{data.wind}</div>
+                  <div className="humidity">{data.humidity}</div>
+                </Stack>
+              ))}
+            </div>
+          </Stack>
+        </div>
+        <Stack className="weather-reports">
+          <div className="card-title">Wind Speed / Tempearture Graph</div>
+          <WeatherGraph></WeatherGraph>
+          {/* <WeatherGraph /> */}
         </Stack>
-      </div>
-      <Stack className="weather-reports">
-        <div className="card-title">Wind Speed / Tempearture Graph</div>
-        <WeatherGraph></WeatherGraph>
-        {/* <WeatherGraph /> */}
       </Stack>
-    </Stack>
+    </div>
   );
 };
 export default Weather;

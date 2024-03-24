@@ -46,6 +46,7 @@ const TransactionTable = ({ transactions, onDelete, setTransactions }) => {
         .replace(/[^\d.]/g, "")
         .replace(/^(\d*\.\d*).*/, "$1");
     }
+    if (updatedValue === "") updatedValue = 0;
 
     // Update the transaction with the new value
     const updatedTransactions = transactions.map((transaction) =>

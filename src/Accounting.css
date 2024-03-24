@@ -36,8 +36,6 @@
   display: flex;
   width: 40%;
   align-items: center;
-  /* padding-left: 25px;
-  padding-right: 25px; */
   padding-top: 25px;
   border: 1px solid black;
   border-radius: 25px;
@@ -46,7 +44,6 @@
   display: flex;
   width: 50%;
   align-items: center;
-  /* padding-left: 25px; */
   padding-top: 25px;
   border: 1px solid black;
   border-radius: 25px;

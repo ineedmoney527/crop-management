@@ -61,6 +61,7 @@ export default function Encyclopedia({ setName }) {
             Crop Catalogue
           </div>
           <TextField
+            className="search-bar"
             id="search"
             label="Search by name"
             variant="outlined"
