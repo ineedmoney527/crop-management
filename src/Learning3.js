@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import "./Learning3.css";
 import IntroVideo from "./images/Video.mp4";
 import { useNavigate } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 const Learning3 = () => {
   // State to manage video playback
@@ -37,7 +38,21 @@ const Learning3 = () => {
   };
 
   return (
-    <div className={"container"}>
+    <div className={"L3-container"}>
+      <Stack className="sidebar">
+        <button
+          className="sidebar-button"
+          onClick={() => navigate("/Encyclopedia")}
+        >
+          Encyclopedia
+        </button>
+        <button
+          className="sidebar-button active"
+          onClick={() => navigate("/Learning1")}
+        >
+          Learning
+        </button>
+      </Stack>
       <div className={"L3-Content"}>
         <div className={"L3-Title"}>Chapter 3 Preparation of Tools</div>
 
@@ -49,12 +64,7 @@ const Learning3 = () => {
             onClick={togglePlayback} // Allow toggling playback by clicking on the video
           >
             <source src={IntroVideo} type="video/mp4" />
-            {/* Add additional <source> tags for different video formats if needed */}
-            {/* Your browser does not support the video tag. */}
           </video>
-          {/*<button className="play-button" onClick={togglePlayback}>*/}
-          {/*    {isPlaying ? 'Pause' : 'Play'}*/}
-          {/*</button>*/}
         </div>
 
         <div className={"L3-Note-Content"}>

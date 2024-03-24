@@ -5,7 +5,9 @@ import "./Encyclopedia.css";
 import carrot from "./images/carrots.png";
 import cabbage from "./images/cabbage.png";
 import corn from "./images/corn.png";
-import SideBar from "./SideBar.js";
+// import SideBar from "./SideBar.js";
+import { Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export default function Encyclopedia({ setName }) {
   const [search, setSearch] = useState("");
 
@@ -47,12 +49,18 @@ export default function Encyclopedia({ setName }) {
               otherName.toLowerCase().includes(search)
             )
         );
-
+  const navigate = useNavigate();
   return (
     <div className="encyclopedia">
-      <div className="sidebar">
-        <SideBar></SideBar>
-      </div>
+      <Stack className="sidebar">
+        <button className="sidebar-button active">Encyclopedia</button>
+        <button
+          className="sidebar-button"
+          onClick={() => navigate("/Learning1")}
+        >
+          Learning
+        </button>
+      </Stack>
       <div className="content">
         <div className="encyclopedia-header">
           <div

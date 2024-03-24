@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import lesson from "./images/Lesson.png";
 import quiz from "./images/Quiz.png";
 import time from "./images/Time.png";
+import { Stack } from "@mui/material";
 
 const Learning2 = ({ progress }) => {
   const navigate = useNavigate();
@@ -12,15 +13,22 @@ const Learning2 = ({ progress }) => {
     navigate("/Learning3");
   };
 
-  const handleAIClick = () => {
-    navigate("/");
-  };
-  const handleLearningClick = () => {
-    navigate("Learning");
-  };
-
   return (
     <div className="chat-container">
+      <Stack className="sidebar">
+        <button
+          className="sidebar-button"
+          onClick={() => navigate("/Encyclopedia")}
+        >
+          Encyclopedia
+        </button>
+        <button
+          className="sidebar-button active"
+          onClick={() => navigate("/Learning1")}
+        >
+          Learning
+        </button>
+      </Stack>
       <div className="chat-messages">
         <div className="L2-title">
           <p>Chapter 3 Overview: Tools Preparation</p>

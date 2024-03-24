@@ -1,7 +1,6 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa6";
 import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
 import * as RiIcons from "react-icons/ri";
 import * as GIIcons from "react-icons/gi";
 import "./NavBar.css";
@@ -17,12 +16,6 @@ export const SidebarData = [
     title: "Fields",
     path: "/fields",
     icon: <RiIcons.RiPlantFill style={style} />,
-    cName: "nav-text",
-  },
-  {
-    title: "Irrigation",
-    path: "/Irrigation",
-    icon: <IoIcons.IoMdWater style={style} />,
     cName: "nav-text",
   },
   {

@@ -4,7 +4,6 @@ import TransactionBarChart from "./TransactionBarChart";
 import TransactionPieChart from "./TransactionPieChart";
 import AddTransactionForm from "./AddTransactionForm";
 import { useNavigate } from "react-router-dom";
-// import { Stack } from "@mui/material";
 import {
   Stack,
   Button,
