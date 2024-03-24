@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CropCard from "./CropCard";
 import { TextField, Stack } from "@mui/material";
 import "./Encyclopedia.css";
-import carrot from "./images/carrot.png";
+import carrot from "./images/carrots.png";
 import cabbage from "./images/cabbage.png";
 import corn from "./images/corn.png";
 import SideBar from "./SideBar.js";
