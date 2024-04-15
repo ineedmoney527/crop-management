@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AddFertilization.css";
-import Planting from "./Planting";
+import Planting from "./Planting.js";
 import blueberry from "./images/blueberry.png";
 import tomato from "./images/tomato.png";
 import carrot from "./images/carrot.png";

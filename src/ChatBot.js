@@ -1,113 +1,83 @@
-// ChatComponent.js
+import React, { useState, useRef } from "react";
+import "./App.css";
+import axios from "axios";
+const Chatbot = () => {
+  const [convHistory, setConvHistory] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const chatbotConversation = useRef(null);
 
-import React, { useState, useEffect } from "react";
-import "./ChatBot.css";
-import { useNavigate } from "react-router-dom";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const ChatComponent = () => {
-  const navigate = useNavigate();
+    try {
+      const response = await axios.post(`http://localhost:5000/api/chatbot`, {
+        userQuestion: userInput,
+        convHistory: convHistory,
+      });
 
-  const handleOption1Click = () => {
-    navigate("ChatBotAnswer");
-  };
+      // Assuming response.data contains the messages
+      const messages = {
+        type: "ai",
+        text: response.data.messages,
+      };
+      setConvHistory((prevHistory) => [
+        ...prevHistory,
+        { type: "human", text: userInput },
+      ]);
+      // Assuming messages is an array of messages
+      setConvHistory((prevHistory) => [
+        ...prevHistory,
+        { type: "ai", text: response.data.messages },
+      ]);
+      console.log(convHistory);
+      // Clear user input
+      setUserInput("");
 
-  const handleLearningClick = () => {
-    navigate("Learning");
-  };
-
-  const handleSendCLick = () => {
-    const inputElement = document.querySelector(".input-container input");
-    const inputValue = inputElement.value.trim(); // Trim to remove leading/trailing whitespace
-
-    if (inputValue !== "") {
-      navigate("ChatBotAnswer");
-    } else {
-      alert("Please enter your question");
+      // Scroll to bottom of conversation
+      chatbotConversation.current.scrollTop =
+        chatbotConversation.current.scrollHeight;
+    } catch (error) {
+      console.error("Error asking questions:", error);
     }
   };
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  // Close the dropdown if the user clicks outside of it
-  const handleOutsideClick = (e) => {
-    if (!e.target.matches(".dropbtn")) {
-      setDropdownOpen(false);
-    }
-  };
-
-  // Attach event listener to detect clicks outside dropdown
-  useEffect(() => {
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
 
   return (
-    <div className="chat-container">
-      {/* <div className={"chat_sidebar"}>
-        <div className={"chat-sidebar-box"}>
-          <button className={"sidebar-button"}>AI Tools</button>
-          <button className={"sidebar-button"} onClick={handleLearningClick}>
-            Learning
+    <main>
+      <section className="chatbot-container">
+        <div className="chatbot-header">
+          <img src="images/logo-scrimba.svg" alt="Logo" className="logo" />
+          <p className="sub-heading">Knowledge Bank</p>
+        </div>
+        <div
+          className="chatbot-conversation-container"
+          ref={chatbotConversation}
+        >
+          {convHistory.map((message, index) => (
+            <div key={index} className={`speech speech-${message.type}`}>
+              {message.text}
+            </div>
+          ))}
+        </div>
+        <form
+          id="form"
+          className="chatbot-input-container"
+          onSubmit={handleSubmit}
+        >
+          <input
+            name="user-input"
+            type="text"
+            id="user-input"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            required
+          />
+          <button type="submit" className="submit-btn">
+            <img src="images/send.svg" alt="Send" className="send-btn-icon" />
           </button>
-        </div>
-      </div> */}
-
-      <div className="chat-messages">
-        <div className="message received">
-          <button className="dropbtn" onClick={toggleDropdown}>
-            ChatBot 1.0 <i className="fa fa-caret-down"></i>
-          </button>
-          <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
-            <a href="./SmartDoctor"> Smart Doctor 1.0</a>
-          </div>
-        </div>
-        <div className="message sent">
-          <p>Hi! How can I help you?</p>
-        </div>
-        <label className={"message-sent-label"}>Popular Questions</label>
-        <div className={"suggestion-column"}>
-          <div className={"suggestion1"}>
-            <button
-              className={"suggestion-button"}
-              onClick={handleOption1Click}
-            >
-              option 1
-            </button>
-            <button
-              className={"suggestion-button"}
-              onClick={handleOption1Click}
-            >
-              option 2
-            </button>
-          </div>
-          <div className={"suggestion2"}>
-            <button
-              className={"suggestion-button"}
-              onClick={handleOption1Click}
-            >
-              option 3
-            </button>
-            <button
-              className={"suggestion-button"}
-              onClick={handleOption1Click}
-            >
-              option 4
-            </button>
-          </div>
-        </div>
-
-        <div className="input-container">
-          <input type="text" placeholder="Message ChatBot..." />
-          <button onClick={handleSendCLick}>Send</button>
-        </div>
-      </div>
-    </div>
+        </form>
+      </section>
+    </main>
   );
 };
 
-export default ChatComponent;
+export default Chatbot;

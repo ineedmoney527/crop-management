@@ -20,6 +20,7 @@ import Encyclopedia from "./Encyclopedia.js";
 import Details from "./CropDetails/Details";
 import Weather from "./Weather.js";
 import Accounting from "./Accounting.js";
+import CartPage from "./CartPage.js";
 import CropSummary from "./CropSummary.js";
 import { useState } from "react";
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/Learning2" element={<Learning2 />} />
           <Route path="/Learning3" element={<Learning3 />} />
           <Route path="/Market" element={<MarketStore />} />
+          <Route exact path="/cart" component={CartPage} />
           <Route path="/Forum" element={<PostList />} />
           <Route path="/SearchPostList" element={<SearchPostList />} />
           <Route path="/AddNewPost" element={<AddPost />} />

@@ -8,6 +8,8 @@
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/interaction": "^6.1.11",
     "@fullcalendar/react": "^6.1.11",
+    "@langchain/community": "^0.0.45",
+    "@langchain/openai": "^0.0.26",
     "@material-ui/icons": "^4.11.3",
     "@mobiscroll/react": "npm:@mobiscroll/react-trial@^5.29.1",
     "@mui/icons-material": "^5.15.14",
@@ -17,6 +19,7 @@
     "@mui/x-charts": "^6.19.8",
     "@mui/x-data-grid": "^6.19.8",
     "@mui/x-date-pickers": "^6.19.8",
+    "@supabase/supabase-js": "^2.42.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -25,12 +28,22 @@
     "chart": "^0.1.2",
     "chart.js": "^4.4.2",
     "clsx": "^2.1.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.1.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.0.20",
+    "fs": "^0.0.1-security",
+    "langchain": "^0.1.32",
     "moment": "^2.30.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.4",
+    "node-polyfill-webpack-plugin": "^3.0.0",
+    "openai": "^4.0.0",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-big-calendar": "^1.11.2",
@@ -53,16 +66,19 @@
     "react-scripts": "^5.0.1",
     "react-scroll-parallax": "^3.4.5",
     "react-spring": "^9.7.3",
+    "stream-browserify": "^3.0.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.7",
+    "timers": "^0.1.1",
+    "typeorm": "^0.3.20",
+    "util": "^0.12.5",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start-react": "react-scripts start",
+    "start": "npm run start-react",
+    "dev": "start"
   },
   "eslintConfig": {
     "extends": [
@@ -81,5 +97,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.2.1"
   }
 }

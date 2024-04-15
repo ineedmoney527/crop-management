@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import TransactionTable from "./TransactionTable";
-import TransactionBarChart from "./TransactionBarChart";
-import TransactionPieChart from "./TransactionPieChart";
-import AddTransactionForm from "./AddTransactionForm";
+import TransactionTable from "./TransactionTable.js";
+import TransactionBarChart from "./TransactionBarChart.js";
+import TransactionPieChart from "./TransactionPieChart.js";
+import AddTransactionForm from "./AddTransactionForm.js";
 import { useNavigate } from "react-router-dom";
-// import { Stack } from "@mui/material";
 import {
   Stack,
   Button,

@@ -38,7 +38,7 @@
   color: "green";
 }
 
-input[type="text"] {
+/* input[type="text"] {
   width: 70%;
   padding: 8px;
   margin-right: 10px;
@@ -51,7 +51,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 /* TodoList.css */
 

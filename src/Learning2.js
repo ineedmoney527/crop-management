@@ -9,7 +9,7 @@ const Learning2 = ({ progress }) => {
   const navigate = useNavigate();
 
   const handleLessonClick = () => {
-    navigate("/Learning3");
+    navigate("Learning3");
   };
 
   const handleAIClick = () => {

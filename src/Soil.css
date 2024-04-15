@@ -93,7 +93,7 @@ label {
   font-size: 25px;
 }
 
-input[type="text"],
+.input input[type="text"],
 input[type="radio"] {
   width: 100%;
   padding: 12px;
@@ -103,19 +103,19 @@ input[type="radio"] {
   font-family: Arial, sans-serif;
   font-weight: 400;
 }
-input[type="text"]:focus,
-input[type="number"]:focus {
+.input input[type="text"]:focus,
+.input input[type="number"]:focus {
   transition: width 0.3s ease, border-color 0.3s ease; /* Add transition for width and border-color */
   border-color: #2ecc71; /* Change border color when focused */
   border-width: 4px;
 }
 
-input[type="number"] {
+.input input[type="number"] {
   width: 50%;
   border-radius: 25px;
 }
 
-input[type="radio"] {
+.input input[type="radio"] {
   margin-right: 15px;
 }
 

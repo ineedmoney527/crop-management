@@ -6,9 +6,9 @@ import weather3 from "./images/weather3.png";
 import weather4 from "./images/weather4.png";
 // import WeatherGraph from "./WeatherGraph";
 import "./Weather.css";
-import TransactionBarChart from "./TransactionBarChart";
+import TransactionBarChart from "./TransactionBarChart.js";
 import { useNavigate } from "react-router-dom";
-import WeatherGraph from "./WeatherGraph";
+import WeatherGraph from "./WeatherGraph.js";
 const Weather = () => {
   const [pageTitle, setPageTitle] = useState("Weather");
   const navigate = useNavigate();

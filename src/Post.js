@@ -1,13 +1,23 @@
+//Post.js
 import React, { useState } from "react";
-import { FaRegComment } from "react-icons/fa";
+import { FaHeart, FaComment, FaStar, FaRegComment } from "react-icons/fa";
 import moment from "moment";
 import Avatar from "@mui/material/Avatar";
 import "./Post.css";
 import Stack from "@mui/material/Stack";
 import { CiHeart, CiStar } from "react-icons/ci";
+import Button from "@mui/material/Button";
 import { ImageList, ImageListItem, Modal } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const Post = ({ post, onLike, onStar }) => {
+const Post = ({ post, onLike, onComment, onStar }) => {
+  const navigate = useNavigate();
+  const { AuthorUsername, PostDate, Content, MediaTypes, MediaURLs, Avatars } =
+    post; // Adjust property names here
+
+  const handleCommentClick = () => {
+    navigate("/Irrigation");
+  };
   const [openModal, setOpenModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const imageSize = {
@@ -24,6 +34,12 @@ const Post = ({ post, onLike, onStar }) => {
   const handleCloseModal = () => {
     setOpenModal(false);
     setSelectedImage(null);
+  };
+
+  const handleModalClose = (event) => {
+    if (event.target === event.currentTarget) {
+      handleCloseModal();
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -53,16 +69,40 @@ const Post = ({ post, onLike, onStar }) => {
     handleCloseModal();
   };
 
+  // Function to handle clicking on the post to navigate to details
+  const handleClick = () => {
+    // Navigate to post details page
+    navigate(`/post/${post.id}`);
+  };
+
+  // Function to render media content (images/videos)
+  const renderMediaContent = () => {
+    if (MediaURLs && MediaURLs.length > 0) {
+      // If media URLs exist, render the media content
+      return (
+        <ImageList rowHeight={350} cols={3} gap={8}>
+          {MediaURLs.split(",").map((url, index) => (
+            <ImageListItem key={index} onClick={() => handleImageClick(url)}>
+              <img src={url.trim()} alt={`Image ${index}`} style={imageSize} />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      );
+    } else {
+      // If no media content, render a placeholder or message
+      return null;
+    }
+  };
+
   return (
     <div className={"post"}>
       <Stack direction="column" spacing={1} className={"EachSinglePost"}>
         <div className={"postHeader"}>
           <Stack direction="row" spacing={3} className={"post-info"}>
-            {/* <Avatar alt={"Avatar"} src={post.avatar} className={"avatar"} style={{ width: '50px', height: '50px'}}/> */}
-            {post.avatar ? (
+            {Avatars ? (
               <Avatar
                 alt="Avatar"
-                src={post.avatar}
+                src={Avatars}
                 className="avatar"
                 style={{ width: "50px", height: "50px" }}
               />
@@ -71,33 +111,41 @@ const Post = ({ post, onLike, onStar }) => {
                 className="avatar"
                 style={{ width: "50px", height: "50px" }}
               >
-                {getInitials(post.username)}
+                {AuthorUsername && getInitials(AuthorUsername)}
               </Avatar>
             )}
             <Stack direction="column" spacing={0.3} className={"poster-info"}>
-              <label className={"username"}>{post.username}</label>
-              <label className={"postTime"}>
-                {moment(post.timeStamp).fromNow()}
-              </label>
+              {/*<label className={"username"}>{post.username}</label>*/}
+              {/*<label className={"postTime"}>{moment(post.timeStamp).fromNow()}</label>*/}
+              <label className={"username"}>{AuthorUsername}</label>
+              <label className={"postTime"}>{moment(PostDate).fromNow()}</label>
             </Stack>
           </Stack>
         </div>
 
         <div className={"post-content"}>
-          <label className={"captions"}>{post.caption}</label>
-          {/* Conditional rendering of images */}
-          {post.images && post.images.length > 0 && (
-            <ImageList rowHeight={350} cols={3} gap={8}>
-              {post.images.map((image, index) => (
-                <ImageListItem
-                  key={index}
-                  onClick={() => handleImageClick(image)}
-                >
-                  <img src={image.url} alt={image.alt} style={imageSize} />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          )}
+          {/*<label className={"captions"}>{post.caption}</label>*/}
+          {/*/!* Conditional rendering of images *!/*/}
+          {/*{post.images && post.images.length > 0 && (*/}
+          {/*    <ImageList rowHeight={350} cols={3} gap={8}>*/}
+          {/*        {post.images.map((image, index) => (*/}
+          {/*            <ImageListItem key={index} onClick={() => handleImageClick(image)}>*/}
+          {/*                <img src={image.url} alt={image.alt} style={imageSize} />*/}
+          {/*            </ImageListItem>*/}
+          {/*        ))}*/}
+          {/*    </ImageList>*/}
+          {/*)}*/}
+          <label className={"captions"}>{Content}</label>
+          {/*{MediaURLs && MediaURLs.length > 0 && (*/}
+          {/*    <ImageList rowHeight={350} cols={3} gap={8}>*/}
+          {/*        {MediaURLs.split(',').map((url, index) => (*/}
+          {/*            <ImageListItem key={index} onClick={() => handleImageClick(url)}>*/}
+          {/*                <img src={url.trim()} alt={`Image ${index}`} style={imageSize} />*/}
+          {/*            </ImageListItem>*/}
+          {/*        ))}*/}
+          {/*    </ImageList>*/}
+          {/*)}*/}
+          {renderMediaContent()}
         </div>
 
         <Stack
@@ -119,7 +167,7 @@ const Post = ({ post, onLike, onStar }) => {
           <Stack direction="row" spacing={2} className={"buttonsAction"}>
             <button
               className={"buttonInteraction"}
-              // onClick={handleCommentClick}
+              onClick={handleCommentClick}
               type="submit"
             >
               <FaRegComment size={15} /> Comments

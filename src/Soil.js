@@ -66,6 +66,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="texture">Texture:</label>
               <input
+                className="input"
                 type="text"
                 id="texture"
                 name="texture"
@@ -77,6 +78,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               <label htmlFor="ph">pH:</label>
 
               <input
+                className="input"
                 type="number"
                 id="ph"
                 name="ph"
@@ -90,6 +92,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="nitrogen">Nitrogen:</label>
               <input
+                className="input"
                 type="text"
                 id="nitrogen"
                 name="nitrogen"
@@ -100,6 +103,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="potassium">Potassium:</label>
               <input
+                className="input"
                 type="text"
                 id="potassium"
                 name="potassium"
@@ -110,6 +114,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="phosphorus">Phosphorus:</label>
               <input
+                className="input"
                 type="text"
                 id="phosphorus"
                 name="phosphorus"
@@ -126,6 +131,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               <label>Tilage Practices:</label>
               <div className="radio-group">
                 <input
+                  className="input"
                   type="radio"
                   id="plowing"
                   name="tilage"
@@ -135,6 +141,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
                 />
                 <label htmlFor="plowing">Plowing</label>
                 <input
+                  className="input"
                   type="radio"
                   id="discing"
                   name="tilage"
@@ -144,6 +151,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
                 />
                 <label htmlFor="discing">Discing</label>
                 <input
+                  className="input"
                   type="radio"
                   id="allowing"
                   name="tilage"
@@ -157,6 +165,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="depth">Depth:</label>
               <input
+                className="input"
                 type="text"
                 id="depth"
                 name="depth"
@@ -167,6 +176,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="time">Time of Operation:</label>
               <input
+                className="input"
                 type="text"
                 id="time"
                 name="time"
@@ -182,6 +192,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="Field Name">Name:</label>
               <input
+                className="input"
                 type="text"
                 id="field"
                 name="field"
@@ -192,6 +203,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
             <div className="form-group">
               <label htmlFor="time">Address</label>
               <input
+                className="input"
                 type="text"
                 id="time"
                 name="time"

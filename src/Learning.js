@@ -1,7 +1,7 @@
 import React from "react";
 import "./Learning.css";
 import { useNavigate } from "react-router-dom";
-
+import { Stack } from "@mui/material";
 const Learning = () => {
   const navigate = useNavigate();
 
@@ -18,14 +18,24 @@ const Learning = () => {
 
   return (
     <div className="chat-container">
-      <div className={"chat_sidebar"}>
+      <Stack className="sidebar">
+        <button
+          className="sidebar-button "
+          onClick={() => navigate("/Encyclopedia")}
+        >
+          {" "}
+          Encyclopedia
+        </button>
+        <button className="sidebar-button active">Learning</button>
+      </Stack>
+      {/* <div className={"chat_sidebar"}>
         <div className={"chat-sidebar-box"}>
           <button className={"sidebar-button"}>AI Tools</button>
           <button className={"sidebar-button"} onClick={handleLearningClick}>
             Learning
           </button>
         </div>
-      </div>
+      </div> */}
       <div className="chat-messages">
         <div className="title">
           <p>Crop Management Lectures</p>
