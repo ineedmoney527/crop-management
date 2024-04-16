@@ -1,51 +1,26 @@
 .chat-container {
     display: flex;
     flex-direction: row;
-    width:100%;
 }
 
 .chat-sidebar-box{
     margin-top: 100px;
 }
-/* Sidebar container */
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* width: 200px; */
-    height: 100vh;
-    padding-top: 60px;
-    padding-right: 20px;
-  }
-  
-  /* Sidebar items */
-  .sidebar-item {
-    margin-bottom: 10px;
-  }
-  
-  /* Sidebar item link */
-  .sidebar-button {
+
+.sidebar-button{
     margin-bottom: 15px;
     width: 200px;
-    height: 60px;
+    height: 45px;
     border: transparent;
-    background-color: #f2f3c0;
-    color: #a98811;
-    font-size: 18px;
+    background-color: transparent;
+    color: black;
+    font-size: 15px;
     cursor: pointer;
-    margin-bottom: 10px;
-    border-radius: 25px;
-    font-weight: bold;
-  }
-  .sidebar-button:hover {
-    background-color: #e3e48f;
-  }
-  
-  /* Active sidebar item */
-  .sidebar-button.active {
-    background-color: #c1c285;
-  }
-  
+}
+
+.sidebar-button:hover{
+    background-color: white;
+}
 
 .chat_sidebar{
     display: flex;
@@ -56,13 +31,11 @@
 }
 
 .chat-messages {
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
-    /*align-items: center;*/
-    padding: 10px;
-    margin-left: 35px;
-    width:100%;
+    align-items: center;
+    display: flex;;
+    flex-direction: column;
+
 }
 
 .message {
@@ -73,7 +46,6 @@
 }
 
 .message.received {
-    /*background-color: #f0f0f0;*/
     align-self: flex-start;
 }
 
@@ -84,8 +56,6 @@
     font-size: 25px;
     justify-content: center;
     margin-top: 120px;
-
-    /*align-self: flex-end;*/
 }
 
 .message-sent-label{
@@ -99,13 +69,15 @@
 .L2-learning-column{
     display: flex;
     flex-direction: row;
-    margin-left: 50px;
-
 }
 
 .L2-learning-column-1{
     display: flex;
     flex-direction: column;
+    width:60%;
+    height:30vh;
+    margin-bottom: 100px;
+
 }
 
 .L2-learning-column-2{
@@ -134,21 +106,25 @@
 }
 
 .L2-title{
-    font-size: 23px;
+    font-size: 30px;
     font-weight: bold;
     display: flex;
-    margin-left: 50px;
-    /*justify-content: center;*/
+    width: 90%;
+    padding-left: 5%;
+    color: #495D44;
 }
 
 
 .progress-bar-container {
     width: 100%;
     height: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    align-items: center;
 }
+
+
 
 .progress-bar {
     height: 100%;
@@ -159,28 +135,38 @@
 .L2-learning-column-2-label{
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .L2-learning-column-2-icon{
     margin-right: 20px;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+
 }
 
 .L2-Lessons{
-    margin-left: 50px;
+    padding-top: 45px;
+    padding-bottom: 50px;
+    padding-left: 5%;
 }
 
 .L2-Lessons-Title{
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    color: #595959;
+    /*color: red;*/
     font-weight: bold;
-    font-size: 15px;
+    font-size: 19px;
 }
 
+.L2-Lessons-Title-Label {
+    width: 71%
+}
+
+.L2-Lessons-small-title-Label{
+    width:70%
+}
 
 .line {
     margin-top: 10px;
@@ -201,37 +187,40 @@
     margin-top: 10px;
     font-size: 15px;
     color: #595959;
+
 }
 
 .L2-Lessons-Title-button{
-    font-size: 12px;
-    width: 50px;
-    margin-left: 450px;
-    background-color: darkslategray;
-    color: #F2F3C0;
-    border-radius: 20px;
+    font-size: 14px;
+    width: 80px;
+    height:26px;
+    color: white;
+    background-color:darkseagreen ;
+    border-radius: 5px;
     border-color: transparent;
     cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 2)
 }
 
 .L2-Lessons-Small-Title-button{
-    font-size: 12px;
-    width: 50px;
-    margin-left: 480px;
-    background-color: darkslategray;
-    color: #F2F3C0;
-    border-radius: 20px;
+    font-size: 13px;
+    width: 80px;
+    height:26px;
+    background-color: darkseagreen;
+    color: white;
+    border-radius: 7px;
     border-color: transparent;
     cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
 }
 
 .L2-Lessons-quiz-button{
-    font-size: 12px;
-    width: 50px;
-    margin-left: 543px;
-    background-color: darkslategray;
-    color: #F2F3C0;
-    border-radius: 20px;
+    font-size: 13px;
+    width: 80px;
+    height:26px;
+    background-color: darkseagreen;
+    color: white;
+    border-radius: 7px;
     border-color: transparent;
     cursor: pointer;
 }

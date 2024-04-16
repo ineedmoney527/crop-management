@@ -16,7 +16,9 @@ function Navbar() {
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar}
+                            style={{color: "#495D44"}}
+            />
           </Link>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -24,7 +26,7 @@ function Navbar() {
             <Link to="#" className="menu-bars">
               <AiIcons.AiOutlineClose
                 onClick={showSidebar}
-                style={{ color: "black", marginTop: "30px" }}
+                style={{ color: "#495D44", marginTop: "5px" }}
               />
             </Link>
 
@@ -34,7 +36,8 @@ function Navbar() {
                   key={index}
                   className={item.cName}
                   style={{
-                    marginTop: "30px",
+                    marginTop: "5px",
+                    color:'#495D44'
                   }}
                 >
                   <Link to={item.path} onClick={showSidebar}>

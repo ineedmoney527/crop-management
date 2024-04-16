@@ -17,7 +17,7 @@
   font-size: 3rem;
 } */
 :root {
-  --border-rad-lg: 15px;
+  /*--border-rad-lg: 15px;*/
   --light-text: #fefefe;
 }
 
@@ -29,29 +29,29 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+  /*margin: 0;*/
+  /*padding: 0;*/
   font-family: "Poppins";
 }
 
 main {
-  background-color: slategrey;
+  background-color: white;
 
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /*background-size: cover;*/
+  /*background-repeat: no-repeat;*/
+  /*height: 100vh;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
 }
 
 /* chatbot elements */
 
 .chatbot-container {
-  background-color: black;
-  width: 360px;
+  background-color: white;
+  width: 100%;
   min-height: 380px;
-  border-radius: var(--border-rad-lg);
+  /*border-radius: var(--border-rad-lg);*/
   padding: 1em;
 }
 
@@ -61,12 +61,13 @@ main {
 
 .chatbot-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   gap: 0.6em;
 }
 
 .logo {
-  width: 160px;
+  width: 60px;
 }
 
 .chatbot-conversation-container {
@@ -98,7 +99,7 @@ main {
 }
 
 .speech-ai {
-  background: #334959;
+  background: white;
   border-top-left-radius: 0;
   margin: 1.2em 1em 0 0;
 }
@@ -111,6 +112,9 @@ main {
 
 .chatbot-input-container {
   display: flex;
+  flex-direction: row;
+  width:100%;
+  /*background-color: black;*/
 }
 
 /* input[type="text"],
@@ -136,7 +140,7 @@ button {
 } */
 
 .send-btn-icon {
-  width: 20px;
+  width: 200px;
   display: block;
 }
 
@@ -149,5 +153,28 @@ button {
   margin: 0;
 }
 .submit-btn {
-  color: white;
+}
+
+.chatbot-input-container input[type="text"] {
+  flex: 1; /* Take remaining space */
+  padding: 10px; /* Padding around the text inside the input */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  outline: none; /* Remove outline */
+  margin-right: 10px;
+  /*background-color: green;*/
+}
+
+
+.chatbot-input-container button[type="submit"] {
+  background-color: #007BFF; /* Button background color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Padding around the text inside the button */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 15px; /* Font size */
+  cursor: pointer; /* Cursor pointer */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+  width: 20%;
 }

@@ -1,8 +1,8 @@
 .navbar {
-  background-color: #378b29;
-  background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%);
-
-  height: 80px;
+  /*background-color: #378b29;*/
+  /*background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%);*/
+  background: linear-gradient(to right, #F8F5EE, #D9DAD3);
+  height: 60px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -11,14 +11,16 @@
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
-  background: none;
+  /*background: none;*/
+  color:#495D44;
+  /*background-color: #495D44;*/
 }
 
 .nav-menu {
-  background-color: #efe48b;
-  color: black; /* Change font color to black */
+  /*background-color: #efe48b;*/
+  background: linear-gradient(to bottom, #F8F5EE, #D9DAD3);
   width: 250px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
@@ -26,6 +28,7 @@
   left: -100%;
   transition: 850ms;
   z-index: 2000;
+
 }
 
 .nav-menu.active {
@@ -44,8 +47,8 @@
 
 .nav-text a {
   text-decoration: none;
-  color: black;
-  font-size: 22px;
+  color: #495D44;
+  font-size: 18px;
   width: 95%;
   height: 100%;
   display: flex;
@@ -56,7 +59,7 @@
 }
 
 .nav-text a:hover {
-  background-color: #1a83ff;
+  background-color: white;
 }
 
 .nav-menu-items {
@@ -82,7 +85,7 @@ span {
 /* NavBar.css */
 
 .icons {
-  color: black; /* Set the color of the icons to black */
+  color: #495D44; /* Set the color of the icons to black */
 }
 .nav-text {
   font-size: 400px;

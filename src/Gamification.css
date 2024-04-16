@@ -1,55 +1,80 @@
-.chat-container {
-  margin-left: 10%;
-  display: flex;
-}
-.gamification-row {
-  justify-content: space-around;
-  gap: 100px;
-  display: flex;
+/*.chat-container{*/
+/*    !*background: linear-gradient(to bottom, #0B2E4A, #000B10);*!*/
+/*    backdrop-filter: blur(5px); !* Adjust the blur radius as needed *!*/
+/*    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(135,135,135,1) 100%);*/
+/*}*/
+.gamification-row{
+  /*display: flex;*/
+  /*flex-direction: column;*/
 }
 
-.gamification-content {
-  flex: 1;
+.gamification-content{
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+
 }
-.personal {
+
+.gamification-content-title{
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color:#364632;
+  margin-left: 50px;
+}
+.personal{
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+
+  /*margin-bottom: 50px;*/
+
 }
 
-.personal-icon {
-  width: 220px;
-  height: 150px;
+.personal-icon{
+  width: 100px;
+  height: 100px;
   margin-right: 50px;
+  border-radius: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display:flex;
+  margin-top: auto;
+  margin-bottom: auto;
+
 }
 
-.medal {
+.medal{
   width: 80px;
   height: 80px;
 }
-.personal-information {
+.personal-information{
   display: flex;
   flex-direction: column;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-.personal-information label,
-progress {
+.personal-information-group{
+  margin-bottom: 15px;
+  color:#364632;
+}
+
+.personal-information-label{
   font-size: 15px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-right: 10px;
+  color:#364632;
+  width: 50px;
 }
 
-.accomplishment-button {
+
+
+.accomplishment-button{
   /*border-radius: 1px;*/
   border-color: transparent;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  width: 600px;
+  width: 80%;
   height: 25px;
   background-color: lightgray;
   color: black;
@@ -57,61 +82,73 @@ progress {
   justify-content: center;
 }
 
-.accomplishment-button-not-select {
+.accomplishment-button-not-select{
   border-color: transparent;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  width: 600px;
+  width: 80%;
   height: 25px;
   background-color: white;
   color: grey;
   cursor: pointer;
   justify-content: center;
+
+
 }
 
-.current-accomplishment {
+.current-accomplishment{
   height: 250px;
+  /*width:90%;*/
   overflow-y: auto;
 }
 
-.current-1 {
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  width: 100vh;
-  height: 80px;
+.current-1{
+  overflow-y: auto;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*border-radius: 20px;*/
+  /*width: 100vh;*/
+  /*height: 80px;*/
 }
 
-.current-1-info {
+.current-1-info{
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  width: auto;
 }
 
-.current-1-info-column {
+.current-1-info-column{
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin-right: 20px;
+
 }
-.current-1-info-title {
-  font-size: 14px;
+.current-1-info-title{
+  font-size: 10px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  color: #495D44
+  /*color:white;*/
 }
 
-.current-1-info-icon {
+.current-1-info-icon{
   width: 65px;
-  height: 75px;
+  height: 65px;
+  border-radius: 10px;
 }
 
-.current-1-info-title label {
+.current-1-info-title label{
+  font-size: 16px;
   font-weight: bold;
+  color: #495D44
+  /*color:white;*/
 }
 
-.level-progress {
-  width: 250px;
+.level-progress{
+  width: 150px;
   height: 15px;
   background-color: lightgray;
 }
@@ -125,7 +162,7 @@ progress {
 }
 
 progress {
-  width: 450px;
+  width: 250px;
   height: 15px;
   background-color: lightgray;
   border-radius: 20px;
@@ -141,46 +178,135 @@ progress::-webkit-progress-value {
   border-radius: 20px;
 }
 
-.ranking-bar {
+.ranking-bar{
   height: 550px;
   width: 230px;
-  flex: 1;
-  margin-top: 30px;
-
+  margin-top: 50px;
+  margin-left: 40px;
   background-color: white;
   display: flex;
   flex-direction: column;
 }
 
-.ranking-person {
+.ranking-person{
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 15px;
 }
 
+.top-three-person{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.first-ranking-person{
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+
+}
+
+.second-ranking-person{
+  margin-top: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.third-ranking-person{
+  margin-top: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.crown-icon{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  margin-left: 5px;
+}
+
+
 .ranking-level {
   margin-left: auto;
 }
 
-.ranking-person label {
+.ranking-person label{
+  font-size: 14px;
 }
 
-.ranking-title {
+
+.third-ranking-person label{
+  display: flex;
+  justify-content: center;
+}
+
+.second-ranking-person label{
+  display: flex;
+  justify-content: center;
+}
+
+.first-ranking-person label{
+  display: flex;
+  justify-content: center;
+}
+
+.ranking-icon-top{
+  width: 40px;
+  height: 40px;
+}
+
+.ranking-title{
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.ranking-icon {
+.ranking-icon{
   width: 35px;
   height: 35px;
   margin-left: 20px;
 }
 
-.goal-1-info {
+/* Add this to your CSS file */
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badge-container {
+  position: relative;
+}
+
+.badge-image {
+  width: 65px;
+  height: 65px;
+}
+
+.lock-icon {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  /*top: 0;*/
+  /*left: 0;*/
+}
+
+.badge-title {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.goal-1-info{
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -188,24 +314,25 @@ progress::-webkit-progress-value {
   align-items: center;
 }
 
-.goal-1-info-icon {
+.goal-1-info-icon{
   width: 100px;
   height: 120px;
 }
 
-.goal-1-info-title label {
+.goal-1-info-title label{
   font-size: 13px;
   font-weight: bold;
   z-index: 1;
 }
 
-.goal-1-info-row {
+.goal-1-info-row{
   display: flex;
   flex-direction: row;
   margin-left: 35px;
 }
 
-.goals-1 {
+.goals-1{
   height: 250px;
   overflow-y: auto;
+
 }

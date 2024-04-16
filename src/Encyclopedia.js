@@ -52,7 +52,7 @@ export default function Encyclopedia({ setName }) {
   const navigate = useNavigate();
   return (
     <div className="encyclopedia">
-      <Stack className="sidebar">
+      <Stack className="sidebar" >
         <button className="sidebar-button active">Encyclopedia</button>
         <button
           className="sidebar-button"
