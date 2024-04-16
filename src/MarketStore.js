@@ -386,7 +386,9 @@ function MarketStore() {
   const handleDeleteClick = async (id) => {
     console.log(id);
     if (
-      window.confirm(`Are you sure you want to delete this user with ID ${id}?`)
+      window.confirm(
+        `Are you sure you want to delete this product with ID ${id}?`
+      )
     ) {
       try {
         const response = await axios.delete(

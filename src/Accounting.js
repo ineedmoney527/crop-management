@@ -12,144 +12,126 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
+import axios from "axios";
 
 import "./Accounting.css";
 
 const Accounting = () => {
-  const dummy_transactions = [
-    {
-      id: 1,
-      date: "2023-06-12",
-      payee: "John Doe",
-      category: "Livestock Sales",
-      description: "Sale of cattle",
-      type: "Income",
-      amount: 223.0,
-    },
-    {
-      id: 2,
-      date: "2023-05-26",
-      payee: "Jane Smith",
-      category: "Gardening",
-      description: "Purchase of seeds and gardening tools",
-      type: "Expense",
-      amount: 500.0,
-    },
-    {
-      id: 3,
-      date: "2023-05-25",
-      payee: "Mike Johnson",
-      category: "Resale Items",
-      description: "Resale of farm equipment",
-      type: "Income",
-      amount: 83.88,
-    },
-    {
-      id: 4,
-      date: "2023-05-25",
-      payee: "John Doe",
-      category: "Resale Items",
-      description: "Resale of farm tools",
-      type: "Income",
-      amount: 60.0,
-    },
-    {
-      id: 5,
-      date: "2023-04-13",
-      payee: "Jane Smith",
-      category: "Miscellaneous Income",
-      description: "Miscellaneous income source",
-      type: "Income",
-      amount: 860.0,
-    },
-    {
-      id: 6,
-      date: "2023-07-18",
-      payee: "Alice Johnson",
-      category: "Maintenance",
-      description: "Repair of farming equipment",
-      type: "Expense",
-      amount: 120.0,
-    },
-    {
-      id: 7,
-      date: "2023-07-22",
-      payee: "Bob Williams",
-      category: "Transportation",
-      description: "Transportation expenses for farm produce",
-      type: "Expense",
-      amount: 65.5,
-    },
-    {
-      id: 8,
-      date: "2023-08-05",
-      payee: "Charlie Brown",
-      category: "Fertilizers",
-      description: "Purchase of fertilizers for crops",
-      type: "Expense",
-      amount: 300.0,
-    },
-    {
-      id: 9,
-      date: "2023-08-15",
-      payee: "David Miller",
-      category: "Rent",
-      description: "Payment for renting farmland",
-      type: "Expense",
-      amount: 700.0,
-    },
-    {
-      id: 10,
-      date: "2023-08-20",
-      payee: "Emma Davis",
-      category: "Utilities",
-      description: "Payment for farm utilities",
-      type: "Expense",
-      amount: 150.0,
-    },
-  ];
   const [pageTitle, setPageTitle] = useState("Accounting");
-  const [transactions, setTransactions] = useState(dummy_transactions);
+  const [transactions, setTransactions] = useState(null);
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
   const [selectedYear, setSelectedYear] = useState("2023");
   const years = ["2021", "2022", "2023", "2024", "2025"]; // Add more years as needed
-  const handleAddTransaction = (newTransaction) => {
-    setTransactions([...transactions, newTransaction]);
-    setOpenAddTransaction(false); // Close the dialog after adding transaction
+  const user_id = 1;
+
+  const fetchTransactions = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/accounting/${user_id}`
+      );
+      setTransactions(response.data);
+      console.log("sell" + JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
   };
-  const handleDeleteTransaction = (id) => {
-    // Logic to delete transaction with the given id
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
-    );
-    setTransactions(updatedTransactions); // Update transactions state
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const handleAddTransaction = async (newTransaction) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/accounting",
+        newTransaction
+      );
+
+      if (!response.data.success) {
+        alert("Transaction is not added successfully!");
+      } else {
+        setOpenAddTransaction(false); // Close the dialog after adding transacti
+        alert("Transaction added successfully!");
+        fetchTransactions();
+      }
+    } catch (e) {
+      alert("An error occured!");
+    }
+  };
+
+  // const handleUpdateTransaction = async (id) => {
+  //   try {
+  //     const response = await axios.post("http://localhost:5000/api/market", {
+  //       ...data,
+  //     });
+
+  //     if (!response.data.success) {
+  //       setError("root", { message: "Server Error. Please try again" });
+  //     } else {
+  //       onClose();
+  //       reset();
+  //       alert("Product added successfully!");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     // Handle network errors or other unexpected errors
+  //     setError("root", {
+  //       message: "An error occurred while processing your request.",
+  //     });
+  //   }
+  // };
+
+  const handleDeleteTransaction = async (id) => {
+    console.log(id);
+    if (
+      window.confirm(
+        `Are you sure you want to delete this product with ID ${id}?`
+      )
+    ) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:5000/api/accounting/${id}`
+        );
+        alert("Transaction deleted successfully");
+        fetchTransactions();
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        alert("An error occurred while deleting the user.");
+      }
+    }
+  };
+
+  const handleDeleteTransactions = async (selectedRows) => {
+    if (selectedRows.length === 0) {
+      return;
+    }
+
+    try {
+      const id = selectedRows.map((row) => row.id).join(",");
+      if (
+        window.confirm(
+          `Are you sure you want to delete selected products with ID ${id}?`
+        )
+      ) {
+        const response = await axios.delete(
+          `http://localhost:5000/api/accounting/rows/${id}`
+        );
+        alert("Transactions deleted successfully");
+        fetchTransactions();
+      }
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+      alert(error.message);
+    }
   };
   const navigate = useNavigate();
   const handleTitleChange = (e) => {
     setPageTitle(e.target.value);
   };
 
-  useEffect(() => {
-    let revenue = 0;
-    let expenses = 0;
-
-    transactions.forEach((transaction) => {
-      const amount = parseFloat(transaction.amount || 0);
-      if (transaction.type === "Income") {
-        revenue += amount;
-      } else if (transaction.type === "Expense") {
-        expenses += amount;
-      }
-    });
-    const profit = revenue - expenses;
-
-    setTotalRevenue(revenue);
-    setTotalExpenses(expenses);
-    setTotalProfit(profit);
-  }, [transactions]);
   useEffect(() => {
     // Navigate to a specific page based on the selected title
     switch (pageTitle) {
@@ -166,6 +148,25 @@ const Accounting = () => {
         break;
     }
   }, [pageTitle]);
+
+  useEffect(() => {
+    if (transactions) {
+      let revenue = 0;
+      let expenses = 0;
+      transactions.map((transaction) => {
+        const amount = parseFloat(transaction.amount || 0);
+        if (transaction.type === "Income") {
+          revenue += amount;
+        } else if (transaction.type === "Expense") {
+          expenses += amount;
+        }
+      });
+      const profit = revenue - expenses;
+      setTotalRevenue(revenue);
+      setTotalExpenses(expenses);
+      setTotalProfit(profit);
+    }
+  }, [transactions]);
 
   return (
     <div>
@@ -209,9 +210,6 @@ const Accounting = () => {
           <TransactionBarChart transactions={transactions} />
         </Stack>
         <Stack className="summary-pie-chart">
-          <div className="pie-chart-title" style={{ fontWeight: "bold" }}>
-            Expenses by Category
-          </div>
           <TransactionPieChart transactions={transactions} />
         </Stack>
       </div>
@@ -237,11 +235,15 @@ const Accounting = () => {
           </div>
         </div>
         <div className="transaction-table">
-          <TransactionTable
-            transactions={transactions}
-            onDelete={handleDeleteTransaction}
-            setTransactions={setTransactions}
-          />
+          {transactions && (
+            <TransactionTable
+              transactions={transactions}
+              onDelete={handleDeleteTransaction}
+              onDeleteRows={handleDeleteTransactions}
+              // onUpdate={handleUpdateTransaction}
+              setTransactions={setTransactions}
+            />
+          )}
         </div>
       </div>
       <Dialog

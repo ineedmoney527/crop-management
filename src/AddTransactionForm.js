@@ -10,6 +10,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
     type: "",
     amount: "",
   });
+  const userId = 1;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +25,12 @@ const AddTransactionForm = ({ onAddTransaction }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddTransaction(transaction); // Pass the new transaction data to the callback function
+    onAddTransaction({ ...transaction, user_id: userId }); // Pass the new transaction data to the callback function
+    console.log(transaction);
     // Clear form fields after submission
     setTransaction({
       date: new Date().toISOString().substr(0, 10),
+      user_id: userId,
       payee: "",
       category: "",
       description: "",
