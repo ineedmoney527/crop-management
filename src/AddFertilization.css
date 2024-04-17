@@ -88,7 +88,7 @@
   color: #555;
 }
 
-button[type="submit"] {
+.button-fertiliser {
   display: block;
   width: 100%;
   padding: 14px;
@@ -103,6 +103,6 @@ button[type="submit"] {
   font-weight: 600;
 }
 
-button[type="submit"]:hover {
+button-fertiliser:hover {
   background-color: #27ae60;
 }

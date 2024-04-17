@@ -52,15 +52,12 @@ app.post("/AddNewPost", (req, res) => {
   const content = req.body.content; // Extract Media from req.body
   const files = req; // Extract files from req
   console.log("Caption content here: ", content);
-  const query = `INSERT INTO Posts (UserID, Content) VALUES (12,?);`;
-  pool.query(query, [content], (err, result) => {
-    if (err) {
-      console.error("Error inserting new post data:", err);
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
-      return;
-    }
+  const query =
+          `INSERT INTO Posts (UserID, Content) VALUES (11,?);`
+  pool.query(query, [content], (err, result)=>{
+      if(err){
+          console.error('Error inserting new post data:', err);
+          res.status(500).json({success: false, message: 'Internal server error'}); 
 
     const postId = result.insertId; // Get the ID of the newly inserted post
     // If there are media files, insert their filenames into the Media table
@@ -105,8 +102,9 @@ app.get("/Likes", (req, res) => {
   // Change the route to /comments
   // const postID=req.params.postId
   // console.log("Display like postID: ",postID);
-  const query = `SELECT P.PostID, P.Content, U.UserID, U.ProfilePictureURL FROM Likes L JOIN Posts P ON L.PostID = P.PostID JOIN Users U ON P.UserID = U.UserID WHERE L.UserID = 1;
-`;
+  const query =
+      `SELECT P.PostID, P.Content, U.UserID, U.ProfilePictureURL FROM Likes L JOIN Posts P ON L.PostID = P.PostID JOIN Users U ON P.UserID = U.UserID WHERE L.UserID = 11;
+`
   pool.query(query, (err, results) => {
     if (err) {
       console.error("Error display liked posts:", err);
@@ -139,8 +137,9 @@ app.put("/SetLikes/:postId", (req, res) => {
   const postID = req.params.postId;
   console.log("like the unlike postID:", postID);
 
-  const query = `INSERT INTO Likes (PostID, UserID) VALUES (?, 1);
-`;
+  const query =
+      `INSERT INTO Likes (PostID, UserID) VALUES (?, 11);
+`
   pool.query(query, [postID], (err, results) => {
     if (err) {
       console.error("Error liking /inserting the post:", err);
@@ -153,13 +152,13 @@ app.put("/SetLikes/:postId", (req, res) => {
   });
 });
 
-app.post("/LeaveComment/:postId", (req, res) => {
-  // Change the route to /comments
-  const postID = req.params.postId;
-  const content = req.body.content;
-  console.log("Insert Comment at, with: ", postID, content);
-  const query = `INSERT INTO Comments (UserID, PostID, Content) VALUES (1, ?, ?);
-`;
+app.post('/LeaveComment/:postId', (req, res) => { // Change the route to /comments
+  const postID=req.params.postId
+  const content=req.body.content;
+  console.log("Insert Comment at, with: ",postID, content);
+  const query =
+      `INSERT INTO Comments (UserID, PostID, Content) VALUES (11, ?, ?);
+
   pool.query(query, [postID, content], (err, results) => {
     if (err) {
       console.error("Error inserting comment in post:", err);

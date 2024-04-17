@@ -217,7 +217,8 @@ const TransactionTable = ({
     const { numSelected } = props;
 
     return (
-      <Toolbar
+      <Stack direction={"row"}>
+        <Toolbar
         sx={{
           pl: { sm: 2 },
           pr: { xs: 1, sm: 1 },
@@ -256,15 +257,9 @@ const TransactionTable = ({
           ) : (
             ""
           )
-          // <Tooltip sx={{ display: "flex", gap: "20px" }} title="Filter list">
-          //   <IconButton onClick={handleAddNewProduct}>
-          //     {`My Products ${"    "}`}
-
-          //     <AddCircleIcon />
-          //   </IconButton>
-          // </Tooltip>
         }
       </Toolbar>
+      </Stack>
     );
   }
 

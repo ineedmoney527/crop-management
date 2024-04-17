@@ -175,7 +175,7 @@ const Accounting = () => {
         className="select-page"
         value={pageTitle}
         onChange={handleTitleChange}
-        style={{ fontWeight: "bold", fontSize: "24px", width: "200px" }}
+        style={{ fontSize: "24px", width: "200px" }}
       >
         <option value="Accounting">Accounting</option>
         <option value="Crop Summary">Farm Summary</option>
@@ -264,12 +264,27 @@ const Accounting = () => {
         open={openAddTransaction}
         onClose={() => setOpenAddTransaction(false)}
       >
-        <DialogTitle>Add Transaction</DialogTitle>
-        <DialogContent>
+        <DialogTitle
+        sx={{fontSize:30, fontWeight:'bold', mb:'5px'}}
+        >Add Transaction</DialogTitle>
+        <DialogContent sx={{ pl:'10px',pr:'10px', pt:'10px'}}>
           <AddTransactionForm onAddTransaction={handleAddTransaction} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenAddTransaction(false)} color="primary">
+          <Button 
+          onClick={() => setOpenAddTransaction(false)} 
+          sx={{
+            mb: '2px',
+            bgcolor: '#9FC173',
+            height: '40px',
+            color:'white',
+            "&:hover": {
+              bgcolor: "#495D44",
+              opacity: '70%',
+              color: 'white'
+          },
+          }}
+          >
             Cancel
           </Button>
         </DialogActions>

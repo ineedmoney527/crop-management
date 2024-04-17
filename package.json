@@ -14,6 +14,7 @@
     "@mobiscroll/react": "npm:@mobiscroll/react-trial@^5.29.1",
     "@mui/icons-material": "^5.15.14",
     "@mui/lab": "^5.0.0-alpha.169",
+    "@mui/material": "^5.15.14",
     "@mui/styles": "^5.15.14",
     "@mui/x-charts": "^6.19.8",
     "@mui/x-data-grid": "^6.19.8",
