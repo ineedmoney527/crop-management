@@ -9,12 +9,52 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  styled,
 } from "@mui/material";
+import { tableCellClasses } from '@mui/material/TableCell';
 import { Pie } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
 import InventoryPage from "./InventoryPage";
 
 export default function CropSummary() {
+  const palette = [  '#FBA884', '#F9DC74', '#73A9AD', '#90C8AC', '#C4DFAA', '#D0C9B6', '#EEC535', '#8D8571',];
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#90C8AC',
+      color: 'white',
+      alignItems: 'center',
+      textAlign: 'center', // Center the text
+      verticalAlign: 'middle',
+      fontWeight: 'bold',
+      fontSize: '16px'
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      alignItems: 'center',
+      textAlign: 'center', // Center the text
+      verticalAlign: 'middle',
+      color: '#495D44'
+    },
+    '&.MuiTable-root	':{
+      borderRadius: '10px'
+    }
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:hover': {
+      backgroundColor: '#FCE5DA',
+      cursor: 'pointer', // Optionally, change cursor to pointer on hover
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  
+
   // Dummy data
   const cropData = [
     { name: "Wheat", areaPlanted: 500, ratio: 0.4, revenue: 25000 },
@@ -30,14 +70,8 @@ export default function CropSummary() {
     datasets: [
       {
         data: [500, 300, 200, 150, 100],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "green", "brown"],
-        hoverBackgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "green",
-          "brown",
-        ],
+        backgroundColor: palette,
+        hoverBackgroundColor: palette,
       },
     ],
   };
@@ -68,8 +102,9 @@ export default function CropSummary() {
       <div>
         <select
           value={pageTitle}
+          className="select-pageCrop"
           onChange={handleTitleChange}
-          style={{ fontWeight: "bold", fontSize: "24px" }}
+          style={{  fontSize: "24px" }}
         >
           {" "}
           <option value="Accounting">Accounting</option>
@@ -81,8 +116,8 @@ export default function CropSummary() {
       <Box
         display="flex"
         justifyContent="center"
-        gap="80px"
-        padding="40px"
+        gap="20px"
+        padding="20px"
         maxHeight={500}
       >
         {/* Left container with table */}
@@ -90,13 +125,16 @@ export default function CropSummary() {
           style={{ flex: "1" }}
           elevation={3}
           variant="outlined"
-          sx={{ borderRadius: 10, padding: 2, flex: "1" }}
+          sx={{ 
+            boxShadow: '0px 6px 12px -2px rgba(50, 50, 93, 0.25), 0px 3px 7px -3px rgba(0, 0, 0, 0.3)',
+            borderRadius: '20px', padding: 2, flex: "1", }}
         >
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h5" gutterBottom sx={{fontWeight:'bold'}}>
             Crop Summary Table
           </Typography>
           <TableContainer
             style={{
+              borderRadius: '10px',
               maxWidth: "100%",
               height: "80%",
               display: "flex",
@@ -104,23 +142,23 @@ export default function CropSummary() {
               justifyContent: "center",
             }}
           >
-            <Table>
+            <Table stickyHeader sx={{ borderRadius: '10px' }} >
               <TableHead>
-                <TableRow>
-                  <TableCell>Crop Name</TableCell>
-                  <TableCell>Area Planted (hectar)</TableCell>
-                  <TableCell>Ratio</TableCell>
-                  <TableCell>Revenue Generated</TableCell>
+                <TableRow style={{ backgroundColor: '#f5f5f5'}}>
+                  <StyledTableCell style={{ fontWeight: 'bold' }}>Crop Name</StyledTableCell>
+                  <StyledTableCell  style={{ fontWeight: 'bold' }}>Area Planted (hectar)</StyledTableCell>
+                  <StyledTableCell style={{ fontWeight: 'bold' }} >Ratio</StyledTableCell>
+                  <StyledTableCell  style={{ fontWeight: 'bold' }} >Revenue Generated</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {cropData.map((crop, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{crop.name}</TableCell>
-                    <TableCell>{crop.areaPlanted}</TableCell>
-                    <TableCell>{crop.ratio}</TableCell>
-                    <TableCell>{crop.revenue}</TableCell>
-                  </TableRow>
+                  <StyledTableRow key={index}>
+                    <StyledTableCell>{crop.name}</StyledTableCell>
+                    <StyledTableCell>{crop.areaPlanted}</StyledTableCell>
+                    <StyledTableCell>{crop.ratio}</StyledTableCell>
+                    <StyledTableCell>{crop.revenue}</StyledTableCell>
+                  </StyledTableRow>
                 ))}
               </TableBody>
             </Table>
@@ -129,17 +167,18 @@ export default function CropSummary() {
 
         {/* Right container with pie chart */}
         <Paper
-          style={{ maxWidth: "500px", flex: "1" }}
+          style={{ width: "350px", flex: "1", height:'450px' }}
           elevation={3}
           variant="outlined"
           sx={{
-            borderRadius: 10,
+            borderRadius: 5,
             padding: 2,
             flex: "1",
+            boxShadow: '0px 6px 12px -2px rgba(50, 50, 93, 0.25), 0px 3px 7px -3px rgba(0, 0, 0, 0.3)',
             height: "400px", // Set a specific height for the container
           }}
         >
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{fontWeight:'bold'}} >
             Crop Categories Pie Chart
           </Typography>
           <div

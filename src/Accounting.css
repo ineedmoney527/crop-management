@@ -9,7 +9,7 @@
 
 .tagsBars{
   /* background-color: #89B84A; */
-  background: linear-gradient(to right, #73A9AD 0%, #90CBAC 50%, #c4dfaa 100%);
+  background: linear-gradient(to right, #73A9AD 10%, #90CBAC 70%, #c4dfaa 100%);
   align-items: center;
   border-radius: 10px;
   justify-content: center;
@@ -23,7 +23,7 @@
 
 .tagsBars-Expenses{
   /* background-color: #E1B51C; */
-  background: linear-gradient(to right, #FBA884 0%, #EEC535 70%, #F9DC74 100%);
+  background: linear-gradient(to right, #FBA884 20%, #EEC535 80%, #F9DC74 100%);
   align-items: center;
   border-radius: 10px;
   justify-content: center;
@@ -45,13 +45,14 @@
   margin-top: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background-color: #90C8AC;
+  background-color: #9FC173;
   color: #fff;
   cursor: pointer;
 }
 
 .select-box:hover {
-  border-color: #C1B39F;
+  border-color: #808E7C;
+  background-color: #808E7C;
 }
 
 .select-box:focus {
@@ -69,7 +70,8 @@
 .select-box option:hover {
   background-color: #ccc;
 }
-.select-page {
+
+.select-page, .select-pageCrop {
   /* width: 100px; */
   padding: 5px;
   margin: 10px 0px 0px 10px;
@@ -79,22 +81,23 @@
   color: #fff;
   cursor: pointer;
 }
-.select-page:hover {
+.select-page:hover, .select-pageCrop:hover {
   border-color: #CED581;
+  background-color: #808E7C;
 }
 
-.select-page:focus {
+.select-page:focus, .select-pageCrop:focus {
   outline: none;
   border-color: #CED581;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-.select-page option {
-  background-color: #f9f9f9;
+.select-page option, .select-pageCrop option {
+  background-color: #A4AD43;
   color: #333;
 }
 
-.select-page option:hover {
+.select-page option:hover, .select-pageCrop option:hover {
   background-color: #ccc;
 }
 
@@ -113,10 +116,11 @@
   /* background-color: red; */
 }
 .summary-pie-chart {
-  display: flex;
+  /* display: flex; */
   width: 40%;
-  align-items: center;
+  /* align-items: center; */
   padding-top: 25px;
+  padding-bottom: 5px;
   border: 1px solid #D2D2D2;
   border-radius: 25px;
   box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2);
@@ -139,8 +143,9 @@
 }
 
 .transaction-table {
-  border: 1px solid #D2D2D2;
+  /* border: 1px solid #D2D2D2; */
   border-radius: 5px;
-  box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2);
- margin-bottom: 20px;
+  background-color: red;
+  /* box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2); */
+  margin-bottom: 20px;
 }

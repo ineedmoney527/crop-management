@@ -3,7 +3,7 @@ var connection = createConnection({
   host: 'localhost',
   user: 'root',
   password:'',
-  database: 'vhack',
+  database: 'hack',
 });
 // Connect to the database
 connection.connect((err) => {

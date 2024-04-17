@@ -191,6 +191,7 @@ const Weather = () => {
   return (
     <div>
       <select
+        className="select-pageWeather"
         value={pageTitle}
         onChange={handleTitleChange}
         style={{ fontWeight: "bold", fontSize: "24px" }}
