@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./App.css";
+import "./ChatBot.css";
 import axios from "axios";
 const Chatbot = () => {
   const [convHistory, setConvHistory] = useState([]);
@@ -45,9 +45,9 @@ const Chatbot = () => {
     <main>
       <section className="chatbot-container">
         <div className="chatbot-header">
-          <img src="images/plant.png" alt={"Logo"} className="logo"/>
+          <img src="images/plant.png" alt={"Logo"} className="logo" />
           {/*<img src="images/logo-scrimba.svg" alt="Logo" className="logo" />*/}
-          <p className="sub-heading">Knowledge Bank</p>
+          <h5 className="sub-heading">Knowledge Bank</h5>
         </div>
         <div
           className="chatbot-conversation-container"
@@ -68,13 +68,15 @@ const Chatbot = () => {
             name="user-input"
             type="text"
             id="user-input"
+            className="chatbox-input"
             placeholder={"Message ChatBot..."}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             required
           />
-          <button type='submit' className="submit-btn">
-            <img src="images/send.svg" alt="Send" className="send-btn-icon" />
+          <button type="submit" className="submit-btn">
+            Send
+            {/* <img src="images/send.svg" alt="Send" className="send-btn-icon" /> */}
           </button>
         </form>
       </section>
