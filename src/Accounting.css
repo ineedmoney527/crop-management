@@ -2,28 +2,107 @@
   display: flex;
   font-size: 15px;
   font-family: Inter;
-  color: white;
-  margin-top: 10px;
-  padding: 10px;
+  /* color: white; */
+  /* margin-top: 10px; */
+  /* padding: 10px; */
 }
-.revenue,
-.profit {
-  background-color: rgb(18, 184, 18);
-  border-radius: 20px;
-  padding: 8px;
-  margin-right: 10px;
+
+.tagsBars{
+  /* background-color: #89B84A; */
+  background: linear-gradient(to right, #73A9AD 0%, #90CBAC 50%, #c4dfaa 100%);
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  padding: 5px 10px 5px 10px;
+  font-weight: bold;
+  margin: 0px 10px 10px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  color: #fff;
 }
-.expenses {
-  background-color: rgb(212, 23, 23);
-  border-radius: 20px;
-  padding: 8px;
-  margin-right: 10px;
+
+
+.tagsBars-Expenses{
+  /* background-color: #E1B51C; */
+  background: linear-gradient(to right, #FBA884 0%, #EEC535 70%, #F9DC74 100%);
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  padding: 5px 10px 5px 10px;
+  font-weight: bold;
+  margin: 0px 10px 10px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  color: #fff;
 }
+
 .transaction-summary-container {
   display: flex;
   flex-direction: flex-start;
   margin-top: 20px;
 }
+
+.select-box{
+  padding: 5px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #90C8AC;
+  color: #fff;
+  cursor: pointer;
+}
+
+.select-box:hover {
+  border-color: #C1B39F;
+}
+
+.select-box:focus {
+  outline: none;
+  border-color: #8d8571;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Style the options */
+.select-box option {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.select-box option:hover {
+  background-color: #ccc;
+}
+.select-page {
+  /* width: 100px; */
+  padding: 5px;
+  margin: 10px 0px 0px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #9FC173;
+  color: #fff;
+  cursor: pointer;
+}
+.select-page:hover {
+  border-color: #CED581;
+}
+
+.select-page:focus {
+  outline: none;
+  border-color: #CED581;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.select-page option {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.select-page option:hover {
+  background-color: #ccc;
+}
+
+.summary-title{
+  color: #383a3b;
+  margin: 10px;
+}
+
 .summary-graphs {
   display: flex;
   padding: 20px;
@@ -31,37 +110,37 @@
   width: 100%;
   justify-content: center;
   gap: 40px;
+  /* background-color: red; */
 }
 .summary-pie-chart {
   display: flex;
   width: 40%;
   align-items: center;
   padding-top: 25px;
-  border: 1px solid black;
+  border: 1px solid #D2D2D2;
   border-radius: 25px;
+  box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
+
 .summary-bar-chart {
   display: flex;
   width: 50%;
   align-items: center;
   padding-top: 25px;
-  border: 1px solid black;
+  border:1px solid #D2D2D2;
   border-radius: 25px;
+  box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .add-transaction {
   display: flex;
   margin-left: auto;
 }
-.add-transaction-button {
-  background-color: rgb(18, 184, 18);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-size: 15px;
-  font-family: Inter;
-  cursor: pointer;
-}
+
 .transaction-table {
-  border: 1px solid rgba(0, 0, 0, 0.607);
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid #D2D2D2;
+  border-radius: 5px;
+  box-shadow: 5px 8px 30px rgba(0, 0, 0, 0.2);
+ margin-bottom: 20px;
 }

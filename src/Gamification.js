@@ -44,7 +44,7 @@ const Gamification = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/user/2')
+    axios.get('http://localhost:5050/api/user/2')
         .then(response => {
           setUserData(response.data); // Update state with fetched user data
         })
@@ -52,7 +52,7 @@ const Gamification = () => {
           console.error('Error fetching user data:', error);
         });
 
-    axios.get('http://localhost:5000/api/userAchievement/2')
+    axios.get('http://localhost:5050/api/userAchievement/2')
         .then(response => {
           setUserAchievement(response.data); // Update state with fetched user data
           updateBadgeLocks(response.data);
@@ -61,7 +61,7 @@ const Gamification = () => {
           console.error('Error fetching user data:', error);
         });
 
-    axios.get('http://localhost:5000/api/gamification')
+    axios.get('http://localhost:5050/api/gamification')
         .then(response => {
           // Check if the data has changed
           if (JSON.stringify(response.data) !== JSON.stringify(gamificationData)) {
@@ -73,7 +73,7 @@ const Gamification = () => {
         });
 
     // Fetch gamification data from the backend API
-    // axios.get('http://localhost:5000/api/gamification')
+    // axios.get('http://localhost:5050/api/gamification')
     //     .then(response => {
     //         setGamificationData(response.data); // Update state with fetched data
     //     })

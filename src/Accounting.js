@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Box
 } from "@mui/material";
 import axios from "axios";
 
@@ -30,7 +31,7 @@ const Accounting = () => {
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/accounting/${user_id}`
+        `http://localhost:5050/api/accounting/${user_id}`
       );
       setTransactions(response.data);
       console.log("sell" + JSON.stringify(response.data));
@@ -46,7 +47,7 @@ const Accounting = () => {
   const handleAddTransaction = async (newTransaction) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/accounting",
+        "http://localhost:5050/api/accounting",
         newTransaction
       );
 
@@ -64,7 +65,7 @@ const Accounting = () => {
 
   // const handleUpdateTransaction = async (id) => {
   //   try {
-  //     const response = await axios.post("http://localhost:5000/api/market", {
+  //     const response = await axios.post("http://localhost:5050/api/market", {
   //       ...data,
   //     });
 
@@ -93,7 +94,7 @@ const Accounting = () => {
     ) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/accounting/${id}`
+          `http://localhost:5050/api/accounting/${id}`
         );
         alert("Transaction deleted successfully");
         fetchTransactions();
@@ -117,7 +118,7 @@ const Accounting = () => {
         )
       ) {
         const response = await axios.delete(
-          `http://localhost:5000/api/accounting/rows/${id}`
+          `http://localhost:5050/api/accounting/rows/${id}`
         );
         alert("Transactions deleted successfully");
         fetchTransactions();
@@ -171,6 +172,7 @@ const Accounting = () => {
   return (
     <div>
       <select
+        className="select-page"
         value={pageTitle}
         onChange={handleTitleChange}
         style={{ fontWeight: "bold", fontSize: "24px", width: "200px" }}
@@ -189,10 +191,17 @@ const Accounting = () => {
           fontFamily: "Inter",
         }}
       >
+       {/* {" Summary"} */}
+       <h1 className="summary-title">Summary</h1>
         <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
-          style={{ width: "80px", padding: "5px", marginTop: "10px" }}
+          // style={{ 
+          //   width: "80px", 
+          //   padding: "5px", 
+          //   marginTop: "10px", 
+          //   borderRadius:'10px' }}
+          className="select-box"
         >
           {years.map((year) => (
             <option key={year} value={year}>
@@ -200,7 +209,6 @@ const Accounting = () => {
             </option>
           ))}
         </select>
-        {" Summary"}
       </div>
       <div className="summary-graphs">
         <Stack className="summary-bar-chart">
@@ -218,17 +226,23 @@ const Accounting = () => {
         style={{ paddingLeft: "50px", paddingRight: "50px" }}
       >
         <div className="tags">
-          <div className="revenue">Revenue: RM {totalRevenue.toFixed(2)}</div>
-          <div className="expenses">
-            Expenses: RM {totalExpenses.toFixed(2)}
-          </div>
-          <div className="profit">Profit: RM {totalProfit.toFixed(2)}</div>
+          <label className="tagsBars">Revenue: RM {totalRevenue.toFixed(2)}</label>
+          <label className="tagsBars-Expenses">Expenses: RM {totalExpenses.toFixed(2)}</label>
+          <label className="tagsBars">Profit: RM {totalProfit.toFixed(2)}</label>
           <div className="add-transaction">
             <Button
               className="add-transaction-button"
               onClick={() => setOpenAddTransaction(true)}
               variant="contained"
-              color="primary"
+              sx={{
+                mb: '10px',
+                bgcolor: '#9FC173',
+                "&:hover": {
+                  bgcolor: "#495D44",
+                  opacity: '70%',
+                  color: 'white'
+              },
+              }}
             >
               Add Transaction
             </Button>

@@ -128,12 +128,27 @@ const TransactionCharts = ({ transactions }) => {
         <IconButton
           onClick={() => handleChartTypeChange("line")}
           aria-label="Show Line Chart"
+          style={{ 
+            backgroundColor: '#E9BA15', 
+            marginRight: '10px',
+            transition: 'background-color 0.3s', // Smooth transition effect
+          }}
+          onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#FFD54F'; }}
+          onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#E9BA15'; }}
         >
           <TrendingUpIcon />
         </IconButton>
         <IconButton
           onClick={() => handleChartTypeChange("bar")}
           aria-label="Show Bar Chart"
+          style={{ 
+            backgroundColor: '#9FC173', 
+            marginRight: '10px',
+            transition: 'background-color 0.3s', // Smooth transition effect
+          }}
+          onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#CED581'; }}
+          onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#9FC173'; }}
+        
         >
           <EqualizerIcon />
         </IconButton>
