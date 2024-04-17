@@ -226,36 +226,6 @@ function Map() {
         )}
         {/* <MapEvents /> */}
       </MapContainer>
-      {/* {selectedLand && (
-        <div className="land-info-container" style={{ flex: 1 }}>
-          <h3>Selected Land Information</h3>
-          <p>Land ID: {selectedLand.id}</p>
-          <p>Soil Information:</p>
-          <ul>
-            <li>
-              Coordinates: $
-              {selectedLand.latlngs.map((home) => (
-                <div>
-                  [{home.lat},{home.lng}]
-                </div>
-              ))}
-            </li>
-            <li>Texture: {selectedLand.soilType.texture}</li>
-            <li>PH: {selectedLand.soilType.ph}</li>
-            <li>Nitrogen: {selectedLand.soilType.nitrogen}</li>
-            <li>Potassium: {selectedLand.soilType.potassium}</li>
-            <li>Phosphorus: {selectedLand.soilType.phosphorus}</li>
-            <li>Tilage: {selectedLand.soilType.tilage}</li>
-            <li>Depth: {selectedLand.soilType.depth}</li>
-            <li>Time: {selectedLand.soilType.time}</li>
-            <li>Name: {selectedLand.soilType.name}</li>
-            <li>Address: {selectedLand.soilType.address}</li>
-            <li>Crops:</li>
-            {selectedLand.crops.map((crop, index) => (
-              <li key={index}>{crop.name}</li>
-            ))}
-          </ul> */}
-      {/* </div> */}
 
       <div id="soilPortal">
         <Soil
