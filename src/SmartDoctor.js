@@ -181,7 +181,7 @@ const SmartDoctor = () => {
     setImage(e.target.files[0]);
     e.target.value = null;
     try {
-      await axios.post("http://localhost:5000/api/vision/upload", formData);
+      await axios.post("http://localhost:8000/api/vision/upload", formData);
     } catch (e) {
       console.log(e);
     }
@@ -195,7 +195,7 @@ const SmartDoctor = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/vision/analyze",
+        "http://localhost:8000/api/vision/analyze",
         {
           message: JSON.stringify(value),
         }

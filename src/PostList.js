@@ -29,7 +29,7 @@ function PostList() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/vision");
+      const response = await axios.get("http://localhost:8000/api/vision");
       console.log("Response data:", response.data);
       setPosts(response.data);
     } catch (error) {

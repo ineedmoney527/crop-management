@@ -1,6 +1,61 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "./TodoList.css"; // Import CSS file for styling
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios for making HTTP requests
+
+function TodoList() {
+  const [tasks, setTasks] = useState([]);
+  const [text, setText] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get("/api/tasks");
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
+
+  const addTask = async (date, text) => {
+    try {
+      const response = await axios.post("/api/tasks", { date, text });
+      setTasks([...tasks, response.data]);
+      setText("");
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
+  };
+
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`/api/tasks/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  const toggleCompleted = async (id, completed) => {
+    try {
+      await axios.put(`/api/tasks/${id}`, { completed: !completed });
+      setTasks(
+        tasks.map((task) =>
+          task.id === id ? { ...task, completed: !task.completed } : task
+        )
+      );
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  // Other functions for adding, deleting, and updating tasks
+}
 
 function TodoItem({ task, deleteTask, toggleCompleted }) {
   const handleTick = () => {

@@ -10,7 +10,7 @@ const Chatbot = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/chatbot`, {
+      const response = await axios.post(`http://localhost:8000/api/chatbot`, {
         userQuestion: userInput,
         convHistory: convHistory,
       });
@@ -45,7 +45,7 @@ const Chatbot = () => {
     <main>
       <section className="chatbot-container">
         <div className="chatbot-header">
-          <img src="images/plant.png" alt={"Logo"} className="logo"/>
+          <img src="images/plant.png" alt={"Logo"} className="logo" />
           {/*<img src="images/logo-scrimba.svg" alt="Logo" className="logo" />*/}
           <p className="sub-heading">Knowledge Bank</p>
         </div>
@@ -73,7 +73,7 @@ const Chatbot = () => {
             onChange={(e) => setUserInput(e.target.value)}
             required
           />
-          <button type='submit' className="submit-btn">
+          <button type="submit" className="submit-btn">
             <img src="images/send.svg" alt="Send" className="send-btn-icon" />
           </button>
         </form>

@@ -28,13 +28,6 @@
   .disease-content{
     display: flex;
     border-radius: 25px;
-    background: #E6EABC;
-    padding-right: 10px;
-    margin-bottom: 10px;
-  }
-  .disease-content2{
-    display: flex;
-    border-radius: 25px;
     border: 1px solid #000;
     background: #FFF;
     margin-bottom: 10px;
@@ -57,4 +50,15 @@
     color: rgba(0, 0, 0, 0.60);
     font-size: 20px;
     margin-top: 5px;
+  }
+
+  .main-img1 {
+    width: auto;
+    height: 250px;
+    border-radius: 25px 0 0 25px;
+  }
+  .main-img2 {
+    width: auto;
+    height: 250px;
+    border-radius: 0 25px 25px 0;
   }

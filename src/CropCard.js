@@ -3,26 +3,13 @@ import "./CropCard.css";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const CropCard = ({
-  id,
-  name,
-  scientificName,
-  otherNames,
-  image,
-  setName,
-  bgColor,
-}) => {
+const CropCard = ({ id, name, scientificName, otherNames, image, bgColor }) => {
   const navigate = useNavigate();
   const handleCropClick = () => {
-    setName(name);
-    navigate("/CropDetails/Details");
+    navigate(`/CropDetails/Details/${name}`);
   };
   return (
-    <button
-      className="crop-card"
-      onClick={handleCropClick}
-      style={{ backgroundColor: bgColor }}
-    >
+    <button className="crop-card" onClick={handleCropClick}>
       <div className="card-content">
         <div className="crop-card-number">{id}</div>
         <Stack className="name-stack">

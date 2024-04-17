@@ -69,12 +69,12 @@ function AddNewProduct({ open, onClose, edit, selectedRowData, userId }) {
 
       if (edit) {
         response = await axios.put(
-          `http://localhost:5000/api/market/product/${selectedRowData.id}`,
+          `http://localhost:8000/api/market/product/${selectedRowData.id}`,
           data
         );
       } else {
         console.log(data);
-        response = await axios.post("http://localhost:5000/api/market", {
+        response = await axios.post("http://localhost:8000/api/market", {
           ...data,
           userId: userId,
         });

@@ -31,6 +31,8 @@
     color: #000;
     transition: background-color 0.3;
     border-radius: 25px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
   }
   
   .faq-question:hover {
@@ -39,6 +41,8 @@
   
   .faq-question.active {
     background-color: #C2C788;
+    margin-bottom: 0px;
+    box-shadow: none;
   }
   
   .indicator {
@@ -49,19 +53,25 @@
   
   .indicator.active {
     transform: rotate(45deg);
+    transition-duration: 0.3s;
   }
   
   .faq-answer {
-    padding: 10px;
     font-size: 16px;
     width:100%;
-    display: none;
-    text-align: left;
+    opacity: 0; /* Set initial opacity to 0 */
+    max-height: 0; /* Collapse the space */
+    overflow: hidden; /* Hide the content */
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
   }
   
   .faq-answer.visible {
-    display: block;
+    padding: 10px;
+    opacity: 1;
+    max-height: 1000px;
     border: 1px solid #C2C788;
     border-radius: 25px;
     margin-bottom: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
   }

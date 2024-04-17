@@ -30,7 +30,7 @@ const Accounting = () => {
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/accounting/${user_id}`
+        `http://localhost:8000/api/accounting/${user_id}`
       );
       setTransactions(response.data);
       console.log("sell" + JSON.stringify(response.data));
@@ -46,7 +46,7 @@ const Accounting = () => {
   const handleAddTransaction = async (newTransaction) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/accounting",
+        "http://localhost:8000/api/accounting",
         newTransaction
       );
 
@@ -93,7 +93,7 @@ const Accounting = () => {
     ) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/accounting/${id}`
+          `http://localhost:8000/api/accounting/${id}`
         );
         alert("Transaction deleted successfully");
         fetchTransactions();
@@ -117,7 +117,7 @@ const Accounting = () => {
         )
       ) {
         const response = await axios.delete(
-          `http://localhost:5000/api/accounting/rows/${id}`
+          `http://localhost:8000/api/accounting/rows/${id}`
         );
         alert("Transactions deleted successfully");
         fetchTransactions();

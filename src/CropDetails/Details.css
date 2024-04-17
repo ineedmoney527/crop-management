@@ -1,19 +1,31 @@
 .container {
-    /* display: flex; */
-    direction: column;
+    display: flex;
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .details-sidebar {
+    display: flex;
+    flex-direction: column;
   }
   .sub-container {
     display: flex;
     direction: row;
     margin-left: 5px;
+    margin-top: 20px;
     width:100%;
+    text-align: left;
   }
   .back-button {
     background-color: transparent;
     border: none;
-    font-size: 24px;
+    font-size: 18px; /* You can adjust the font size to be smaller as well */
     cursor: pointer;
     align-self: flex-start;
+    width:auto;
+    height: auto;
+  }
+  .back-button img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
   }
