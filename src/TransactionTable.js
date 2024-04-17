@@ -34,6 +34,95 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
+function customCheckbox(theme) {
+  return {
+      '& .MuiCheckbox-root svg': {
+          width: 16,
+          height: 16,
+          backgroundColor: 'transparent',
+          border: `1px solid ${
+              theme.palette.mode === 'light' ? '#d9d9d9' : 'rgb(67, 67, 67)'
+          }`,
+          borderRadius: 2,
+      },
+      '& .MuiCheckbox-root svg path': {
+          display: 'none',
+      },
+      '& .MuiCheckbox-root.Mui-checked:not(.MuiCheckbox-indeterminate) svg': {
+          backgroundColor: '#73A9AD',
+          borderColor: '#73A9AD',
+      },
+      '& .MuiCheckbox-root.Mui-checked .MuiIconButton-label:after': {
+          position: 'absolute',
+          display: 'table',
+          border: '2px solid #fff',
+          borderTop: 0,
+          borderLeft: 0,
+          transform: 'rotate(45deg) translate(-50%,-50%)',
+          opacity: 1,
+          transition: 'all .2s cubic-bezier(.12,.4,.29,1.46) .1s',
+          content: '""',
+          top: '50%',
+          left: '39%',
+          width: 5.71428571,
+          height: 9.14285714,
+      },
+      '& .MuiCheckbox-indeterminate .MuiIconButton-label:after': {
+          width: 8,
+          height: 8,
+          backgroundColor: '#1890ff',
+          transform: 'none',
+          top: '39%',
+          border: 0,
+      },
+  };
+}
+
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  border: 0,
+  color:
+      theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.85)',
+  letterSpacing: 'normal',
+  '& .MuiDataGrid-root': {
+      borderRadius: 20, // Set the border radius here (adjust the value as needed)
+      overflow: 'hidden', // Optional: Hide overflow content if needed
+  },
+  '& .MuiDataGrid-columnsContainer .MuiDataGrid-iconSeparator': {
+      color: '#fff', // Set your desired color here
+  },
+  '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
+      borderBottom: `1px solid ${
+          theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+      }`,
+  },
+  '& .MuiDataGrid-cell': {
+      color:
+          theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center', // Align text center
+      padding: theme.spacing(1),
+  },
+  '& .MuiPaginationItem-root': {
+      borderRadius: 0,
+  },
+  '& .MuiDataGrid-columnHeader, .MuiDataGrid-columnHeaderTitle': {
+      backgroundColor: '#90C8AC', // Change header background color here
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center', // Align text center
+      padding: theme.spacing(1),
+      color: '#fff',
+      fontSize: '17px',
+  },
+  '& .MuiDataGrid-sortIcon, .MuiDataGrid-menuIconButton': {
+      color: '#fff',
+  },
+  ...customCheckbox(theme),
+}));
+
 const TransactionTable = ({
   transactions,
   onDelete,
@@ -151,7 +240,10 @@ const TransactionTable = ({
             {numSelected} selected
           </Typography>
         ) : (
-          "Transaction History"
+          <Typography
+          variant="h4"
+          sx={{fontWeight:"bold", color: '#383a3b'}}
+          >Transaction History</Typography>
         )}
 
         {
@@ -181,7 +273,7 @@ const TransactionTable = ({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selectedRows?.length} />
         <TableContainer>
-          <DataGrid
+          <StyledDataGrid
             rows={transactions}
             checkboxSelection
             disableRowSelectionOnClick

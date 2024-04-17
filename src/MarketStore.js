@@ -130,7 +130,7 @@ function MarketStore() {
   const fetchStoreItem = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/market/${user_id}/1`
+        `http://localhost:5050/api/market/${user_id}/1`
       );
       setStoreItems(response.data);
       setFilteredItems(response.data);
@@ -142,7 +142,7 @@ function MarketStore() {
   const fetchMyProduct = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/market/${user_id}/0`
+        `http://localhost:5050/api/market/${user_id}/0`
       );
       setMyItem(response.data);
       console.log("sell" + JSON.stringify(response.data));
@@ -392,7 +392,7 @@ function MarketStore() {
     ) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/market/${id}`
+          `http://localhost:5050/api/market/${id}`
         );
         alert("Product deleted successfully");
         fetchMyProduct();
@@ -416,7 +416,7 @@ function MarketStore() {
         )
       ) {
         const response = await axios.delete(
-          `http://localhost:5000/api/market/rows/${id}`
+          `http://localhost:5050/api/market/rows/${id}`
         );
         alert("Products deleted successfully");
         fetchMyProduct();
