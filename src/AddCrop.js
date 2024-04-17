@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddFertilization.css";
 import Planting from "./Planting.js";
 import blueberry from "./images/blueberry.png";
@@ -7,36 +7,23 @@ import carrot from "./images/carrot.png";
 import apple from "./images/apple.png";
 import banana from "./images/banana.png";
 import broccoli from "./images/broccoli.png";
-
+import axios from "axios";
 import { blue } from "@mui/material/colors";
-export default function Crop({ open, onCropSubmit, onClose }) {
-  const crops = [
-    {
-      name: "Blueberry",
-      image: blueberry, // Corrected image URL for Tomato
-    },
-    {
-      name: "Carrot",
-      image: carrot, // Corrected image URL for Carrot
-    },
-    {
-      name: "Apple",
-      image: apple, // Corrected image URL for Carrot
-    },
-    {
-      name: "Tomato",
-      image: tomato, // Corrected image URL for Carrot
-    },
-    {
-      name: "Broccoli",
-      image: broccoli, // Corrected image URL for Carrot
-    },
-    {
-      name: "Banana",
-      image: banana, // Corrected image URL for Carrot
-    },
-    // Add more crops as needed
-  ];
+export default function Crop({ open, onCropSubmit, onClose, user_id }) {
+  const [crops, setCrops] = useState([]);
+  const fetchCrops = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5050/api/map/addCrop`);
+      setCrops(response.data);
+      console.log("sell" + JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCrops();
+  }, []);
 
   if (!open) return null;
   const handleAdd = (crop) => {
@@ -54,7 +41,7 @@ export default function Crop({ open, onCropSubmit, onClose }) {
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        <img src={crop.image} alt={crop.name} />
+        <img src={`./images/${crop.image}`} alt={crop.name} />
         <label>{crop.name}</label>
         <button className="select" onClick={() => handleAdd(crop)}>
           Select

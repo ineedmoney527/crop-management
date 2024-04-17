@@ -8,6 +8,7 @@ import PlantingConainer from "./PlantingContainer";
 import SoilContainer from "./SoilContainer";
 import FertilizationPage from "./Fertilization";
 import Irrigation from "./Irrigation";
+import axios from "axios";
 
 import {
   MapContainer,
@@ -46,34 +47,7 @@ const calculateCenter = (latlngs) => {
 
 function Map() {
   const [selectedIcon, setSelectedIcon] = useState(icons.defaultIcon);
-  const [mapLayers, setMapLayers] = useState([
-    {
-      id: "2",
-      latlngs: [
-        [2.019858963264568, 103.22156929584389],
-        [2.029858963264568, 103.23156929584389],
-        [2.024858963264568, 103.24156929584389],
-      ], // Coordinates for another polygon
-      crops: { name: "Crop 4" },
-      soilType: {
-        texture: "Sandy",
-        ph: "7.0",
-        nitrogen: "20 ppm",
-        potassium: "25 ppm",
-        phosphorus: "10 ppm",
-        tilage: "Intensive",
-        depth: "25 cm",
-        time: "Fall",
-        name: "Sample Soil 2",
-        address: "456 Soil Ave, Earth",
-      },
-      markerPosition: calculateCenter([
-        [2.019858963264568, 103.22156929584389],
-        [2.029858963264568, 103.23156929584389],
-        [2.024858963264568, 103.24156929584389],
-      ]),
-    },
-  ]);
+  const [mapLayers, setMapLayers] = useState([]);
   const [selectedLand, setSelectedLand] = useState(null);
   const [showLandInfo, setShowLandInfo] = useState(false);
   const [showAddCrop, setShowAddCrop] = useState(false);
@@ -81,10 +55,31 @@ function Map() {
   const [id, setID] = useState("");
   const [latlngs, setlatlngs] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(null);
-
+  const user_id = 1;
   //tab containers
   const [activeTab, setActiveTab] = useState("tasks"); // State to track active tab
 
+  const fetchLands = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/map/${user_id}`
+      );
+      setMapLayers((prev) => response.data);
+      const hehe = response.data[0].latlngs;
+      const huhu = JSON.parse(hehe);
+      console.log(calculateCenter(huhu));
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLands();
+  }, []);
+
+  useEffect(() => {
+    fetchLands();
+  }, [showLandInfo]);
   const handleIconChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedIcon(icons[selectedValue]);
@@ -93,17 +88,6 @@ function Map() {
   const handleAddCrop = () => {
     setShowAddCrop(true);
   };
-  // const MapEvents = () => {
-  //   useMapEvents({
-  //     click(e) {
-  //       // setState your coords here
-  //       // coords exist in "e.latlng.lat" and "e.latlng.lng"
-  //       console.log();
-  //       console.log(e.latlng.lng);
-  //     },
-  //   });
-  //   return false;
-  // };
 
   const _onCreate = (e) => {
     console.log("haha");
@@ -117,6 +101,7 @@ function Map() {
       setID(_leaflet_id);
       setlatlngs(layer.getLatLngs()[0]);
       setShowLandInfo(true);
+      fetchLands();
     }
   };
   const _onDeleted = (e) => {
@@ -184,62 +169,120 @@ function Map() {
         </FeatureGroup>
         <MarkerClusterGroup>
           {mapLayers.map((land) => (
-            <Marker
-              key={land.id}
-              position={land.markerPosition}
-              icon={selectedIcon}
-              eventHandlers={{
-                click: (e) => {
-                  console.log("marker clicked", e);
-                  setSelectedLand(land);
-                  console.log(land.id);
-                  console.log(land.latlngs[0]);
-
-                  // e.layer.setStyle({ color: "red" });
-                },
-              }}
+            <Polygon
+              positions={JSON.parse(land.latlngs)}
+              pathOptions={
+                land?.id !== selectedLand?.id
+                  ? {
+                      color: "#87cefa",
+                      fillColor: "#87cefa",
+                      opacity: 0.5,
+                    }
+                  : { color: "red", fillColor: "red", fillOpacity: 0.5 }
+              }
             >
-              <Popup class="pop">
-                <h3>ID:{selectedLand?.id}</h3>
-                <Table bordered>
-                  <thead>
-                    <tr>
-                      <th>Plant Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{selectedLand && selectedLand.crops.name}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-                <button onClick={() => handleAddCrop(land.id)}>Add Crop</button>
-              </Popup>
-            </Marker>
+              <Marker
+                key={land && land.id}
+                position={calculateCenter(JSON.parse(land.latlngs))}
+                icon={selectedIcon}
+                eventHandlers={{
+                  click: (e) => {
+                    console.log("marker clicked", e);
+                    setSelectedLand((prev) => land);
+                    console.log(selectedLand);
+
+                    // e.layer.setStyle({ color: "red" });
+                  },
+                }}
+              >
+                <Popup class="pop">
+                  <div className="popup-content">
+                    <h3>Land ID: {selectedLand?.id}</h3>
+                    <div className="popup-details">
+                      <div className="popup-row">
+                        <span className="popup-label">Address:</span>
+                        <span>{selectedLand?.address || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Crop Name:</span>
+                        <span>{selectedLand?.crop_id || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Soil Texture:</span>
+                        <span>{selectedLand?.soil_texture || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Nitrogen:</span>
+                        <span>{selectedLand?.nitrogen || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Phosphorus:</span>
+                        <span>{selectedLand?.phosphorus || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Potassium:</span>
+                        <span>{selectedLand?.potassium || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">pH:</span>
+                        <span>{selectedLand?.ph || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Tillage Depth:</span>
+                        <span>{selectedLand?.tilage_depth || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Tillage Practice:</span>
+                        <span>{selectedLand?.tilage_practice || ""}</span>
+                      </div>
+                      <div className="popup-row">
+                        <span className="popup-label">Tillage Timing:</span>
+                        <span>{selectedLand?.tilage_timing || ""}</span>
+                      </div>
+                    </div>
+                    <button onClick={() => handleAddCrop(land.id)}>
+                      Add Crop
+                    </button>
+                  </div>
+                </Popup>
+              </Marker>
+            </Polygon>
           ))}
         </MarkerClusterGroup>
-        {selectedLand && (
+        {/* {selectedLand && (
           <Polygon
             positions={selectedLand.latlngs}
             pathOptions={{ color: "red", fillColor: "red", fillOpacity: 0.5 }}
           />
-        )}
+        )} */}
+
         {/* <MapEvents /> */}
       </MapContainer>
 
       <div id="soilPortal">
         <Soil
           open={showLandInfo}
-          onSoilInfoSubmit={(soilType) => {
+          onSoilInfoSubmit={async (soilType) => {
             const newLand = {
-              id: id, // Generate a random ID；
+              user_id: user_id,
               latlngs: latlngs, // You can add the actual latlngs data here
               soilType: soilType,
-              crops: { name: "" },
-              markerPosition: calculateCenter(latlngs),
+              crops: "",
+              // markerPosition: calculateCenter(latlngs),
             };
-            setMapLayers((prevLayers) => [...prevLayers, newLand]);
-            // setSelectedLand(newLand);
+            console.log(newLand);
+            await axios
+              .post("http://localhost:5050/api/map", newLand)
+              .then((response) => {
+                console.log("Shape data sent successfully:", response.data);
+                fetchLands();
+                // Perform any necessary actions after successful insertion
+              })
+              .catch((error) => {
+                console.error("Error sending shape data:", error);
+              });
+
+            // setMapLayers((prevLayers) => [...prevLayers, newLand]);
           }}
           onClose={() => setShowLandInfo(false)}
         />
@@ -247,16 +290,22 @@ function Map() {
       <div id="cropPortal">
         <Crop
           id={selectedLand && selectedLand.id}
+          user_id={user_id}
           open={showAddCrop}
-          onCropSubmit={(newCrop) => {
-            setMapLayers((layers) =>
-              layers.map((land) =>
-                land.id === selectedLand.id
-                  ? { ...land, crops: { name: newCrop.name } }
-                  : land
+          onCropSubmit={async (newCrop) => {
+            console.log(newCrop.id);
+            await axios
+              .put(
+                `http://localhost:5050/api/map/crop/${newCrop.id}/${selectedLand.id}`
               )
-            );
-            // setSelectedLand(newLand);
+              .then((response) => {
+                console.log("CROP data updated successfully:", response.data);
+
+                // Perform any necessary actions after successful insertion
+              })
+              .catch((error) => {
+                console.error("Error sending shape data:", error);
+              });
           }}
           onClose={() => {
             setShowAddCrop(false);
@@ -268,7 +317,10 @@ function Map() {
         <Planting
           open={showPlanting}
           onCropSubmit={() => {
+            console.log("haha");
+            alert("Crop added successfully!");
             setShowPlanting(false);
+
             // setSelectedLand(newLand);
           }}
           onClose={() => setShowPlanting(false)}
