@@ -1,20 +1,121 @@
 import React, { useState, useEffect } from "react";
 import { Stack } from "@mui/material";
-import weather1 from "./images/weather1.png";
-import weather2 from "./images/weather2.png";
-import weather3 from "./images/weather3.png";
-import weather4 from "./images/weather4.png";
-// import WeatherGraph from "./WeatherGraph";
 import "./Weather.css";
-import TransactionBarChart from "./TransactionBarChart.js";
 import { useNavigate } from "react-router-dom";
-import WeatherGraph from "./WeatherGraph.js";
+import WeatherGraph from "./WeatherGraph";
+import { ICON_MAP, weatherDescriptions } from "./WeatherCodeMap";
+import axios from "axios";
+
 const Weather = () => {
   const [pageTitle, setPageTitle] = useState("Weather");
   const navigate = useNavigate();
   const handleTitleChange = (e) => {
     setPageTitle(e.target.value);
   };
+  const [currentData, setCurrentData] = useState(null);
+  const [hourlyData, setHourlyData] = useState([]);
+  const [dailyData, setDailyData] = useState([]);
+  const [startIndex, setStartIndex] = useState(0); // Track the starting index of visible data
+  const DISPLAY_COUNT = 4; // Number of cards to display at once
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          getWeatherData(lat, lon, timezone);
+        },
+        function (error) {
+          console.error("Error getting geolocation:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation not supported");
+    }
+  }, []);
+
+  function parseCurrentWeather({ current, daily }) {
+    const {
+      temperature_2m: temperature,
+      wind_speed_10m: wind_speed,
+      relative_humidity_2m: humidity,
+      weather_code: icon_code,
+    } = current;
+    const {
+      temperature_2m_max: [max_temp],
+      temperature_2m_min: [min_temp],
+    } = daily;
+    return {
+      timestamp: current.time * 1000,
+      temperature: Math.round(temperature),
+      humidity: Math.round(humidity),
+      icon_code,
+      wind_speed: Math.round(wind_speed),
+      max_temp: Math.round(max_temp),
+      min_temp: Math.round(min_temp),
+    };
+  }
+
+  function parseDailyWeather({ daily }) {
+    return daily.time.map((time, index) => {
+      return {
+        timestamp: time * 1000,
+        icon_code: daily.weather_code[index],
+        temperature: Math.round(daily.temperature_2m_max[index]),
+        wind_speed: Math.round(daily.wind_speed_10m_max[index]),
+      };
+    });
+  }
+
+  function parseHourlyWeather({ hourly, current }) {
+    return hourly.time
+      .map((time, index) => {
+        return {
+          timestamp: time * 1000,
+          icon_code: hourly.weather_code[index],
+          temperature: Math.round(hourly.temperature_2m[index]),
+          wind_speed: Math.round(hourly.wind_speed_10m[index]),
+          humidity: Math.round(hourly.relative_humidity_2m[index]),
+        };
+      })
+      .filter(({ timestamp }) => timestamp >= current.time * 1000);
+  }
+
+  function getWeatherData(lat, lon, timezone) {
+    axios
+      .get(
+        "https://api.open-meteo.com/v1/forecast?current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timeformat=unixtime",
+        {
+          params: {
+            latitude: lat,
+            longitude: lon,
+            timezone: timezone,
+          },
+        }
+      )
+      .then(({ data }) => {
+        setCurrentData(parseCurrentWeather(data));
+        setHourlyData(parseHourlyWeather(data).slice(0, 30));
+        setDailyData(parseDailyWeather(data));
+      })
+      .catch((error) => {
+        console.error("Error getting weather data:", error);
+      });
+  }
+  function getWeatherIcon(icon_code, timestamp) {
+    let key = icon_code;
+    if ([0, 1, 2].includes(icon_code)) {
+      const hour = new Date(timestamp).getHours();
+      if (hour >= 6 && hour < 18) {
+        key = `${icon_code}-day`;
+      } else {
+        key = `${icon_code}-night`;
+      }
+    }
+    return `/weather/${ICON_MAP.get(key)}.svg`;
+  }
 
   useEffect(() => {
     // Navigate to a specific page based on the selected title
@@ -33,236 +134,182 @@ const Weather = () => {
     }
   }, [pageTitle]);
 
-  const transactions = [
-    {
-      id: 1,
-      date: "2023-06-12",
-      payee: "John Doe",
-      category: "Livestock Sales",
-      description: "Sale of cattle",
-      type: "Income",
-      amount: 223.0,
-    },
-    {
-      id: 2,
-      date: "2023-05-26",
-      payee: "Jane Smith",
-      category: "Gardening",
-      description: "Purchase of seeds and gardening tools",
-      type: "Expense",
-      amount: 500.0,
-    },
-    {
-      id: 3,
-      date: "2023-05-25",
-      payee: "Mike Johnson",
-      category: "Resale Items",
-      description: "Resale of farm equipment",
-      type: "Income",
-      amount: 83.88,
-    },
-    {
-      id: 4,
-      date: "2023-05-25",
-      payee: "John Doe",
-      category: "Resale Items",
-      description: "Resale of farm tools",
-      type: "Income",
-      amount: 60.0,
-    },
-    {
-      id: 5,
-      date: "2023-04-13",
-      payee: "Jane Smith",
-      category: "Miscellaneous Income",
-      description: "Miscellaneous income source",
-      type: "Income",
-      amount: 860.0,
-    },
-    {
-      id: 6,
-      date: "2023-07-18",
-      payee: "Alice Johnson",
-      category: "Maintenance",
-      description: "Repair of farming equipment",
-      type: "Expense",
-      amount: 120.0,
-    },
-    {
-      id: 7,
-      date: "2023-07-22",
-      payee: "Bob Williams",
-      category: "Transportation",
-      description: "Transportation expenses for farm produce",
-      type: "Expense",
-      amount: 65.5,
-    },
-    {
-      id: 8,
-      date: "2023-08-05",
-      payee: "Charlie Brown",
-      category: "Fertilizers",
-      description: "Purchase of fertilizers for crops",
-      type: "Expense",
-      amount: 300.0,
-    },
-    {
-      id: 9,
-      date: "2023-08-15",
-      payee: "David Miller",
-      category: "Rent",
-      description: "Payment for renting farmland",
-      type: "Expense",
-      amount: 700.0,
-    },
-    {
-      id: 10,
-      date: "2023-08-20",
-      payee: "Emma Davis",
-      category: "Utilities",
-      description: "Payment for farm utilities",
-      type: "Expense",
-      amount: 150.0,
-    },
-  ];
   const [isHourly, setIsHourly] = useState(true);
-  const hourly_data = [
-    {
-      time: "1:00 PM",
-      icon: weather2,
-      temperature: "29˚C",
-      wind: "8.2 km/h",
-      humidity: "65%",
-    },
-    {
-      time: "2:00 PM",
-      icon: weather3,
-      temperature: "30˚C",
-      wind: "7.5 km/h",
-      humidity: "63%",
-    },
-    {
-      time: "3:00 PM",
-      icon: weather4,
-      temperature: "31˚C",
-      wind: "6.8 km/h",
-      humidity: "60%",
-    },
-    {
-      time: "4:00 PM",
-      icon: weather4,
-      temperature: "32˚C",
-      wind: "9.3 km/h",
-      humidity: "58%",
-    },
-  ];
 
-  const daily_data = [
-    {
-      day: "Monday",
-      icon: weather3,
-      temperature: "30˚C",
-      wind: "8.2 km/h",
-      humidity: "65%",
-    },
-    {
-      day: "Tuesday",
-      icon: weather2,
-      temperature: "31˚C",
-      wind: "7.5 km/h",
-      humidity: "63%",
-    },
-    {
-      day: "Wednesday",
-      icon: weather4,
-      temperature: "32˚C",
-      wind: "6.8 km/h",
-      humidity: "60%",
-    },
-    {
-      day: "Thursday",
-      icon: weather2,
-      temperature: "33˚C",
-      wind: "9.3 km/h",
-      humidity: "58%",
-    },
-  ];
+  const handlePrevClick = () => {
+    setStartIndex((prevIndex) => prevIndex - 1); // Move the starting index backward
+  };
+
+  const handleNextClick = () => {
+    // const totalDataCount = isHourly ? hourlyData.length : dailyData.length;
+    setStartIndex((prevIndex) => prevIndex + 1); // Move the starting index forward
+  };
+  useEffect(() => {
+    setStartIndex(0); // Reset the starting index when the data changes
+  }, [isHourly]);
 
   return (
-    <div>
+    <div >
       <select
         className="select-pageWeather"
         value={pageTitle}
         onChange={handleTitleChange}
-        style={{ fontWeight: "bold", fontSize: "24px" }}
+        style={{  fontSize: "24px" }}
       >
-        {/* {" "} */}
         <option value="Accounting">Accounting</option>
         <option value="Crop Summary">Farm Summary</option>
         <option value="Weather">Weather</option>
-        {/* Add options for the select dropdown here */}
       </select>
       <Stack className="weather-container">
         <div className="weather-details">
-          <Stack className="detail-left">
-            <div className="card-title">Weather</div>
-            <div className="main-temperature-container">
-              <div className="main-temperature">29˚C</div>
-              <img
-                className="main-temperature-icon"
-                src={weather1}
-                alt="weather"
-              ></img>
-            </div>
-            <div className="weather-description">
-              Light Rain - H 33˚C L 28˚C
-            </div>
-            <div className="weather-description">Wind: 6.5 km/h</div>
-            <div className="weather-description">Humidity: 60%</div>
-          </Stack>
+          {currentData && (
+            <Stack className="detail-left">
+              <div className="main-temperature-container">
+                <div className="main-temperature">
+                  {currentData.temperature}˚C
+                </div>
+                <img
+                  className="main-temperature-icon"
+                  src={getWeatherIcon(
+                    currentData.icon_code,
+                    currentData.timestamp
+                  )}
+                  alt={weatherDescriptions[currentData.icon_code]}
+                />
+              </div>
+              <div className="weather-description">
+                {weatherDescriptions[currentData.icon_code]} - H{" "}
+                {currentData.max_temp}˚C L {currentData.min_temp}˚C
+              </div>
+              <div className="weather-description">
+                Wind: {currentData.wind_speed} km/h
+              </div>
+              <div className="weather-description">
+                Humidity: {currentData.humidity}%
+              </div>
+            </Stack>
+          )}
           <Stack className="detail-right">
             <div className="frequency-container">
               <button
-                className="frequency-button"
-                onClick={() => setIsHourly(true)}
-                style={{
-                  borderBottom: isHourly ? "2px solid #000" : "none",
-                  color: "black",
-                }}
+                  className={`frequency-button ${isHourly ? "isHourly" : ""}`}
+                  onClick={() => setIsHourly(true)}
+                // className="frequency-button"
+                // onClick={() => setIsHourly(true)}
+                // style={{
+                //   backgroundColor: isHourly ? "#9FC173" : "lightgrey",
+                //   transition: "background-color 0.3s ease",
+                //   ":hover": {
+                //     backgroundColor: isHourly ? "#8ABD64" : "grey",
+                //   },
+                // }}
+                // style={{
+                //   // borderBottom: isHourly ? "2px solid #DCDCDC" : "none",
+                //   backgroundColor: isHourly ? "#9FC173" : "lightgrey",
+                //
+                // }}
               >
                 Hourly
               </button>
               <button
-                className="frequency-button"
-                onClick={() => setIsHourly(false)}
-                style={{
-                  borderBottom: isHourly ? "none" : "2px solid #000",
-                  color: "black",
-                }}
+                  className={`frequency-button ${isHourly ? "" : "isHourly"}`}
+                  onClick={() => setIsHourly(false)}
+                // className="frequency-button"
+                // onClick={() => setIsHourly(false)}
+                // style={{
+                //   backgroundColor: isHourly ? "lightgrey" : "#9FC173",
+                //   transition: "background-color 0.3s ease",
+                //   ":hover": {
+                //     backgroundColor: isHourly ? "#8ABD64" : "grey",
+                //   },
+                // }}
               >
                 Daily
               </button>
             </div>
-            <div className="detail-right-contents">
-              {(isHourly ? hourly_data : daily_data).map((data) => (
-                <Stack
-                  key={isHourly ? data.time : data.date}
-                  className="detail-right-content"
-                >
-                  <div className="time">{isHourly ? data.time : data.day}</div>
-                  <img className="weather-icon" src={data.icon} alt="weather" />
-                  <div className="temperature">{data.temperature}</div>
-                  <div className="wind">{data.wind}</div>
-                  <div className="humidity">{data.humidity}</div>
-                </Stack>
-              ))}
+            <div style={{ display: "flex", direction: "row", width: "100%" }}>
+              <button
+                className="navigate-button"
+                onClick={handlePrevClick}
+                style={{ visibility: startIndex > 0 ? "visible" : "hidden" }}
+              >
+                {`<`}
+              </button>
+              <div className="detail-right-cards">
+                {(isHourly ? hourlyData : dailyData)
+                  .slice(startIndex, startIndex + DISPLAY_COUNT) // Display a portion of data based on the starting index and display count
+                  .map((data, index) => (
+                    <Stack
+                      key={isHourly ? data.timestamp : index}
+                      className="detail-right-card"
+                    >
+                      <div className="time" style={{color:'grey',fontSize:'19px'}}>
+                        {isHourly
+                          ? new Date(data.timestamp).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : new Date(data.timestamp).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "2-digit",
+                                day: "2-digit",
+                              }
+                            )}
+                      </div>
+                      <img
+                        className="weather-icon"
+                        src={getWeatherIcon(data.icon_code)}
+                        alt="weather"
+                      />
+                      <div className="temperature">{data.temperature}˚C</div>
+                      <div className="wind">{data.wind_speed} km/h</div>
+                      {isHourly && (
+                        <div className="humidity">{data.humidity}%</div>
+                      )}
+                    </Stack>
+                  ))}
+              </div>
+              <button
+                className="navigate-button"
+                onClick={handleNextClick}
+                style={{
+                  visibility:
+                    startIndex <
+                    (isHourly
+                      ? hourlyData.length - DISPLAY_COUNT
+                      : dailyData.length - DISPLAY_COUNT)
+                      ? "visible"
+                      : "hidden",
+                }}
+              >
+                {`>`}
+              </button>
             </div>
           </Stack>
         </div>
         <Stack className="weather-reports">
-          <div className="card-title">Wind Speed / Tempearture Graph</div>
-          <WeatherGraph></WeatherGraph>
-          {/* <WeatherGraph /> */}
+          <div className="card-title">Wind Speed / Temperature Graph</div>
+          <WeatherGraph
+            isHourly={isHourly}
+            labels={(isHourly ? hourlyData : dailyData).map((data) =>
+              isHourly
+                ? new Date(data.timestamp).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : new Date(data.timestamp).toLocaleDateString("en-US", {
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
+            )}
+            windSpeedData={(isHourly ? hourlyData : dailyData).map(
+              (data) => data.wind_speed
+            )}
+            temperatureData={(isHourly ? hourlyData : dailyData).map(
+              (data) => data.temperature
+            )}
+          />
         </Stack>
       </Stack>
     </div>

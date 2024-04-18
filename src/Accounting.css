@@ -80,6 +80,8 @@
   background-color: #9FC173;
   color: #fff;
   cursor: pointer;
+  justify-content: center;
+  padding-bottom:10px
 }
 .select-page:hover, .select-pageCrop:hover {
   border-color: #CED581;
@@ -93,8 +95,9 @@
 }
 
 .select-page option, .select-pageCrop option {
-  background-color: #A4AD43;
+  background-color: white;
   color: #333;
+  font-size: 22px;
 }
 
 .select-page option:hover, .select-pageCrop option:hover {
@@ -102,8 +105,11 @@
 }
 
 .summary-title{
-  color: #383a3b;
+  color: #495D44;
   margin: 10px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size:40px
 }
 
 .summary-graphs {
