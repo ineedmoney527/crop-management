@@ -44,7 +44,7 @@ const Gamification = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5050/api/user/2')
+    axios.get('http://localhost:5000/api/user/2')
         .then(response => {
           setUserData(response.data); // Update state with fetched user data
         })
@@ -52,7 +52,7 @@ const Gamification = () => {
           console.error('Error fetching user data:', error);
         });
 
-    axios.get('http://localhost:5050/api/userAchievement/2')
+    axios.get('http://localhost:5000/api/userAchievement/2')
         .then(response => {
           setUserAchievement(response.data); // Update state with fetched user data
           updateBadgeLocks(response.data);
@@ -61,7 +61,7 @@ const Gamification = () => {
           console.error('Error fetching user data:', error);
         });
 
-    axios.get('http://localhost:5050/api/gamification')
+    axios.get('http://localhost:5000/api/gamification')
         .then(response => {
           // Check if the data has changed
           if (JSON.stringify(response.data) !== JSON.stringify(gamificationData)) {
@@ -274,7 +274,7 @@ const Gamification = () => {
                       <img src={jessi} alt={"icon"} className={"personal-icon"}/>
                     </div>
                     <div className={"personal-information"}>
-                      <div className={"personal-information-group"} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '10px' }}>
+                      <div className={"personal-information-group"} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '10px',fontSize:'18px' }}>
                         <label className={"personal-information-label"} style={{ width: '150px', textAlign: 'left', paddingRight: '10px' }}>Username:</label>
                         <label className={"personal-information-value"} style={{textAlign: 'left'}}>{userData.Username}</label>
                       </div>

@@ -1,18 +1,19 @@
-
-
 .page-title{
     display: flex;
     align-items: center;
     margin-bottom: 5px;
   }
   .page-title-text{
-    color: #000;
-    font-family: Inter;
+    color:black;
+    /* font-family: Inter; */
     font-size: 32px;
-    font-style: normal;
+    /* font-style: normal; */
     font-weight: 700;
     line-height: normal;
     margin-bottom: 5px;
+    font-family: inherit;
+    margin-left: 10px;
+
   }
   .main-content{
     display: flex;
@@ -29,38 +30,42 @@
   .page-content{
     display: flex;
     border-radius: 25px;
-    background: #E6EABC;
+    background:white;
     padding: 10px;
     margin-bottom: 10px;
     width: 100%;
+    height:auto;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   }
   .page-content2{
     display: flex;
-    border-radius: 25px;
-    border: 1px solid #000;
+    border-radius: 22px;
     background: #FFF;
     margin-bottom: 10px;
     padding: 10px;
     width:100%;
+    height:auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   }
   .content-text{
     justify-content: center;
     align-items: flex-start;
-    font-style: normal;
-    font-weight: 700;
-    font-family: Inter;
     line-height: normal;
     padding-left: 10px;
     padding-right: 10px;
   }
   .content-title{
-    color: #000;
-    font-size: 32px;
+    font-size: 25px;
     display: flex;
     align-items: center;
+    font-family: Arial, sans-serif;
+    color:#495D44;
   }
   .content-description{
-    color: rgba(0, 0, 0, 0.60);
-    font-size: 20px;
+    /*color: rgba(0, 0, 0, 0.60);*/
+    font-size: 18px;
     margin-top: 5px;
+    font-family: Arial, sans-serif;
+    /*color:#495D44;*/
   }

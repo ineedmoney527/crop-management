@@ -9,25 +9,25 @@ const CropCard = ({
   scientificName,
   otherNames,
   image,
-  setName,
+  // setName,
   bgColor,
 }) => {
   const navigate = useNavigate();
   const handleCropClick = () => {
-    setName(name);
-    navigate("/CropDetails/Details");
+    // setName(name);
+    navigate(`/CropDetails/Details/${name}`);
   };
   return (
     <button
       className="crop-card"
       onClick={handleCropClick}
-      style={{ backgroundColor: bgColor }}
+      style={{ backgroundColor: 'white' }}
     >
       <div className="card-content">
         <div className="crop-card-number">{id}</div>
         <Stack className="name-stack">
           <div className="normal-name">{name}</div>
-          <div className="scientific-name">{scientificName}</div>
+          <div className="scientific-name" style={{fontSize:'18px'}}>{scientificName}</div>
         </Stack>
         <Stack className="other-names-container">
           {otherNames.length > 0 ? (

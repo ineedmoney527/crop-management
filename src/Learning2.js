@@ -87,11 +87,11 @@ const Learning2 = ({progress}) => {
                 alt={"image"} style={{width: '60%', height: '60vh'}}/>
             <div className={"L2-learning-column-2"}>
 
-              <div className="progress-bar-container">
-                <label style={{fontSize: '17px',marginRight:'10px'}}>Chapter Progress</label>
+              <div className="progress-bar-container" style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                <label style={{fontSize: '18px',width:'170px',justifyContent:'center'}}>Chapter Progress</label>
                 <progress value={30} max="100"
-                          style={{width:"150px",height:'17px',marginRight:'5px'}}></progress>
-                <label>30%</label>
+                          style={{width:"150px",height:'17px',marginRight:'5px',alignItems:'center'}}></progress>
+                <label style={{fontSize:'20px'}}>30%</label>
               </div>
               <div className={"L2-learning-column-2-label"}>
                 <img src={lesson} alt={"lesson"} className={"L2-learning-column-2-icon"}/>
@@ -120,7 +120,7 @@ const Learning2 = ({progress}) => {
             </div>
           </div>
           <div className={"L2-Lessons"}>
-            <label style={{fontWeight: "bold", fontSize: "27px"}}>Content</label>
+            <label style={{fontWeight: "bold", fontSize: "27px",color:'black'}}>Content</label>
             <div className={"L2-Lessons-Title"}>
               <label className={"L2-Lessons-Title-Label"}>3.1 Introduction to tools</label>
               <button className={"L2-Lessons-Title-button"} onClick={handleLessonClick}>Start</button>

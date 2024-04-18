@@ -1,9 +1,10 @@
 .side-buttons {
-    border: 1px solid #ccc;
+    border: 1px solid #D2D2D2;
     padding-top: 5px;
-    padding-bottom: 5px;
-    justify-content: space-between;
-    height: 300px;
+    padding-bottom: 10px;
+    /* justify-content: space-between; */
+    height: 450px;
+    margin-top: 20px;
   }
   
   .side-button {
@@ -11,6 +12,7 @@
     border: none;
     font-size: 18px;
     cursor: pointer;
+      margin-bottom:10px
   }
   .side-button:hover {
     background-color: #E6EABC;

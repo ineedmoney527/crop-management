@@ -26,19 +26,23 @@
 }
 .crop-card-header {
   display: flex;
-  background-color: rgba(169, 136, 17, 0.6);
+  background-color: #8BA766;
+  /*background-color: rgba(169, 136, 17, 0.6);*/
   border-radius: 4px;
   border: 1px solid #e0e0e0;
   align-items: center;
-  font-size: 20px;
+  font-size: 17px;
   margin-bottom: 5px;
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 8px;
+  color:white;
+  height:40px;
 }
 .number-header {
   font-weight: bold;
-  color: #333;
+  color:white;
+  /*color: #333;*/
   text-align: left;
   width: 5%;
 }

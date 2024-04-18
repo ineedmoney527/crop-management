@@ -6,10 +6,10 @@
   }
   .page-title-text{
     color: #000;
-    font-family: Inter;
+    /*font-family: Inter;*/
     font-size: 32px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 300;
     line-height: normal;
     margin-bottom: 5px;
   }
@@ -27,34 +27,56 @@
   }
   .disease-content{
     display: flex;
-    border-radius: 25px;
-    background: #E6EABC;
-    padding-right: 10px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #D2D2D2;
+    /*padding-right: 10px;*/
+    margin-bottom: 25px;
   }
   .disease-content2{
     display: flex;
-    border-radius: 25px;
-    border: 1px solid #000;
+    border-radius: 10px;
+    border: 1px solid #D2D2D2;
     background: #FFF;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
   }
   .content-text{
     justify-content: center;
     align-items: flex-start;
-    font-style: normal;
-    font-weight: 700;
-    font-family: Inter;
-    line-height: normal;
     padding-left: 10px;
     padding-right: 10px;
   }
   .content-title{
     color: #000;
     font-size: 32px;
+    /*margin-left: 20px;*/
   }
   .content-description{
-    color: rgba(0, 0, 0, 0.60);
+    /*color: rgba(0, 0, 0, 0.60);*/
     font-size: 20px;
     margin-top: 5px;
+    /*padding-left: 20px;*/
+    /*color: red;*/
   }
+
+  .main-img-r{
+    width: 40%;
+    height:40vh;
+    margin-left: auto;
+    border-radius: 5px;
+  }
+
+.main-img-l{
+  width: 40%;
+  height:40vh;
+  margin-right: auto;
+  border-radius:5px
+
+}
+
+.prevention{
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  /*margin-left:20px;*/
+  color:#F13535;
+}

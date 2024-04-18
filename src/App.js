@@ -42,7 +42,7 @@ function App() {
             element={<Encyclopedia setName={setName} />}
           />
           <Route path="/Irrigation" element={<Irrigation />} />
-          <Route path="CropDetails/Details" element={<Details name={name} />} />
+          <Route path="CropDetails/Details/:name" element={<Details name={name} />} />
           <Route path="/Learning" element={<Learning />} />
           <Route path="/Learning2" element={<Learning2 />} />
           <Route path="/Learning3" element={<Learning3 />} />
