@@ -9,6 +9,7 @@ import SoilContainer from "./SoilContainer";
 import FertilizationPage from "./Fertilization";
 import Irrigation from "./Irrigation";
 import axios from "axios";
+import { Tab, Tabs } from "@mui/material";
 
 import {
   MapContainer,
@@ -47,6 +48,7 @@ const calculateCenter = (latlngs) => {
 
 function Map() {
   const [selectedIcon, setSelectedIcon] = useState(icons.defaultIcon);
+  const [currentSection, setCurrentSection] = useState(0); // State to track curre
   const [mapLayers, setMapLayers] = useState([]);
   const [selectedLand, setSelectedLand] = useState(null);
   const [showLandInfo, setShowLandInfo] = useState(false);
@@ -54,22 +56,29 @@ function Map() {
   const [showPlanting, setShowPlanting] = useState(false);
   const [id, setID] = useState("");
   const [latlngs, setlatlngs] = useState(null);
+  const [selectedCrop, setSelectedCrop] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(null);
   const user_id = 1;
   //tab containers
-  const [activeTab, setActiveTab] = useState("tasks"); // State to track active tab
+  const [popUpTab, setPopUpTab] = useState("land"); // State to track active tab
+
+  const [activeTab, setActiveTab] = useState("Soil"); // State to track active tab
 
   const fetchLands = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5050/api/map/${user_id}`
       );
-      setMapLayers((prev) => response.data);
-      const hehe = response.data[0].latlngs;
-      const huhu = JSON.parse(hehe);
-      console.log(calculateCenter(huhu));
+      const updatedData = await Promise.all(
+        response.data.map(async (land) => {
+          const cropName = await getCropName(land.crop_id);
+          return { ...land, cropName: cropName ? cropName : " " };
+        })
+      );
+      console.log(updatedData);
+      setMapLayers(updatedData);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching lands:", error);
     }
   };
 
@@ -88,6 +97,17 @@ function Map() {
   const handleAddCrop = () => {
     setShowAddCrop(true);
   };
+  const getCropName = async (ID) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/map/crop/" + ID
+      );
+      return response.data.name; // Return the crop name
+    } catch (e) {
+      console.log(e);
+      return null; // Return null in case of an error
+    }
+  };
 
   const _onCreate = (e) => {
     console.log("haha");
@@ -104,12 +124,18 @@ function Map() {
       fetchLands();
     }
   };
+
   const _onDeleted = (e) => {
     const {
       layers: { _layers },
     } = e;
-    Object.values(_layers).map(({ _leaflet_id }) => {
-      setMapLayers((layers) => layers.filter((l) => l.id !== _leaflet_id));
+    Object.values(_layers).forEach(({ _leaflet_id }) => {
+      console.log(_leaflet_id);
+      // Find the land in the mapLayers state that matches the deleted _leaflet_id
+      const deletedLand = mapLayers.find((land) => land.id === _leaflet_id);
+      if (deletedLand) {
+        setMapLayers((layers) => layers.filter((l) => l.id !== deletedLand.id));
+      }
     });
   };
   const _onEdited = (e) => {
@@ -135,7 +161,10 @@ function Map() {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  //for tab contaienr
+
+  const handlePopUpTabClick = (tab) => {
+    setPopUpTab(tab);
+  };
 
   return (
     <div className="App">
@@ -187,62 +216,120 @@ function Map() {
                 icon={selectedIcon}
                 eventHandlers={{
                   click: (e) => {
-                    console.log("marker clicked", e);
+                    setActiveTab("");
                     setSelectedLand((prev) => land);
-                    console.log(selectedLand);
-
-                    // e.layer.setStyle({ color: "red" });
+                    console.log(land);
                   },
                 }}
               >
-                <Popup class="pop">
+                <Popup className="custom-popup">
                   <div className="popup-content">
-                    <h3>Land ID: {selectedLand?.id}</h3>
-                    <div className="popup-details">
-                      <div className="popup-row">
-                        <span className="popup-label">Address:</span>
-                        <span>{selectedLand?.address || ""}</span>
+                    <div className="popup-header">
+                      <Typography>Land ID: {selectedLand?.id}</Typography>
+                    </div>
+                    <div className="popup-body">
+                      <div className="popup-tabs">
+                        <Tabs
+                          value={popUpTab}
+                          onChange={(event, newValue) =>
+                            handlePopUpTabClick(newValue)
+                          }
+                          variant="fullWidth"
+                          indicatorColor="primary"
+                          textColor="primary"
+                        >
+                          <Tab label="Land Details" value="land" />
+                          <Tab label="Soil Properties" value="soil" />
+                          <Tab label="Tillage Practices" value="tillage" />
+                        </Tabs>
                       </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Crop Name:</span>
-                        <span>{selectedLand?.crop_id || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Soil Texture:</span>
-                        <span>{selectedLand?.soil_texture || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Nitrogen:</span>
-                        <span>{selectedLand?.nitrogen || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Phosphorus:</span>
-                        <span>{selectedLand?.phosphorus || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Potassium:</span>
-                        <span>{selectedLand?.potassium || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">pH:</span>
-                        <span>{selectedLand?.ph || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Tillage Depth:</span>
-                        <span>{selectedLand?.tilage_depth || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Tillage Practice:</span>
-                        <span>{selectedLand?.tilage_practice || ""}</span>
-                      </div>
-                      <div className="popup-row">
-                        <span className="popup-label">Tillage Timing:</span>
-                        <span>{selectedLand?.tilage_timing || ""}</span>
+                      <div className="popup-tab-content">
+                        {popUpTab === "land" && (
+                          <div className="section">
+                            <Table bordered hover>
+                              <tbody>
+                                <tr>
+                                  <td>Address:</td>
+                                  <td>{selectedLand?.address || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Coordinate:</td>
+                                  <td>
+                                    {calculateCenter(JSON.parse(land.latlngs))
+                                      .toString()
+                                      .match(/LatLng\(([^)]+)\)/)[1] || ""}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>Crop:</td>
+                                  <td>
+                                    {selectedLand
+                                      ? selectedLand.cropName || ""
+                                      : ""}
+                                  </td>
+                                </tr>
+
+                                <button onClick={() => handleAddCrop(land.id)}>
+                                  Add Crop
+                                </button>
+                              </tbody>
+                            </Table>
+                          </div>
+                        )}
+                        {popUpTab === "soil" && (
+                          <div className="section">
+                            <Table bordered hover>
+                              <tbody>
+                                <tr>
+                                  <td>Soil Texture:</td>
+                                  <td>{selectedLand?.soil_texture || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Nitrogen:</td>
+                                  <td>{selectedLand?.nitrogen || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Phosphorus:</td>
+                                  <td>{selectedLand?.phosphorus || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Potassium:</td>
+                                  <td>{selectedLand?.potassium || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>pH:</td>
+                                  <td>{selectedLand?.ph || ""}</td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </div>
+                        )}
+                        {popUpTab === "tillage" && (
+                          <div className="section">
+                            <Table bordered hover>
+                              <tbody>
+                                <tr>
+                                  <td>Tillage Depth:</td>
+                                  <td>{selectedLand?.tilage_depth || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Tillage Practice:</td>
+                                  <td>{selectedLand?.tilage_practice || ""}</td>
+                                </tr>
+                                <tr>
+                                  <td>Tillage Timing:</td>
+                                  <td>{selectedLand?.tilage_timing || ""}</td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <button onClick={() => handleAddCrop(land.id)}>
-                      Add Crop
-                    </button>
+                    <div className="popup-footer">
+                      {/* Add footer content or buttons if needed */}
+                    </div>
                   </div>
                 </Popup>
               </Marker>
@@ -267,7 +354,7 @@ function Map() {
               user_id: user_id,
               latlngs: latlngs, // You can add the actual latlngs data here
               soilType: soilType,
-              crops: "",
+              crops: null,
               // markerPosition: calculateCenter(latlngs),
             };
             console.log(newLand);
@@ -293,7 +380,7 @@ function Map() {
           user_id={user_id}
           open={showAddCrop}
           onCropSubmit={async (newCrop) => {
-            console.log(newCrop.id);
+            setSelectedCrop(newCrop.name);
             await axios
               .put(
                 `http://localhost:5050/api/map/crop/${newCrop.id}/${selectedLand.id}`
@@ -315,9 +402,23 @@ function Map() {
       </div>
       <div id="plantingPortal">
         <Planting
+          cropName={selectedCrop}
           open={showPlanting}
-          onCropSubmit={() => {
-            console.log("haha");
+          onCropSubmit={async (info) => {
+            console.log(info);
+            await axios
+              .post(
+                `http://localhost:5050/api/map/crop/${selectedLand.id}`,
+                info
+              )
+              .then((response) => {
+                fetchLands();
+                console.log("Data inserted successfully:", response.data);
+                // Perform any necessary actions after successful insertion
+              })
+              .catch((error) => {
+                console.error("Error sending shape data:", error);
+              });
             alert("Crop added successfully!");
             setShowPlanting(false);
 
@@ -372,7 +473,12 @@ function Map() {
           {activeTab === "soil" && selectedLand && (
             <SoilContainer></SoilContainer>
           )}
-          {activeTab === "crops" && <PlantingConainer></PlantingConainer>}
+          {activeTab === "crops" && (
+            <PlantingConainer
+              landId={selectedLand && selectedLand.id}
+              crop={selectedLand && selectedLand.crop_id}
+            ></PlantingConainer>
+          )}
           {activeTab === "fertilization" && (
             <FertilizationPage></FertilizationPage>
           )}
@@ -380,7 +486,9 @@ function Map() {
             <div>Weather content goes here...</div>
           )}
           {activeTab === "irrigation" && <Irrigation></Irrigation>}
-          {activeTab === "tasks" && <TodoList></TodoList>}
+          {activeTab === "tasks" && (
+            <TodoList landId={selectedLand && selectedLand.id}></TodoList>
+          )}
         </div>
       </div>
     </div>
