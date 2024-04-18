@@ -39,7 +39,7 @@ app.listen(5050, () => {
   console.log(`Server running on port ${5050}`);
 });
 
-app.post('/api/update-quiz-count', (req, res) => {
+app.post("/api/update-quiz-count", (req, res) => {
   const { userId } = req.body;
 
   // Query to update the quiz count for the specified user
@@ -61,8 +61,10 @@ app.post('/api/update-quiz-count', (req, res) => {
 
     pool.query(sqlUpdateRanking, [userId], (errRanking, resultRanking) => {
       if (errRanking) {
-        console.error('Error updating ranking:', errRanking);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        console.error("Error updating ranking:", errRanking);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
         return;
       }
     });
@@ -71,16 +73,20 @@ app.post('/api/update-quiz-count', (req, res) => {
   // Execute the first query to update quiz count
   pool.query(sql1, [userId], (err1, result1) => {
     if (err1) {
-      console.error('Error executing SQL query 1:', err1);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error("Error executing SQL query 1:", err1);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
       return;
     }
 
     // Execute the second query to update level progress
     pool.query(sql2, [userId], (err2, result2) => {
       if (err2) {
-        console.error('Error executing SQL query 2:', err2);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        console.error("Error executing SQL query 2:", err2);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
         return;
       }
 
@@ -89,8 +95,10 @@ app.post('/api/update-quiz-count', (req, res) => {
 
       pool.query(sqlFetch, [userId], (errFetch, resultFetch) => {
         if (errFetch) {
-          console.error('Error fetching user data:', errFetch);
-          res.status(500).json({ success: false, message: 'Internal server error' });
+          console.error("Error fetching user data:", errFetch);
+          res
+            .status(500)
+            .json({ success: false, message: "Internal server error" });
           return;
         }
 
@@ -107,30 +115,37 @@ app.post('/api/update-quiz-count', (req, res) => {
           const sql3 = `UPDATE user_gamification SET level = ?, level_progress = ? WHERE user_id = ?`;
           pool.query(sql3, [newLevel, newProgress, userId], (err3, result3) => {
             if (err3) {
-              console.error('Error updating user level and progress:', err3);
-              res.status(500).json({ success: false, message: 'Internal server error' });
+              console.error("Error updating user level and progress:", err3);
+              res
+                .status(500)
+                .json({ success: false, message: "Internal server error" });
               return;
             }
 
             // Update ranking after updating level or level_progress
             updateRanking(userId);
 
-            res.json({ success: true, message: 'Learning hours, level progress, and level updated successfully' });
+            res.json({
+              success: true,
+              message:
+                "Learning hours, level progress, and level updated successfully",
+            });
           });
         } else {
           // Update ranking after updating level_progress
           updateRanking(userId);
 
-          res.json({ success: true, message: 'Learning hours and level progress updated successfully' });
+          res.json({
+            success: true,
+            message: "Learning hours and level progress updated successfully",
+          });
         }
       });
     });
   });
 });
 
-
-
-app.post('/api/update-lecture-hours', (req, res) => {
+app.post("/api/update-lecture-hours", (req, res) => {
   const { userId } = req.body;
 
   // Query to update the quiz count for the specified user
@@ -151,8 +166,10 @@ app.post('/api/update-lecture-hours', (req, res) => {
 
     pool.query(sqlUpdateRanking, [userId], (errRanking, resultRanking) => {
       if (errRanking) {
-        console.error('Error updating ranking:', errRanking);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        console.error("Error updating ranking:", errRanking);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
         return;
       }
     });
@@ -161,16 +178,20 @@ app.post('/api/update-lecture-hours', (req, res) => {
   // Execute the first query to update quiz count
   pool.query(sql1, [userId], (err1, result1) => {
     if (err1) {
-      console.error('Error executing SQL query 1:', err1);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error("Error executing SQL query 1:", err1);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
       return;
     }
 
     // Execute the second query to update level progress
     pool.query(sql2, [userId], (err2, result2) => {
       if (err2) {
-        console.error('Error executing SQL query 2:', err2);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        console.error("Error executing SQL query 2:", err2);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
         return;
       }
 
@@ -181,8 +202,10 @@ app.post('/api/update-lecture-hours', (req, res) => {
 
         pool.query(sqlFetch, [userId], (errFetch, resultFetch) => {
           if (errFetch) {
-            console.error('Error fetching user data:', errFetch);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            console.error("Error fetching user data:", errFetch);
+            res
+              .status(500)
+              .json({ success: false, message: "Internal server error" });
             return;
           }
 
@@ -196,90 +219,112 @@ app.post('/api/update-lecture-hours', (req, res) => {
 
             // Update user_level and level_progress
             const sql3 = `UPDATE user_gamification SET level = ?, level_progress = ? WHERE user_id = ?`;
-            pool.query(sql3, [newLevel, newProgress, userId], (err3, result3) => {
-              if (err3) {
-                console.error('Error updating user level and progress:', err3);
-                res.status(500).json({ success: false, message: 'Internal server error' });
-                return;
-              }
-              res.json({ success: true, message: 'Learning hours, level progress, and level updated successfully' });
+            pool.query(
+              sql3,
+              [newLevel, newProgress, userId],
+              (err3, result3) => {
+                if (err3) {
+                  console.error(
+                    "Error updating user level and progress:",
+                    err3
+                  );
+                  res
+                    .status(500)
+                    .json({ success: false, message: "Internal server error" });
+                  return;
+                }
+                res.json({
+                  success: true,
+                  message:
+                    "Learning hours, level progress, and level updated successfully",
+                });
 
-              // Update ranking after updating level or level_progress
-              updateRanking(userId);
-            });
+                // Update ranking after updating level or level_progress
+                updateRanking(userId);
+              }
+            );
           } else {
             // Update ranking after updating level or level_progress
             updateRanking(userId);
-            res.json({ success: true, message: 'Learning hours and level progress updated successfully' });
+            res.json({
+              success: true,
+              message: "Learning hours and level progress updated successfully",
+            });
           }
         });
       } else {
-        res.status(404).json({ success: false, message: 'User not found' });
+        res.status(404).json({ success: false, message: "User not found" });
       }
     });
   });
 });
 
-
-
-app.get('/api/gamification', (req, res) => {
+app.get("/api/gamification", (req, res) => {
   // Query to fetch gamification data from the database
-  const sql = 'SELECT username,level,ranking FROM user_gamification JOIN users ON user_gamification.user_id= users.UserID;';
+  const sql =
+    "SELECT username,level,ranking FROM user_gamification JOIN users ON user_gamification.user_id= users.UserID;";
 
   // Execute the query
   pool.query(sql, (err, rows) => {
     if (err) {
-      console.error('Error fetching gamification data:', err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error("Error fetching gamification data:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
       return;
     }
 
-    console.log('Gamification data:', rows); // Log the fetched data
+    console.log("Gamification data:", rows); // Log the fetched data
     res.json(rows); // Send the fetched data as JSON response
   });
 });
 
-app.get('/api/user/:userId', (req, res) => {
+app.get("/api/user/:userId", (req, res) => {
   const userId = req.params.userId;
 
   // Query to fetch user details by ID from the database
   // const sql = 'SELECT * FROM users WHERE user_id = ?';
-  const sql = 'SELECT * FROM `user_gamification` JOIN users ON `user_gamification`.`user_id` = `users`.`UserID` WHERE user_id = ?';
+  const sql =
+    "SELECT * FROM `user_gamification` JOIN users ON `user_gamification`.`user_id` = `users`.`UserID` WHERE user_id = ?";
 
   // Execute the query
   pool.query(sql, [userId], (err, rows) => {
     if (err) {
-      console.error('Error fetching user data:', err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error("Error fetching user data:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
       return;
     }
 
     if (rows.length > 0) {
       res.json(rows[0]); // Send the fetched user data as JSON response
     } else {
-      res.status(404).json({ success: false, message: 'User not found' });
+      res.status(404).json({ success: false, message: "User not found" });
     }
   });
 });
 
-app.get('/api/userAchievement/:userId', (req, res) => {
+app.get("/api/userAchievement/:userId", (req, res) => {
   const userId = req.params.userId;
 
   // Query to fetch user details by ID from the database
-  const sql = 'SELECT * FROM user_achievements WHERE user_id = ?';
+  const sql = "SELECT * FROM user_achievements WHERE user_id = ?";
 
   // Execute the query
   pool.query(sql, [userId], (err, rows) => {
     if (err) {
-      console.error('Error fetching user data:', err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error("Error fetching user data:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
       return;
     }
 
     if (rows.length > 0) {
       res.json(rows[0]); // Send the fetched user data as JSON response
     } else {
-      res.status(404).json({ success: false, message: 'User not found' });
+      res.status(404).json({ success: false, message: "User not found" });
     }
   });
 });
@@ -634,10 +679,8 @@ app.post("/AddNewPost/:id", (req, res) => {
         res.json({ success: true, postId });
       });
     }
-  };
+  });
 });
-});
-
 
 app.get("/Comment/:postId", (req, res) => {
   // Change the route to /comments
