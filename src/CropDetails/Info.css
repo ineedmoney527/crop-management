@@ -2,6 +2,7 @@
   .details-container {
     display: flex;
     align-items: center;
+    margin-top: 20px;
   }
 
   .details-middle {
@@ -21,10 +22,12 @@
   
   .crop-image {
     margin-left: 10px;
-    margin-right: 10px;
-    height: 283.547px;
-    width: 283.547px;
-    border: 1px solid #000;
+    margin-right: 30px;
+    height:30vh;
+    width:30%;
+    /*height: 283.547px;*/
+    /*width: 283.547px;*/
+    /*border: 1px solid #000;*/
     border-radius: 25px;
   }
   
@@ -44,19 +47,19 @@
   }
   
   .scientific-name {
-    color: rgba(0, 0, 0, 0.60);
-    font-size: 24px;
+    color: rgba(0, 0, 0, 0.80);
+    font-size: 23px;
     font-style: italic;
-    font-weight: 700;
-    line-height: normal;
+    /*font-weight: 700;*/
+    /*line-height: normal;*/
   }
   
   .other-names {
     color: rgba(0, 0, 0, 0.60);
-    font-family: Inter;
-    font-size: 24px;
+    /*font-family: Inter;*/
+    font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
   }
   
@@ -64,8 +67,8 @@
     margin-top: 10px;
     font-size: 18px;
     margin-bottom: 24px;
-    font-family: Inter;
-    font-weight: bold;
+    /*font-family: Inter;*/
+    /*font-weight: bold;*/
   }
   
   .details-care-container {
@@ -76,14 +79,21 @@
   
   .details-care-button {
     flex-shrink: 0;
-    border-radius: 25px;
-    background: #F1DDA8;
+    border-radius: 15px;
+    /*background: #F1DDA8;*/
     margin-right: 10px;
-    padding:10px
+    padding:10px;
+    margin-bottom: 5px;
+    background-color: #8BA766;
+    color: white;
+    transition: background-color 0.3s, opacity 0.3s;
+    border: none;
+    height:auto;
+    min-height: 40px;
   }
   .details-care-button:hover,
   .details-care-button:active {
-    background-color: #efd17e;
+    background-color: #495D44;
     cursor: pointer;
 }
   
@@ -106,19 +116,21 @@
     justify-content: space-evenly;
   }
   .button-text1{
-    color: rgba(0, 0, 0, 0.60);
-    font-family: Inter;
+    color:white;
+    /*color: rgba(0, 0, 0, 0.60);*/
+    /*font-family: Inter;*/
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
   }
   .button-text2{
-    color: #000;
-    font-family: Inter;
+    color: white;
+    /*color: #000;*/
+    /*font-family: Inter;*/
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
   }
   .attributes-title{
@@ -127,8 +139,8 @@
   }
   .attributes-title-text{
     color: #000;
-    font-family: Inter;
-    font-size: 32px;
+    /*font-family: Inter;*/
+    font-size: 25px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -136,20 +148,20 @@
   .attributes-container{
     display: flex;
     flex-direction: row;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    font-family: Inter;
-    line-height: normal;
+    /*font-family: Inter;*/
+    /*line-height: normal;*/
   }
   .attribute {
     display: flex;
     flex-direction: row;
     align-items:center;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    /*border-top: 0.5px solid #ccc;*/
+    /*border-bottom: 0.5px solid #ccc;*/
     padding: 15px;
-    padding-left: 25px;
+    /*padding-left: 25px;*/
     width:90%;
     text-align: start;
   }

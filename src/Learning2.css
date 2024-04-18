@@ -146,6 +146,7 @@
 }
 
 .L2-Lessons{
+    width:100%;
     padding-top: 45px;
     padding-bottom: 50px;
     padding-left: 5%;
@@ -161,11 +162,14 @@
 }
 
 .L2-Lessons-Title-Label {
-    width: 71%
+    font-size: 20px;
+    width: 71%;
 }
 
 .L2-Lessons-small-title-Label{
-    width:70%
+    font-size: 20px;
+    width:70%;
+    color:dimgrey;
 }
 
 .line {

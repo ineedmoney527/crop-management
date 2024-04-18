@@ -6,16 +6,18 @@ import Pest from "./Pest";
 import Disease from "./Disease";
 import Cares from "./Cares";
 import Faq from "./Faq";
-import icon_back from "../images/Go Back.png";
+// import icon_back from "../images/Go Back.png";
 import "./Details.css";
-const Detail = ({ name }) => {
+import { useParams } from "react-router-dom";
+const Detail = () => {
+    const { name } = useParams();
   const [selectedDetail, setSelectedDetail] = useState("info");
   return (
     <div>
       <Stack className="container">
-        <button className="back-button" onClick={() => window.history.back()}>
-          <img src={icon_back} alt="<" />
-        </button>
+        {/*<button className="back-button" onClick={() => window.history.back()}>*/}
+        {/*  <img src={icon_back} alt="<" />*/}
+        {/*</button>*/}
         <div className="sub-container">
           <DetailsSideBar
             selectedDetail={selectedDetail}

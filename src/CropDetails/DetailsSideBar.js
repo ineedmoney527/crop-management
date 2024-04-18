@@ -34,7 +34,7 @@ export default function DetailsSideBar({ selectedDetail, setSelectedDetail }) {
   return (
     <Stack className="side-buttons">
       {side_components.map((component) => (
-        <button
+        <button key={component.name}
           className={`side-button ${
             selectedDetail === component.name ? "active" : ""
           }`}

@@ -22,6 +22,7 @@ import Weather from "./Weather.js";
 import Accounting from "./Accounting.js";
 import CartPage from "./CartPage.js";
 import CropSummary from "./CropSummary.js";
+import Quiz from "./Quiz.js";
 import { useState } from "react";
 function App() {
   const [name, setName] = useState("");
@@ -42,10 +43,11 @@ function App() {
             element={<Encyclopedia setName={setName} />}
           />
           <Route path="/Irrigation" element={<Irrigation />} />
-          <Route path="CropDetails/Details" element={<Details name={name} />} />
+          <Route path="CropDetails/Details/:name" element={<Details name={name} />} />
           <Route path="/Learning" element={<Learning />} />
           <Route path="/Learning2" element={<Learning2 />} />
           <Route path="/Learning3" element={<Learning3 />} />
+          <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Market" element={<MarketStore />} />
           <Route exact path="/cart" component={CartPage} />
           <Route path="/Forum" element={<PostList />} />

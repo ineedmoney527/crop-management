@@ -51,11 +51,14 @@
   flex-direction: column;
   margin-top: auto;
   margin-bottom: auto;
+  font-size: 18px;
+  /*color:red;*/
 }
 
 .personal-information-group{
   margin-bottom: 15px;
   color:#364632;
+  font-size:13px ;
 }
 
 .personal-information-label{

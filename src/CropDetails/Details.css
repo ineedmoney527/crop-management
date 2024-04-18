@@ -9,6 +9,7 @@
     direction: row;
     margin-left: 5px;
     width:100%;
+    margin-top: 20px;
   }
   .back-button {
     background-color: transparent;
