@@ -1,9 +1,9 @@
 import { createConnection } from "mysql";
 var connection = createConnection({
-  host: 'localhost',
-  user: 'root',
-  password:'',
-  database: 'hack',
+  host: "localhost",
+  user: "root",
+
+  database: "vhack",
 });
 // Connect to the database
 connection.connect((err) => {

@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   const latlngsJSON = JSON.stringify(latlngs);
   const values = [
     user_id,
-    1,
+    crops,
     latlngsJSON,
     soilType.address,
     soilType.depth,
@@ -37,6 +37,70 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/crop/:landId", async (req, res) => {
+  const landId = req.params.landId;
+  const {
+    cropName,
+    cultivar,
+    plantingMethod,
+    seedTreatment,
+    plantingAmount,
+    nurseryStartDate,
+    nurseryDays,
+    plantingDate,
+    daysToMature,
+    firstHarvestDay,
+    noOfRows,
+    rowSpacing,
+    spacingOnRows,
+  } = req.body;
+
+  try {
+    // Your INSERT query to insert data into the database
+    const insertQuery = `
+      INSERT INTO planting (
+        landId,
+    
+        cultivar,
+        plantingMethod,
+        seedTreatment,
+        plantingAmount,
+        nurseryStartDate,
+        nurseryDays,
+        plantingDate,
+        daysToMature,
+        firstHarvestDay,
+        noOfRows,
+        rowSpacing,
+        spacingOnRows
+        
+      ) VALUES ( ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    // Execute the query
+    await connection.query(insertQuery, [
+      landId,
+
+      cultivar,
+      plantingMethod,
+      seedTreatment,
+      plantingAmount,
+      nurseryStartDate,
+      nurseryDays,
+      plantingDate,
+      daysToMature,
+      firstHarvestDay,
+      noOfRows,
+      rowSpacing,
+      spacingOnRows,
+    ]);
+
+    res.status(200).send("Data inserted successfully");
+  } catch (error) {
+    console.error("Error inserting data into database:", error);
+    res.status(500).send("Internal server error");
+  }
+});
 router.get("/addCrop", (req, res) => {
   const sql = "SELECT * FROM crop";
   connection.query(sql, (err, results) => {
@@ -48,6 +112,37 @@ router.get("/addCrop", (req, res) => {
     }
   });
 });
+
+router.get("/crop/:id", (req, res) => {
+  const sql = "SELECT DISTINCT name FROM crop WHERE id=" + req.params.id;
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ error: err });
+    } else {
+      console.log(results);
+      res.status(200).json(results[0]);
+    }
+  });
+});
+
+router.get("/planting/:id", (req, res) => {
+  const sql = `
+    SELECT *
+    FROM planting
+    WHERE id = (SELECT MAX(id) FROM planting WHERE landId = ${req.params.id})
+  `;
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ error: err });
+    } else {
+      console.log(results);
+      res.status(200).json(results[0]);
+    }
+  });
+});
+
 // API to fetch all shapes from MySQL
 router.get("/:id", (req, res) => {
   const sql = "SELECT * FROM map where user_id=" + req.params.id;
