@@ -89,7 +89,7 @@ const Planting = ({ open, onCropSubmit, onClose }) => {
       <span className="close" onClick={onClose}>
         &times;
       </span>
-      <h1>Planting Page - You selected Blueberry</h1>
+      <h1>Planting information</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="cropName">Crop Name:</label>
