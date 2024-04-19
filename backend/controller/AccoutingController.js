@@ -11,7 +11,7 @@ router.get("/:id", async (req, res) => {
     JOIN users u ON a.user_id = u.UserID
     WHERE a.user_id = ?`;
 
-    await connection.query(sqlQuery, [userId], (err, results) => {
+    connection.query(sqlQuery, [userId], (err, results) => {
       if (err) {
         console.error("Error executing SQL query:", err);
         res.status(500).json({ error: "Internal server error" });
@@ -65,11 +65,9 @@ router.delete("/rows/:ids", async (req, res) => {
   connection.query(queryString, [ids], (err, data) => {
     if (err) {
       console.error("Error deleting transactions:", err);
-      res
-        .status(500)
-        .json({
-          message: "An error occurrdeed while deleting the transactions.",
-        });
+      res.status(500).json({
+        message: "An error occurrdeed while deleting the transactions.",
+      });
     } else {
       res.json({ message: "transactions deleted successfully." });
     }

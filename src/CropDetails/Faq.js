@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Faq.css";
 import { Stack } from "@mui/material";
 import icon_faq from "../images/Question Mark.png";
@@ -11,13 +11,12 @@ const Faq = ({ name }) => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5000/api/encyclopedia/faq/${name}`)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-            setFaqs(data)
-          });
-
+      fetch(`http://localhost:5050/api/encyclopedia/faq/${name}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setFaqs(data);
+        });
     } catch (e) {
       console.error("Error:", e);
     }
@@ -74,15 +73,11 @@ const Faq = ({ name }) => {
             className={`faq-question ${expanded[faq.id] ? "active" : ""}`}
           >
             {faq.question}{" "}
-            <span
-              className={`indicator ${expanded[faq.id] ? "active" : ""}`}
-            >
+            <span className={`indicator ${expanded[faq.id] ? "active" : ""}`}>
               +
             </span>
           </button>
-          <div
-            className={`faq-answer ${expanded[faq.id] ? "visible" : ""}`}
-          >
+          <div className={`faq-answer ${expanded[faq.id] ? "visible" : ""}`}>
             {faq.answer}
           </div>
         </div>

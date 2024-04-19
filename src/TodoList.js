@@ -1,92 +1,151 @@
-import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "./TodoList.css"; // Import CSS file for styling
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios for making HTTP requests
 
-function TodoItem({ task, deleteTask, toggleCompleted }) {
-  const handleTick = () => {
-    toggleCompleted(task.id);
-  };
-
-  return (
-    <div className={`todo-item ${task.completed ? "completed" : ""}`}>
-      <div style={{ display: "flex" }}>
-        <input type="checkbox" checked={task.completed} onChange={handleTick} />
-        <p style={{ marginTop: "5px" }}>{task.text}</p>
-      </div>
-
-      <button onClick={() => deleteTask(task.id)}>X</button>
-    </div>
-  );
-}
-
-function TodoList() {
-  const [tasks, setTasks] = useState({});
-  const [text, setText] = useState("");
+function TodoList({ landId }) {
+  const [tasks, setTasks] = useState([]);
+  const [name, setName] = useState("");
+  const [added, setAdded] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [datesWithTasks, setDatesWithTasks] = useState([]);
 
-  const addTask = (date, text) => {
-    const newTasks = { ...tasks };
-    if (!newTasks[date]) {
-      newTasks[date] = [];
-    }
-    const newTask = { id: Date.now(), text, completed: false };
-    newTasks[date].push(newTask);
-    setTasks(newTasks);
-    setText("");
-  };
+  function TodoItem({ task }) {
+    return (
+      <div className={`todo-item ${task.is_completed ? "completed" : ""}`}>
+        <div style={{ display: "flex" }}>
+          <input
+            type="checkbox"
+            checked={task.is_completed}
+            onChange={() => toggleCompleted(task.id)}
+          />
+          <span>{task.name}</span>
+        </div>
 
-  const deleteTask = (date, id) => {
-    const newTasks = { ...tasks };
-    if (newTasks[date]) {
-      newTasks[date] = newTasks[date].filter((task) => task.id !== id);
-      if (newTasks[date].length === 0) {
-        delete newTasks[date];
-      }
-      setTasks(newTasks);
-    }
-  };
+        <button onClick={() => deleteTask(task.id)}>X</button>
+      </div>
+    );
+  }
 
-  const toggleCompleted = (date, id) => {
-    const newTasks = { ...tasks };
-    if (newTasks[date]) {
-      newTasks[date] = newTasks[date].map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+  useEffect(() => {
+    landId && fetchDateTasks();
+  }, [landId, selectedDate]);
+  useEffect(() => {
+    fetchAllTasks();
+  }, []);
+
+  const fetchAllTasks = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/todo/getDatesWithTasks/${1}`,
+        {
+          params: {
+            map_id: landId,
+          },
+        }
       );
-      setTasks(newTasks);
+
+      setDatesWithTasks(
+        response.data.map((dateObj) => new Date(dateObj.date).toDateString())
+      );
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
+  useEffect(() => {
+    console.log(datesWithTasks);
+  }, [datesWithTasks]);
+
+  const fetchDateTasks = async () => {
+    console.log(landId);
+    try {
+      const response = await axios.post(
+        `http://localhost:5050/api/todo/getDateTasks/${1}?map_id=${landId}&date=${selectedDate.toDateString()}`
+      );
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
     }
   };
 
+  const addTask = async () => {
+    if (name.trim() === "") {
+      console.error("Task name cannot be empty");
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/todo/addTask/${1}`,
+        {
+          params: {
+            map_id: landId,
+            name: name,
+            date: selectedDate.toDateString(),
+          },
+        }
+      );
+
+      setTasks([...tasks, response.data]);
+      fetchDateTasks();
+      fetchAllTasks();
+      setName("");
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
+  };
+
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5050/api/todo/deleteTask/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+      fetchDateTasks();
+      fetchAllTasks();
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  const toggleCompleted = async (id) => {
+    try {
+      const isCompleted = !tasks.find((task) => task.id === id).is_completed;
+      const response = await axios.get(
+        `http://localhost:5050/api/todo/toggleTask/${id}`,
+        {
+          params: {
+            is_completed: isCompleted,
+          },
+        }
+      );
+
+      setTasks((prevTasks) => {
+        return prevTasks.map((task) =>
+          task.id === id ? { ...task, is_completed: isCompleted } : task
+        );
+      });
+      setAdded(!added);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+  // useEffect(() => {
+  //   // fetchDateTasks();
+  // }, [added]);
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  const datesWithTasks = Object.keys(tasks);
-
   return (
     <div className="todo-list-container">
       <div className="todo-list">
-        {tasks[selectedDate.toDateString()] &&
-          tasks[selectedDate.toDateString()].map((task) => (
-            <TodoItem
-              key={task.id}
-              task={task}
-              deleteTask={() =>
-                deleteTask(selectedDate.toDateString(), task.id)
-              }
-              toggleCompleted={() =>
-                toggleCompleted(selectedDate.toDateString(), task.id)
-              }
-            />
-          ))}
+        {tasks && tasks.map((task) => <TodoItem key={task.id} task={task} />)}
         <div className="add-container">
           <input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Add a task"
           />
-          <button onClick={() => addTask(selectedDate.toDateString(), text)}>
-            Add
-          </button>
+          <button onClick={addTask}>Add</button>
         </div>
       </div>
       <div className="sidebar">

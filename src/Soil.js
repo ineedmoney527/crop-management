@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Soil.css"; // Import CSS for Soil component styles
+import { Button } from "@mui/material";
 
 export default function Soil({ open, onSoilInfoSubmit, onClose }) {
   const [soilInfo, setSoilInfo] = useState({
@@ -39,7 +40,7 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        <h2>Soil Information</h2>
+        <h2 className="heading1">Soil Information</h2>
         <div className="tabs">
           <button
             className={activeTab === "soilInfo" ? "active" : ""}
@@ -62,9 +63,11 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
           </button>
         </div>
         {activeTab === "soilInfo" && (
-          <form onSubmit={handleSubmit}>
+          <form className="Allform" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="texture">Texture:</label>
+              <label className="labelTitle-soil" htmlFor="texture">
+                Texture:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -75,8 +78,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="ph">pH:</label>
-
+              <label className="labelTitle-soil" htmlFor="ph">
+                pH:
+              </label>
               <input
                 className="input"
                 type="number"
@@ -90,7 +94,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="nitrogen">Nitrogen:</label>
+              <label className="labelTitle-soil" htmlFor="nitrogen">
+                Nitrogen:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -101,7 +107,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="potassium">Potassium:</label>
+              <label className="labelTitle-soil" htmlFor="potassium">
+                Potassium:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -112,7 +120,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="phosphorus">Phosphorus:</label>
+              <label className="labelTitle-soil" htmlFor="phosphorus">
+                Phosphorus:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -122,13 +132,15 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit">Submit</button>
+            <button id="submitbtn" className="submitbutton" type="submit">
+              Submit
+            </button>
           </form>
         )}
         {activeTab === "tilagePractices" && (
-          <form onSubmit={handleSubmit}>
+          <form className="Allform" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Tilage Practices:</label>
+              <label className="labelTitle-soil">Tilage Practices:</label>
               <div className="radio-group">
                 <input
                   className="input"
@@ -163,7 +175,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="depth">Depth:</label>
+              <label className="labelTitle-soil" htmlFor="depth">
+                Depth:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -174,7 +188,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="time">Time of Operation:</label>
+              <label className="labelTitle-soil" htmlFor="time">
+                Time of Operation:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -184,13 +200,17 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit">Submit</button>
+            <button className="submitbutton" type="submit">
+              Submit
+            </button>
           </form>
         )}
         {activeTab === "landInformation" && (
-          <form onSubmit={handleSubmit}>
+          <form className="Allform" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="Field Name">Name:</label>
+              <label className="labelTitle-soil" htmlFor="Field Name">
+                Name:
+              </label>
               <input
                 className="input"
                 type="text"
@@ -201,7 +221,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="time">Address</label>
+              <label className="labelTitle-soil" htmlFor="time">
+                Address
+              </label>
               <input
                 className="input"
                 type="text"
@@ -211,7 +233,9 @@ export default function Soil({ open, onSoilInfoSubmit, onClose }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit">Submit</button>
+            <button className="submitbutton" type="submit">
+              Submit
+            </button>
           </form>
         )}
       </div>

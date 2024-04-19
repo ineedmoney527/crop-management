@@ -5,13 +5,12 @@
   display: flex;
   flex-direction: column;
 }
+
 .tabs-container {
   width: 100%;
-
   margin: 0 auto;
   border-radius: 10px;
-  border: 3px solid black;
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+  border: 1.5px solid #d2d2d2;
   background-color: #fff;
   overflow: hidden;
 }
@@ -20,32 +19,40 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  border-radius: 5px;
+  border-bottom: 3px solid #9fc173; /* Add a solid black border line at the bottom */
 }
 
 .tab {
   flex: 1;
   background-color: transparent;
   text-align: center;
-  color: #555;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
+  width: 20px;
+  color: #3f4736;
+  padding: 10px 10px;
+  margin-right: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   cursor: pointer;
   font-weight: bold;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
+.tab:hover {
+  background-color: #495d44;
+  color: white;
+}
+
 .tab.active {
-  background-color: #2ecc71;
-  border-color: black;
-  border-style: solid;
-  border-width: 3px;
+  background-color: #9fc173;
+  border-color: transparent;
   color: #fff;
 }
 
 .tab-content {
-  padding: 20px;
+  padding: 10px;
 }
 
 .form-group {
@@ -58,4 +65,26 @@ label-map {
   color: #444;
   margin-bottom: 10px;
   font-size: 25px;
+}
+
+.buttonAddCrop {
+  background-color: #8ba766; /* Button background color */
+  color: #fff; /* Text color */
+  margin: 10px;
+  padding: 10px; /* Padding around the text inside the button */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 15px; /* Font size */
+  cursor: pointer; /* Cursor pointer */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+  width: 300px;
+}
+
+.buttonAddCrop:hover {
+  background-color: #495d44; /* Button background color */
+}
+
+.tableContent-map .headerTable {
+  font-weight: bold;
+  color: #495d44;
 }

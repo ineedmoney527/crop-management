@@ -5,13 +5,14 @@ const router = Router();
 // API to save shape data to MySQL
 
 router.post("/", (req, res) => {
-  const { user_id, latlngs, crops, soilType } = req.body;
+  const { land_id, user_id, latlngs, crops, soilType } = req.body;
   const insertQuery = `
-        INSERT INTO map (user_id,crop_id, latlngs, address, tilage_depth, name, nitrogen, ph, phosphorus, potassium, soil_texture, tilage_practice,tilage_timing)
-        VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+        INSERT INTO map (id,user_id,crop_id, latlngs, address, tilage_depth, name, nitrogen, ph, phosphorus, potassium, soil_texture, tilage_practice,tilage_timing)
+        VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
     `;
   const latlngsJSON = JSON.stringify(latlngs);
   const values = [
+    land_id,
     user_id,
     crops,
     latlngsJSON,
@@ -164,6 +165,22 @@ router.put("/crop/:cropId/:id", (req, res) => {
       res.status(500).json({ success: false, error: err.message });
     } else {
       res.status(200).json({ success: true });
+    }
+  });
+});
+
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  const deleteQuery = "DELETE FROM map WHERE id = ?";
+
+  // Execute the delete query
+  connection.query(deleteQuery, [id], (err, result) => {
+    if (err) {
+      console.error("Error deleting polygon from database:", err);
+      res.status(500).send("Internal server error");
+    } else {
+      console.log("Polygon deleted successfully");
+      res.status(200).send("Polygon deleted successfully");
     }
   });
 });

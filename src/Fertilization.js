@@ -45,25 +45,25 @@ const FertilizationPage = () => {
                 from: -30,
                 to: 5,
                 name: "extreme",
-                color: "#00A100",
+                color: "#4b924b",
               },
               {
                 from: 6,
                 to: 20,
                 name: "high",
-                color: "#128FD9",
+                color: "#3e96d3",
               },
               {
                 from: 21,
                 to: 45,
                 name: "medium",
-                color: "#FFB200",
+                color: "#e1a826",
               },
               {
                 from: 46,
                 to: 55,
                 name: "low",
-                color: "#FF0000",
+                color: "#e02f2f",
               },
             ],
           },
@@ -241,46 +241,82 @@ const FertilizationPage = () => {
         style={{ marginTop: "90px", marginBottom: "50px" }}
       />
 
-      <form style={{ display: "flex", justifyContent: "space-around" }}>
+      <form
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div
           className="form-group"
           style={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
             alignItems: "center",
           }}
         >
-          <label htmlFor="fertilizerType">Fertilizer Type:{fertilizer}</label>
+          <label
+            htmlFor="fertilizerType"
+            style={{ width: "300px", height: "30px" }}
+          >
+            Fertilizer Type:
+          </label>
+
           <button
             style={{
               marginBottom: "5px",
-              backgroundColor: "lightgreen",
-              borderWidth: "3px",
-              borderColor: "black",
+              marginLeft: "10px",
+              backgroundColor: "#8ba766",
+              height: "auto",
+              width: "auto",
+              color: "white",
+              border: "none",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             onClick={handleSelect}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#6a8f52")}
+            onMouseOut={(e) => (e.target.style.backgroundColor = "#8ba766")}
           >
             Select
           </button>
+          <label style={{ marginLeft: "6px", fontWeight: "bold" }}>
+            {fertilizer}
+          </label>
         </div>
         <div className="form-group">
-          <label htmlFor="fertilizerAmount">Fertilizer Amount (lbs):</label>
+          <label
+            htmlFor="fertilizerAmount"
+            style={{ marginRight: "10px", width: "310px", height: "30px" }}
+          >
+            Fertilizer Amount (lbs):
+          </label>
           <input
             type="text"
-            id="fertilizerAmount"
+            // id="fertilizerAmount"
             value={fertilizerAmount}
             onChange={(e) => setFertilizerAmount(e.target.value)}
             required
+            // className={"input-style"}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="fertilizationDate">Fertilization Date:</label>
+          <label
+            htmlFor="fertilizationDate"
+            style={{ marginRight: "10px", width: "300px", height: "30px" }}
+          >
+            Fertilization Date:
+          </label>
           <input
             type="date"
             id="fertilizationDate"
             value={fertilizationDate}
             onChange={(e) => setFertilizationDate(e.target.value)}
             required
+            style={{
+              width: "220px", // Adjust width as needed
+              height: "50px", // Adjust height as needed
+            }}
           />
         </div>
       </form>
@@ -291,7 +327,17 @@ const FertilizationPage = () => {
           alignItems: "center",
         }}
       >
-        <button type="submit" style={{ marginLeft: "30%", marginRight: "30%" }}>
+        <button
+          type="submit"
+          style={{
+            width: "220px",
+            alignItems: "center",
+            backgroundColor: "#8ba766",
+            color: "white",
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#6a8f52")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#8ba766")}
+        >
           Submit
         </button>
       </div>

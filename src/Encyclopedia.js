@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CropCard from "./CropCard";
 import { TextField } from "@mui/material";
 import "./Encyclopedia.css";
@@ -19,33 +19,33 @@ export default function Encyclopedia() {
 
   useEffect(() => {
     // Fetch crops data from the API endpoint
-    fetch("http://localhost:5000/api/encyclopedia/crops")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error fetching crops at fronteee");
-          }
-          // Print response headers to the console
-          console.log("Response headers:", response.headers);
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Crops data:", data);
-          setCrops(data);
-          setFilteredCrops(data);
-        })
-        .catch((error) => console.error("Error fetching crops at front:", error));
+    fetch("http://localhost:5050/api/encyclopedia/crops")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching crops at fronteee");
+        }
+        // Print response headers to the console
+        console.log("Response headers:", response.headers);
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Crops data:", data);
+        setCrops(data);
+        setFilteredCrops(data);
+      })
+      .catch((error) => console.error("Error fetching crops at front:", error));
   }, []);
 
   useEffect(() => {
     // Filter crops based on search query
     setFilteredCrops(
-        crops.filter(
-            (crop) =>
-                crop.name.toLowerCase().includes(search) ||
-                crop.otherNames.some((otherName) =>
-                    otherName.toLowerCase().includes(search)
-                )
-        )
+      crops.filter(
+        (crop) =>
+          crop.name.toLowerCase().includes(search) ||
+          crop.otherNames.some((otherName) =>
+            otherName.toLowerCase().includes(search)
+          )
+      )
     );
   }, [search, crops]);
 
@@ -86,7 +86,7 @@ export default function Encyclopedia() {
   // const navigate = useNavigate();
   return (
     <div className="encyclopedia">
-      <Stack className="sidebar" >
+      <Stack className="sidebar">
         <button className="sidebar-button active">Encyclopedia</button>
         <button
           className="sidebar-button"
@@ -110,7 +110,7 @@ export default function Encyclopedia() {
             size="small"
             value={search}
             onChange={handleSearchChange}
-            style={{ width: "50%" ,borderRadius:'10px'}}
+            style={{ width: "50%", borderRadius: "10px" }}
           />
         </div>
         <div className="crops-container">
@@ -121,7 +121,7 @@ export default function Encyclopedia() {
             <div className="image-header">Image</div>
           </div>
           <div className="crop-list">
-            {filteredCrops.map((crop,index) => (
+            {filteredCrops.map((crop, index) => (
               <CropCard
                 key={crop.id}
                 name={crop.name}

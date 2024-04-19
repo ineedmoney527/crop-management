@@ -185,7 +185,7 @@
 // }
 
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Example from "./example";
 // import Button from '@mui/material/Button';
 // import Sidebar from "./sidebar";
@@ -195,74 +195,66 @@ import Example from "./example";
 // import Typography from "@mui/material/Typography";
 // import AppBar from "@mui/material/AppBar";
 
-
 const Quiz = () => {
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [selectedOption, setSelectedOption] = useState('');
-    const [score, setScore] = useState(0);
-    const [quizEnded, setQuizEnded] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [score, setScore] = useState(0);
+  const [quizEnded, setQuizEnded] = useState(false);
 
-    const handleCloseDialog = () => {
-        setCurrentQuestion(0);
-        setSelectedOption('');
-        setQuizEnded(false);
+  const handleCloseDialog = () => {
+    setCurrentQuestion(0);
+    setSelectedOption("");
+    setQuizEnded(false);
 
-        const updatedUserData = {
-            userId: 2,
-        };
-
-        axios.post('http://localhost:5000/api/update-quiz-count', updatedUserData)
-            .then(response => {
-                console.log('Quiz count updated successfully:', response.data);
-            })
-            .catch(error => {
-                console.error('Error updating quiz count:', error);
-            });
+    const updatedUserData = {
+      userId: 2,
     };
 
-    const questions = [
-        // ... (same questions array)
-    ];
+    axios
+      .post("http://localhost:5050/api/update-quiz-count", updatedUserData)
+      .then((response) => {
+        console.log("Quiz count updated successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating quiz count:", error);
+      });
+  };
 
-    const handleOptionSelect = (option) => {
-        setSelectedOption(option);
-    };
+  const questions = [
+    // ... (same questions array)
+  ];
 
-    const handleNextQuestion = () => {
-        if (selectedOption === questions[currentQuestion].correctAnswer) {
-            setScore(score + 1);
-        }
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+  };
 
-        if (currentQuestion < questions.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-            setSelectedOption('');
-        } else {
-            setQuizEnded(true);
-        }
-    };
+  const handleNextQuestion = () => {
+    if (selectedOption === questions[currentQuestion].correctAnswer) {
+      setScore(score + 1);
+    }
 
-    return (
-        <div>
-            {/* Quiz component JSX */}
-        </div>
-    );
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedOption("");
+    } else {
+      setQuizEnded(true);
+    }
+  };
+
+  return <div>{/* Quiz component JSX */}</div>;
 };
 
-
 const App = () => {
-    const [open, setOpen] = useState(false);
-    const toggleDrawer = (newOpen) => () => {
-        setOpen(newOpen);
-    };
-    return (
-        <div style={{backgroundColor:'#E4E4E4'}}>
-            <Example />
-            <Quiz />
-        </div>
-    );
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+  return (
+    <div style={{ backgroundColor: "#E4E4E4" }}>
+      <Example />
+      <Quiz />
+    </div>
+  );
 };
 
 export default App;
-
-
-

@@ -9,7 +9,7 @@ import SoilContainer from "./SoilContainer";
 import FertilizationPage from "./Fertilization";
 import Irrigation from "./Irrigation";
 import axios from "axios";
-import { Tab, Tabs } from "@mui/material";
+import { Tab, Tabs, styled } from "@mui/material";
 
 import {
   MapContainer,
@@ -46,6 +46,33 @@ const calculateCenter = (latlngs) => {
   return bounds.getCenter();
 };
 
+const StyledTabs = styled(Tabs)(({ theme }) => ({
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    width: "20%",
+    justifyContent: "center",
+    backgroundColor: "#73A9AD",
+  },
+  "& .MuiTabs-indicatorSpan": {
+    maxWidth: "50%", // Adjust the width here
+    width: "10%",
+    backgroundColor: "rgba(69, 124, 204, 1)",
+    borderRadius: 2,
+  },
+}));
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+  fontWeight: "bold",
+  fontSize: theme.typography.pxToRem(15),
+  color: "#808E7C", // Set the text color here
+  "&.Mui-selected": {
+    color: "#73A9AD",
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
+  },
+}));
+
 function Map() {
   const [selectedIcon, setSelectedIcon] = useState(icons.defaultIcon);
   const [currentSection, setCurrentSection] = useState(0); // State to track curre
@@ -56,7 +83,6 @@ function Map() {
   const [showPlanting, setShowPlanting] = useState(false);
   const [id, setID] = useState("");
   const [latlngs, setlatlngs] = useState(null);
-  const [selectedCrop, setSelectedCrop] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(null);
   const user_id = 1;
   //tab containers
@@ -97,6 +123,14 @@ function Map() {
   const handleAddCrop = () => {
     setShowAddCrop(true);
   };
+  const handleDeleteCrop = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5050/api/map/${id}`);
+      fetchLands();
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const getCropName = async (ID) => {
     try {
       const response = await axios.get(
@@ -124,18 +158,12 @@ function Map() {
       fetchLands();
     }
   };
-
   const _onDeleted = (e) => {
     const {
       layers: { _layers },
     } = e;
-    Object.values(_layers).forEach(({ _leaflet_id }) => {
-      console.log(_leaflet_id);
-      // Find the land in the mapLayers state that matches the deleted _leaflet_id
-      const deletedLand = mapLayers.find((land) => land.id === _leaflet_id);
-      if (deletedLand) {
-        setMapLayers((layers) => layers.filter((l) => l.id !== deletedLand.id));
-      }
+    Object.values(_layers).map(({ _leaflet_id }) => {
+      setMapLayers((layers) => layers.filter((l) => l.id !== _leaflet_id));
     });
   };
   const _onEdited = (e) => {
@@ -168,12 +196,6 @@ function Map() {
 
   return (
     <div className="App">
-      <div className="icon-selector">
-        <label htmlFor="iconSelect">Select Icon:</label>
-        <select id="iconSelect" onChange={handleIconChange}>
-          <option value="defaultIcon">Default Icon</option>
-        </select>
-      </div>
       <MapContainer
         className="map"
         center={[2.019858963264568, 103.22156929584389]}
@@ -218,18 +240,22 @@ function Map() {
                   click: (e) => {
                     setActiveTab("");
                     setSelectedLand((prev) => land);
-                    console.log(land);
                   },
                 }}
               >
                 <Popup className="custom-popup">
                   <div className="popup-content">
                     <div className="popup-header">
-                      <Typography>Land ID: {selectedLand?.id}</Typography>
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: "bold", color: "#3F4736" }}
+                      >
+                        Land ID: {selectedLand?.id}
+                      </Typography>
                     </div>
                     <div className="popup-body">
                       <div className="popup-tabs">
-                        <Tabs
+                        <StyledTabs
                           value={popUpTab}
                           onChange={(event, newValue) =>
                             handlePopUpTabClick(newValue)
@@ -238,22 +264,25 @@ function Map() {
                           indicatorColor="primary"
                           textColor="primary"
                         >
-                          <Tab label="Land Details" value="land" />
-                          <Tab label="Soil Properties" value="soil" />
-                          <Tab label="Tillage Practices" value="tillage" />
-                        </Tabs>
+                          <StyledTab label="Land Details" value="land" />
+                          <StyledTab label="Soil Properties" value="soil" />
+                          <StyledTab
+                            label="Tillage Practices"
+                            value="tillage"
+                          />
+                        </StyledTabs>
                       </div>
                       <div className="popup-tab-content">
                         {popUpTab === "land" && (
                           <div className="section">
-                            <Table bordered hover>
+                            <Table bordered hover className="tableContent-map">
                               <tbody>
                                 <tr>
-                                  <td>Address:</td>
+                                  <td className="headerTable">Address:</td>
                                   <td>{selectedLand?.address || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Coordinate:</td>
+                                  <td className="headerTable">Coordinate:</td>
                                   <td>
                                     {calculateCenter(JSON.parse(land.latlngs))
                                       .toString()
@@ -262,43 +291,48 @@ function Map() {
                                 </tr>
 
                                 <tr>
-                                  <td>Crop:</td>
+                                  <td className="headerTable">Crop:</td>
                                   <td>
                                     {selectedLand
                                       ? selectedLand.cropName || ""
                                       : ""}
                                   </td>
                                 </tr>
-
-                                <button onClick={() => handleAddCrop(land.id)}>
-                                  Add Crop
-                                </button>
                               </tbody>
                             </Table>
+                            <button
+                              className="buttonAddCrop"
+                              onClick={() => handleAddCrop(land.id)}
+                            >
+                              Add Crop
+                            </button>
+                            <button onClick={() => handleDeleteCrop(land.id)}>
+                              Delete
+                            </button>
                           </div>
                         )}
                         {popUpTab === "soil" && (
                           <div className="section">
-                            <Table bordered hover>
+                            <Table className="tableContent-map" bordered hover>
                               <tbody>
                                 <tr>
-                                  <td>Soil Texture:</td>
+                                  <td className="headerTable">Soil Texture:</td>
                                   <td>{selectedLand?.soil_texture || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Nitrogen:</td>
+                                  <td className="headerTable">Nitrogen:</td>
                                   <td>{selectedLand?.nitrogen || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Phosphorus:</td>
+                                  <td className="headerTable">Phosphorus:</td>
                                   <td>{selectedLand?.phosphorus || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Potassium:</td>
+                                  <td className="headerTable">Potassium:</td>
                                   <td>{selectedLand?.potassium || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>pH:</td>
+                                  <td className="headerTable">pH Value:</td>
                                   <td>{selectedLand?.ph || ""}</td>
                                 </tr>
                               </tbody>
@@ -307,18 +341,24 @@ function Map() {
                         )}
                         {popUpTab === "tillage" && (
                           <div className="section">
-                            <Table bordered hover>
+                            <Table className="tableContent-map" bordered hover>
                               <tbody>
                                 <tr>
-                                  <td>Tillage Depth:</td>
+                                  <td className="headerTable">
+                                    Tillage Depth:
+                                  </td>
                                   <td>{selectedLand?.tilage_depth || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Tillage Practice:</td>
+                                  <td className="headerTable">
+                                    Tillage Practice:
+                                  </td>
                                   <td>{selectedLand?.tilage_practice || ""}</td>
                                 </tr>
                                 <tr>
-                                  <td>Tillage Timing:</td>
+                                  <td className="headerTable">
+                                    Tillage Timing:
+                                  </td>
                                   <td>{selectedLand?.tilage_timing || ""}</td>
                                 </tr>
                               </tbody>
@@ -380,7 +420,7 @@ function Map() {
           user_id={user_id}
           open={showAddCrop}
           onCropSubmit={async (newCrop) => {
-            setSelectedCrop(newCrop.name);
+            console.log(newCrop.name);
             await axios
               .put(
                 `http://localhost:5050/api/map/crop/${newCrop.id}/${selectedLand.id}`
@@ -402,7 +442,6 @@ function Map() {
       </div>
       <div id="plantingPortal">
         <Planting
-          cropName={selectedCrop}
           open={showPlanting}
           onCropSubmit={async (info) => {
             console.log(info);

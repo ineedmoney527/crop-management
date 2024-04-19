@@ -64,6 +64,24 @@ const Planting = ({ open, onCropSubmit, onClose }) => {
   if (!open) return null;
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = {
+      cropName,
+      cultivar,
+      plantingMethod,
+      seedTreatment,
+      plantingAmount,
+      nurseryStartDate,
+      nurseryDays,
+      plantingDate,
+      daysToMature,
+      firstHarvestDay,
+      noOfRows,
+      rowSpacing,
+      spacingOnRows,
+      bedVisualization,
+    };
+    console.log(formData);
+    onCropSubmit(formData);
     onClose();
   };
   return (
@@ -93,7 +111,10 @@ const Planting = ({ open, onCropSubmit, onClose }) => {
         </div>
         <div>
           <label htmlFor="plantingMethod">Planting Method:</label>
-          <select name="plantingMethod">
+          <select
+            name="plantingMethod"
+            onChange={(e) => setPlantingMethod(e.target.value)}
+          >
             <option value="broadcasting">Broadcasting</option>
             <option value="rowPlanting">Row Planting</option>
             <option value="drilling">Drilling</option>

@@ -68,3 +68,13 @@ h2 {
 .harvest-table tbody tr:nth-child(odd) {
   background-color: #ffffff;
 }
+
+.form-group input[type="text"] {
+  width: 80%;
+}
+.form-group input[type="text"] {
+  background-color: transparent;
+  border: 1px solid #586e88;
+  border-radius: 10px;
+  padding: 1em;
+}

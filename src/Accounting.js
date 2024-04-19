@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import TransactionTable from "./TransactionTable.js";
 import TransactionBarChart from "./TransactionBarChart.js";
 import TransactionPieChart from "./TransactionPieChart.js";
 import AddTransactionForm from "./AddTransactionForm.js";
+import "@mui/material/styles/useTheme";
 import { useNavigate } from "react-router-dom";
 import {
   Stack,
@@ -11,7 +12,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Box
+  Box,
 } from "@mui/material";
 import axios from "axios";
 
@@ -19,7 +20,7 @@ import "./Accounting.css";
 
 const Accounting = () => {
   const [pageTitle, setPageTitle] = useState("Accounting");
-  const [transactions, setTransactions] = useState(null);
+  const [transactions, setTransactionss] = useState([]);
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
@@ -31,12 +32,12 @@ const Accounting = () => {
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/accounting/${user_id}`
+        `http://localhost:5050/api/accounting/1`
       );
-      setTransactions(response.data);
-      console.log("sell" + JSON.stringify(response.data));
+      console.log("accounting: ", response.data);
+      setTransactionss(response.data);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.log(error);
     }
   };
 
@@ -191,15 +192,15 @@ const Accounting = () => {
           fontFamily: "Inter",
         }}
       >
-       {/* {" Summary"} */}
-       <h1 className="summary-title">Summary</h1>
+        {/* {" Summary"} */}
+        <h1 className="summary-title">Summary</h1>
         <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
-          // style={{ 
-          //   width: "80px", 
-          //   padding: "5px", 
-          //   marginTop: "10px", 
+          // style={{
+          //   width: "80px",
+          //   padding: "5px",
+          //   marginTop: "10px",
           //   borderRadius:'10px' }}
           className="select-box"
         >
@@ -226,22 +227,28 @@ const Accounting = () => {
         style={{ paddingLeft: "50px", paddingRight: "50px" }}
       >
         <div className="tags">
-          <label className="tagsBars">Revenue: RM {totalRevenue.toFixed(2)}</label>
-          <label className="tagsBars-Expenses">Expenses: RM {totalExpenses.toFixed(2)}</label>
-          <label className="tagsBars">Profit: RM {totalProfit.toFixed(2)}</label>
+          <label className="tagsBars">
+            Revenue: RM {totalRevenue.toFixed(2)}
+          </label>
+          <label className="tagsBars-Expenses">
+            Expenses: RM {totalExpenses.toFixed(2)}
+          </label>
+          <label className="tagsBars">
+            Profit: RM {totalProfit.toFixed(2)}
+          </label>
           <div className="add-transaction">
             <Button
               className="add-transaction-button"
               onClick={() => setOpenAddTransaction(true)}
               variant="contained"
               sx={{
-                mb: '10px',
-                bgcolor: '#9FC173',
+                mb: "10px",
+                bgcolor: "#9FC173",
                 "&:hover": {
                   bgcolor: "#495D44",
-                  opacity: '70%',
-                  color: 'white'
-              },
+                  opacity: "70%",
+                  color: "white",
+                },
               }}
             >
               Add Transaction
@@ -249,13 +256,13 @@ const Accounting = () => {
           </div>
         </div>
         <div className="transaction-table">
-          {transactions && (
+          {transactions.length > 0 && (
             <TransactionTable
               transactions={transactions}
               onDelete={handleDeleteTransaction}
               onDeleteRows={handleDeleteTransactions}
               // onUpdate={handleUpdateTransaction}
-              setTransactions={setTransactions}
+              setTransactions={setTransactionss}
             />
           )}
         </div>
@@ -264,26 +271,26 @@ const Accounting = () => {
         open={openAddTransaction}
         onClose={() => setOpenAddTransaction(false)}
       >
-        <DialogTitle
-        sx={{fontSize:30, fontWeight:'bold', mb:'5px'}}
-        >Add Transaction</DialogTitle>
-        <DialogContent sx={{ pl:'10px',pr:'10px', pt:'10px'}}>
+        <DialogTitle sx={{ fontSize: 30, fontWeight: "bold", mb: "5px" }}>
+          Add Transaction
+        </DialogTitle>
+        <DialogContent sx={{ pl: "10px", pr: "10px", pt: "10px" }}>
           <AddTransactionForm onAddTransaction={handleAddTransaction} />
         </DialogContent>
         <DialogActions>
-          <Button 
-          onClick={() => setOpenAddTransaction(false)} 
-          sx={{
-            mb: '2px',
-            bgcolor: '#9FC173',
-            height: '40px',
-            color:'white',
-            "&:hover": {
-              bgcolor: "#495D44",
-              opacity: '70%',
-              color: 'white'
-          },
-          }}
+          <Button
+            onClick={() => setOpenAddTransaction(false)}
+            sx={{
+              mb: "2px",
+              bgcolor: "#9FC173",
+              height: "40px",
+              color: "white",
+              "&:hover": {
+                bgcolor: "#495D44",
+                opacity: "70%",
+                color: "white",
+              },
+            }}
           >
             Cancel
           </Button>

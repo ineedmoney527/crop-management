@@ -8,23 +8,24 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import "./Calendar.css";
+
 const initialValue = dayjs("2024-04-01");
 
 function ServerDay(props) {
-  const { highlightedDates = [], day, outsideCurrentMonth, ...other } = props;
+  const { highlightedDates = {}, day, outsideCurrentMonth, ...other } = props;
 
-  const isHighlighted = highlightedDates.some((date) =>
-    day.isSame(dayjs(date), "day")
+  const isHighlighted = Object.keys(highlightedDates).some((key) =>
+    day.isSame(dayjs(highlightedDates[key]), "day")
   );
 
   const getTooltipContent = (date) => {
     switch (date) {
-      case "2024-03-20":
-        return "Nursery Start: March 20, 2024 (30 days)";
-      case "2024-04-20":
-        return "Planting to Ground: April 20, 2024";
-      case "2024-08-18":
-        return "Estimated Harvest: August 18, 2024 (120 days)";
+      case highlightedDates.nursery:
+        return `Nursery Start: ${highlightedDates.nursery} `;
+      case highlightedDates.plant:
+        return `Planting to Ground: ${highlightedDates.plant}`;
+      case highlightedDates.harvest:
+        return `Estimated Harvest: ${highlightedDates.harvest}`;
       default:
         return "";
     }
@@ -32,14 +33,14 @@ function ServerDay(props) {
 
   const getBadgeContent = (date) => {
     switch (date) {
-      case "2024-03-20":
+      case highlightedDates.nursery:
         return "🌱";
-      case "2024-04-20":
-        return "🌱🌿";
-      case "2024-08-18":
+      case highlightedDates.plant:
+        return "🌿";
+      case highlightedDates.harvest:
         return "🌾";
       default:
-        return "";
+        return "🌾";
     }
   };
 
@@ -65,25 +66,21 @@ function ServerDay(props) {
   );
 }
 
-export default function DateCalendarValue() {
+export default function DateCalendarValue({ markedDates }) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDates, setHighlightedDates] = React.useState([
-    "2024-03-20",
-    "2024-04-20",
-    "2024-08-18",
-  ]);
+  const [highlightedDates, setHighlightedDates] = React.useState({});
 
   const generateHighlightedDates = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setHighlightedDates(["2024-03-20", "2024-04-20", "2024-08-18"]); // Simulate fetching data
+      setHighlightedDates(markedDates);
       setIsLoading(false);
     }, 500);
   };
 
   React.useEffect(() => {
     generateHighlightedDates();
-  }, []);
+  }, [markedDates]);
 
   const handleMonthChange = (date) => {
     generateHighlightedDates();

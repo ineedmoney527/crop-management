@@ -24,7 +24,6 @@ router.get("/getDatesWithTasks/:userId", async (req, res) => {
 });
 
 router.post("/getDateTasks/:id", async (req, res) => {
-  console.log("req.params.id: ", req.params.id);
   const { map_id, date } = req.query;
   console.log(map_id);
   try {

@@ -10,34 +10,34 @@ import icon_next from "../images/Chevron Right.png";
 import { useEffect, useState } from "react";
 
 const Info = ({ name, setSelectedDetails }) => {
-    const [crop, setCrop] = useState(null);
+  const [crop, setCrop] = useState(null);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/encyclopedia/info/${name}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setCrop(data)
-            });
-    }, []);
+  useEffect(() => {
+    fetch(`http://localhost:5050/api/encyclopedia/info/${name}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setCrop(data);
+      });
+  }, []);
 
-    if (!crop) {
-        return <div>Loading...</div>;
+  if (!crop) {
+    return <div>Loading...</div>;
+  }
+
+  // Split attributes into two halves
+  const leftAttributes = {};
+  const rightAttributes = {};
+  const attributes = crop.attributes;
+  const attributeKeys = Object.keys(attributes);
+  const halfIndex = Math.ceil(attributeKeys.length / 2);
+  attributeKeys.forEach((key, index) => {
+    if (index < halfIndex) {
+      leftAttributes[key] = attributes[key];
+    } else {
+      rightAttributes[key] = attributes[key];
     }
-
-    // Split attributes into two halves
-    const leftAttributes = {};
-    const rightAttributes = {};
-    const attributes = crop.attributes;
-    const attributeKeys = Object.keys(attributes);
-    const halfIndex = Math.ceil(attributeKeys.length / 2);
-    attributeKeys.forEach((key, index) => {
-        if (index < halfIndex) {
-            leftAttributes[key] = attributes[key];
-        } else {
-            rightAttributes[key] = attributes[key];
-        }
-    });
+  });
   // const crops = {
   //   Carrot: {
   //     scientificName: "Daucus carota",
@@ -125,9 +125,7 @@ const Info = ({ name, setSelectedDetails }) => {
         <Stack className="details-content">
           <div className="crop-name">{crop.name}</div>
           <div className="scientific-name">{crop.scientificName}</div>
-          <div className="other-names">
-            Also known as: {crop.otherNames}
-          </div>
+          <div className="other-names">Also known as: {crop.otherNames}</div>
           <div className="description">{crop.description}</div>
           <div className="details-care-container">
             <button
@@ -135,12 +133,30 @@ const Info = ({ name, setSelectedDetails }) => {
               onClick={() => setSelectedDetails("care")}
             >
               <div className="button-components">
-                <img src={icon_water} alt="Icon Care" style={{color:'white',filter: 'brightness(0) invert(1)',width:'30px',height:'30px'}} />
+                <img
+                  src={icon_water}
+                  alt="Icon Care"
+                  style={{
+                    color: "white",
+                    filter: "brightness(0) invert(1)",
+                    width: "30px",
+                    height: "30px",
+                  }}
+                />
                 <Stack className="details-care-button-text">
                   {/*<div className="button-text1">Water</div>*/}
                   <div className="button-text2">Every Week</div>
                 </Stack>
-                <img src={icon_next} alt=">" style={{color:'white',filter: 'brightness(0) invert(1)',width:'30px',height:'30px'}} />
+                <img
+                  src={icon_next}
+                  alt=">"
+                  style={{
+                    color: "white",
+                    filter: "brightness(0) invert(1)",
+                    width: "30px",
+                    height: "30px",
+                  }}
+                />
               </div>
             </button>
             <button
@@ -148,12 +164,30 @@ const Info = ({ name, setSelectedDetails }) => {
               onClick={() => setSelectedDetails("care")}
             >
               <div className="button-components">
-                <img src={icon_sun} alt="Icon Care" style={{color:'white',filter: 'brightness(0) invert(1)',width:'30px',height:'30px'}}/>
+                <img
+                  src={icon_sun}
+                  alt="Icon Care"
+                  style={{
+                    color: "white",
+                    filter: "brightness(0) invert(1)",
+                    width: "30px",
+                    height: "30px",
+                  }}
+                />
                 <Stack className="details-care-button-text">
                   {/*<div className="button-text1">Sunlight</div>*/}
                   <div className="button-text2">Full Shade</div>
                 </Stack>
-                <img src={icon_next} alt=">" style={{color:'white',filter: 'brightness(0) invert(1)',width:'30px',height:'30px'}}/>
+                <img
+                  src={icon_next}
+                  alt=">"
+                  style={{
+                    color: "white",
+                    filter: "brightness(0) invert(1)",
+                    width: "30px",
+                    height: "30px",
+                  }}
+                />
               </div>
             </button>
           </div>
@@ -161,7 +195,11 @@ const Info = ({ name, setSelectedDetails }) => {
       </div>
       <Stack className="details-attributes-container">
         <div className="attributes-title">
-          <img src={icon_info} alt="Icon" style={{width:'40px',height:'40px',marginRight:'10px'}} />
+          <img
+            src={icon_info}
+            alt="Icon"
+            style={{ width: "40px", height: "40px", marginRight: "10px" }}
+          />
           <div className="attributes-title-text">Attributes of {name}</div>
         </div>
         <div className="attributes-container">

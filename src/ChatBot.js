@@ -1,11 +1,13 @@
 import React, { useState, useRef } from "react";
 import "./ChatBot.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const Chatbot = () => {
   const [convHistory, setConvHistory] = useState([]);
   const [userInput, setUserInput] = useState("");
   const chatbotConversation = useRef(null);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,13 +43,27 @@ const Chatbot = () => {
     }
   };
 
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.value;
+    if (selectedOption === "Smart Doctor") {
+      navigate("/SmartDoctor"); // Navigate to Smart Doctor page
+    }
+  };
+
   return (
     <main>
       <section className="chatbot-container">
         <div className="chatbot-header">
-          <img src="images/plant.png" alt={"Logo"} className="logo" />
-          {/*<img src="images/logo-scrimba.svg" alt="Logo" className="logo" />*/}
-          <h5 className="sub-heading">Knowledge Bank</h5>
+          {/*<img src="images/plant.png" alt={"Logo"} className="logo"/>*/}
+
+          <select
+            className="select-page"
+            style={{ fontSize: "24px", width: "200px" }}
+            onChange={handleSelectChange}
+          >
+            <option value="ChatBot">ChatBot</option>
+            <option value="Smart Doctor">Smart Doctor</option>
+          </select>
         </div>
         <div
           className="chatbot-conversation-container"

@@ -1,163 +1,179 @@
 /* IrrigationPage.css */
 
 .irrigation-page {
-    font-family: Arial, sans-serif;
-    padding-top: 10px;
-    /*padding: 20px;*/
-    background-color: #F3F4C3;
-    border-radius: 20px;
+  font-family: Arial, sans-serif;
+  padding-top: 10px;
+  /*padding: 20px;*/
+  background-color: #e4e4e9;
+  border-radius: 20px;
+}
+
+.duration-display-container {
+  display: flex;
+  flex-direction: row;
+  width: 450px;
+}
+
+.patchTitle {
+  font-size: 30px;
+}
+
+.subTitle-irr {
+  padding-top: 45px;
+  font-size: 25px;
 }
 
 .page-title {
-    font-size: 24px;
-    padding-left: 20px;
-    margin-bottom: 20px;
+  font-size: 27px;
+  padding-left: 20px;
+  margin-bottom: 20px;
 }
 
 .info-container {
-    /*border: 1px solid #ccc;*/
-    /*border-radius: 5px;*/
-    padding: 20px;
-    justify-content: center;
-    /*background-color: #f9f9f9;*/
+  /*border: 1px solid #ccc;*/
+  /*border-radius: 5px;*/
+  padding: 20px;
+  justify-content: center;
+  /*background-color: #f9f9f9;*/
 }
 
 .info-row {
-    /*margin-bottom: 10px;*/
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space items evenly */
-    align-items: center; /* Align items vertically */
-    margin-bottom: 8px;
+  /*margin-bottom: 10px;*/
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space items evenly */
+  align-items: center; /* Align items vertically */
+  margin-bottom: 8px;
 }
 
 .info-label {
-    font-weight: bold;
-    font-size: 20px;
-    margin-right: 50px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 50px;
 }
 
 .info-value {
-    font-size: 20px;
-    color: #333;
+  font-size: 18px;
+  color: #333;
 }
 
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
-    background-color: #8BA766;
+  background-color: #8ba766;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #8BA766;
+  box-shadow: 0 0 1px #8ba766;
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
-.smallTitleBar{
-    margin-bottom: 10px;
+.smallTitleBar {
+  margin-bottom: 10px;
 }
 
-.st1col{
-    padding-left: 20px;
-    /*background-color: #61dafb;*/
+.st1col {
+  padding-left: 20px;
+  /*background-color: #61dafb;*/
 }
 
-.firstrow, .sndrow{
-    background-color: white;
-    border-radius: 30px;
-    padding: 20px;
+.firstrow,
+.sndrow {
+  background-color: white;
+  border-radius: 30px;
+  padding: 20px;
 }
 
-.checkbox1{
-    margin: 10px;
-    padding: 10px 10px 10px 40px;
-    max-width: 600px;
-    max-height: 650px;
-    overflow: auto;
+.checkbox1 {
+  margin: 10px;
+  padding: 10px 10px 10px 30px;
+  max-width: 600px;
+  max-height: 650px;
+  overflow: auto;
 }
 
-.watering-levels-container{
-    padding-top: 40px;
-    /*background-color: red;*/
+.watering-levels-container {
+  padding-top: 40px;
+  /*background-color: red;*/
 }
 
-.watering-level-slider{
-    margin-bottom: 35px;
+.watering-level-slider {
+  margin-bottom: 35px;
 }
 
-.buttons-this{
-    background-color: #8BA766;
+.buttons-this {
+  background-color: #8ba766;
 }
 
 /* styles.css (or any other CSS file) */
 
 .timer-selection-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .timer-selection-container > * {
-    width: 100%; /* Make child elements take full width */
+  width: 100%; /* Make child elements take full width */
 }
 
 .timer-selection-container > div {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .timer-selection-container select {
-    width: 100%;
+  width: 100%;
 }
 
 .timer-selection-container button {
-    width: 150px;
-    align-self: flex-end;
+  width: 150px;
+  align-self: flex-end;
 }
 
-.rd3col{
-    /*background-color: #61dafb;*/
-    /*margin-top: 130px;*/
+.rd3col {
+  /*background-color: #61dafb;*/
+  /*margin-top: 130px;*/
 }

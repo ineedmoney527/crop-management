@@ -1,18 +1,18 @@
 body {
   font-family: Arial, sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 1.6;
   font-weight: 400;
   color: #333333;
   background-color: #fff; /* White background */
 }
 
-.h2-soil {
+/* .h2-soil {
   color: #27ae60;
   font-size: 33px;
   font-weight: 600;
   margin-bottom: 20px;
-}
+} */
 
 .soil-modal {
   position: fixed;
@@ -20,12 +20,12 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff; /* White background */
-  border-radius: 10px;
-  border: 3px solid black;
-  padding: 30px;
+  border-radius: 9px;
+  border: 2px solid #d2d2d2;
+  padding: 10px;
   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
   max-width: 600px;
-  height: 90%;
+  height: 80%;
   overflow-y: auto;
   width: 100%;
   z-index: 1000;
@@ -33,6 +33,11 @@ body {
 
 .soil-modal-content {
   text-align: left;
+}
+
+.heading1 {
+  margin: 5px 0px 0px 5px;
+  font-weight: bold;
 }
 
 .close {
@@ -58,84 +63,82 @@ body {
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 10px;
 }
 
 .tabs button {
-  flex: 1;
-  background-color: transparent;
-  color: #555;
-  padding: 10px 20px;
-  margin: 0 10px;
+  border: transparent;
   border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #9fc173;
+  margin: 3px;
+  width: 250px;
+  height: 100px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.tabs button:hover {
+  background-color: #a4cb70;
+  color: #3f4736;
+  opacity: 90%;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .tabs button.active {
-  background-color: #2ecc71; /* Green for active tab */
-  border-color: black;
-  border-style: solid;
-  border-width: 3px;
-  color: #fff;
+  background-color: #83a458;
+  color: white;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 20px; */
 }
 
-label-soil {
+.labelTitle-soil {
   display: block;
   font-weight: bold;
   color: #444;
+  /* margin-left: 30px; */
   margin-bottom: 10px;
-  font-size: 25px;
+  margin-right: 10px;
+  font-size: 18px;
+  width: 150px;
 }
 
-.input input[type="text"],
-input[type="radio"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 30px;
+.input {
+  width: 300px;
+  padding: 10px;
+  border: 1.5px solid #d2d2d2;
+  border-radius: 10px;
   font-size: 17px;
-  font-family: Arial, sans-serif;
   font-weight: 400;
 }
-.input input[type="text"]:focus,
-.input input[type="number"]:focus {
+.input:focus {
   transition: width 0.3s ease, border-color 0.3s ease; /* Add transition for width and border-color */
-  border-color: #2ecc71; /* Change border color when focused */
-  border-width: 4px;
+  border-color: #a4cb70; /*Change border color when focused*/
+  border-width: 1.5px;
+  /* border: #A4CB70; */
+  outline: #a4cb70;
 }
 
-.input input[type="number"] {
-  width: 50%;
-  border-radius: 25px;
-}
-
-.input input[type="radio"] {
-  margin-right: 15px;
-}
-
-.button-soil {
-  display: block;
+.Allform button[type="submit"] {
+  background-color: #8ba766; /* Button background color */
+  color: #fff; /* Text color */
+  padding: 10px; /* Padding around the text inside the button */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 15px; /* Font size */
+  cursor: pointer; /* Cursor pointer */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
   width: 100%;
-  padding: 14px;
-  background-color: #2ecc71; /* Green for submit button */
-  color: #fff;
-  border: width 2px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: Arial, sans-serif;
-  font-size: 25px;
-  font-weight: 600;
 }
 
-.button-soil:hover {
-  background-color: #27ae60; /* Darker green on hover */
+.Allform button[type="submit"]:hover {
+  background-color: #495d44; /* Button background color */
 }
 
 .radio-group {
@@ -147,7 +150,7 @@ input[type="radio"] {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #444;
+  color: #3f4736;
 }
 
 .radio-group input[type="radio"] {
@@ -157,8 +160,8 @@ input[type="radio"] {
 .radio-group input[type="radio"] + label::before {
   content: "";
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border: 2px solid #ccc;
   border-radius: 50%;
   margin-right: 8px;
@@ -166,8 +169,8 @@ input[type="radio"] {
 }
 
 .radio-group input[type="radio"]:checked + label::before {
-  border-color: #2ecc71;
-  background-color: #2ecc71; /* Green color for checked radio button */
+  border-color: #83a458;
+  background-color: #83a458; /* Green color for checked radio button */
 }
 
 .radio-group input[type="radio"]:focus + label::before {

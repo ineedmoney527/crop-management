@@ -119,8 +119,8 @@ const SoilContainer = () => {
   };
 
   return (
-    <div style={{ padding: "50px" }}>
-      <h1>Soil Management Dashboard</h1>
+    <div style={{ margin: "10px" }}>
+      <h1 style={{ marginBottom: "20px" }}>Soil Management Dashboard</h1>
 
       {soilData && (
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -130,19 +130,18 @@ const SoilContainer = () => {
               className="gauge-container"
               style={{
                 borderRadius: "15px",
-                border: "2px solid #000",
-                padding: "50px",
                 flex: "1",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                gap: "10px",
-                border: "1px solid #000",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+                border: "1px solid #d2d2d2",
+                boxShadow: "5px 8px 30px rgba(0, 0, 0, 0.2)",
               }}
             >
               <div>
-                <h2 style={{ marginBottom: "100px" }}>pH value</h2>
+                <h2 style={{ marginLeft: "30px", fontWeight: "bold" }}>
+                  pH value
+                </h2>
               </div>
               <GaugeComponent
                 style={{
@@ -197,23 +196,23 @@ const SoilContainer = () => {
             <div
               style={{
                 borderRadius: "15px",
-                border: "2px solid #000",
-                padding: "50px",
+                border: "1px solid #d2d2d2",
+                padding: "10px",
                 flex: "1",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                gap: "10px",
-                border: "1px solid #000",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+                // gap: "10px",
+                boxShadow: "5px 8px 30px rgba(0, 0, 0, 0.2)",
               }}
             >
               <div>
-                <h2>Soil Health Indicators</h2>
+                <h2 style={{ fontWeight: "bold", marginBottom: "5px" }}>
+                  Soil Health Indicators
+                </h2>
               </div>
-
               <Radar
-                style={{ flex: "1" }}
+                style={{ flex: "1", height: "300px" }}
                 title="Soil Nutrient Content"
                 data={chartData}
               />
@@ -235,7 +234,9 @@ const SoilContainer = () => {
               boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
             }}
           >
-            <h2>Soil Moisture and Temperature</h2>
+            <h2 style={{ fontWeight: "bold" }}>
+              Soil Moisture and Temperature
+            </h2>
             <p>Moisture: {soilData.soilMoisture}%</p>
             <p>Temperature: {soilData.soilTemperature}°C</p>
             <div style={{ width: "100%", height: "100%" }}>

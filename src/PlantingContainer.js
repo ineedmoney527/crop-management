@@ -3,40 +3,20 @@ import "./PlantingContainer.css";
 import CalendarComponent from "./CalendarComponent";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { GoRows } from "react-icons/go";
+import { LuFlower } from "react-icons/lu";
+import { TbSpacingHorizontal } from "react-icons/tb";
+import { TbSpacingVertical } from "react-icons/tb";
+import { MdOutlineBookmarkAdded } from "react-icons/md";
+import { LuTreeDeciduous } from "react-icons/lu";
+import { LiaSeedlingSolid } from "react-icons/lia";
+import axios from "axios";
 
-const PlantingContainer = () => {
-  const [cropName, setCropName] = useState("Blueberry");
-  const [cultivar, setCultivar] = useState("Variety X");
-  const [plantingMethod, setPlantingMethod] = useState("rowPlanting");
-  const [seedTreatment, setSeedTreatment] = useState("treatment2");
-  const [plantingAmount, setPlantingAmount] = useState(120);
-  const [nurseryStartDate, setNurseryStartDate] = useState(
-    new Date("2024-03-20")
-  );
-  const [nurseryDays, setNurseryDays] = useState(30);
-  const [plantingDate, setPlantingDate] = useState(new Date("2024-04-20"));
-  const [daysToMature, setDaysToMature] = useState(120);
-  const [firstHarvestDay, setFirstHarvestDay] = useState("");
+const PlantingContainer = ({ landId, crop }) => {
+  const [cropInfo, setCropInfo] = useState([]);
+  const [harvest, setHarvest] = useState(null);
+  const [markedDates, setMarkedDates] = useState(null);
 
-  const [noOfRows, setNoOfRows] = useState(10);
-  const [rowSpacing, setRowSpacing] = useState(2);
-  const [spacingOnRows, setSpacingOnRows] = useState(4);
-  const [bedVisualization, setBedVisualization] = useState("");
-
-  useEffect(() => {
-    if (plantingDate && daysToMature) {
-      const maturityDate = new Date(plantingDate);
-      maturityDate.setDate(maturityDate.getDate() + daysToMature);
-      setFirstHarvestDay(maturityDate.toDateString());
-    }
-  }, [plantingDate, daysToMature]);
-
-  // Define the marked dates for the calendar
-  const markedDates = [
-    new Date("2024-03-20"),
-    new Date("2024-04-20"),
-    new Date("2024-08-14"),
-  ];
   const harvestData = [
     {
       id: 1,
@@ -102,54 +82,190 @@ const PlantingContainer = () => {
       date: "2024-09-30",
     },
   ];
+  const fetchCropInfo = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/map/planting/${landId}`
+      );
+      setCropInfo((prev) => response.data);
+    } catch (error) {
+      console.error("Error fetching lands:", error);
+    }
+  };
 
-  return (
+  useEffect(() => {
+    fetchCropInfo();
+  }, []);
+  useEffect(() => {
+    console.log("Crop Info:", cropInfo);
+  }, [cropInfo, markedDates]);
+
+  // Define the marked dates for the calendar
+
+  return crop == null ? (
+    <div>Nothing is planted here</div>
+  ) : (
     <div className="planting-info">
-      <h1 className="header">Blueberry Planting Information</h1>
+      <h1 className="header">
+        {" "}
+        {crop} ({cropInfo?.cultivar}) Planting Information
+      </h1>
 
       <div className="card-container">
         {/* Plant Layout */}
-        <div className="card">
-          <h2>Plant Layout</h2>
-          <div className="info-item">
-            <label className="title">Number of Rows</label>{" "}
-            <label>{noOfRows}</label>
+        <div className="card1">
+          <h2 className="subh2">Plant Layout</h2>
+          <div className="card-content">
+            <div className="info-item1">
+              <label
+                className="title"
+                style={{
+                  fontSize: "27px",
+                  alignContent: "flex-start",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <GoRows style={{ marginRight: "5px" }} />
+                Number of Rows
+              </label>
+              <label
+                style={{
+                  alignItems: "flex-end",
+                  textAlign: "right",
+                  fontSize: "50px",
+                  fontWeight: "bold",
+                }}
+              >
+                {cropInfo?.noOfRows || ""}
+              </label>
+            </div>
+            <div className="info-item2">
+              <label
+                className="title"
+                style={{
+                  fontSize: "27px",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  alignContent: "flex-start",
+                }}
+              >
+                <TbSpacingHorizontal style={{ marginRight: "5px" }} />
+                Spacing in Row
+              </label>{" "}
+              <label
+                style={{
+                  alignItems: "flex-end",
+                  textAlign: "right",
+                  fontSize: "50px",
+                  fontWeight: "bold",
+                }}
+              >
+                {cropInfo?.rowSpacing} ft
+              </label>
+            </div>
+            <div className="info-item3">
+              <label
+                className="title"
+                style={{
+                  fontSize: "27px",
+                  alignContent: "center",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <TbSpacingVertical style={{ marginRight: "5px" }} />
+                Spacing Between Rows
+              </label>{" "}
+              <label
+                style={{
+                  alignItems: "flex-end",
+                  textAlign: "right",
+                  fontSize: "50px",
+                  fontWeight: "bold",
+                }}
+              >
+                {cropInfo?.spacingOnRows} ft
+              </label>
+            </div>
           </div>
-          <div className="info-item">
-            <label className="title">Spacing in Row</label>{" "}
-            <label>{rowSpacing} ft</label>
-          </div>
-          <div className="info-item">
-            <label className="title">Spacing Between Rows</label>{" "}
-            <label>{spacingOnRows} ft</label>
+
+          {/* Important Dates */}
+          <div className="card">
+            <h2 className="subh2">Important Dates</h2>
+            <div className="card-content2">
+              <div className="card-inline">
+                <div className="info-item4">
+                  <label className="title2">
+                    <LiaSeedlingSolid
+                      style={{
+                        marginRight: "5px",
+                        animation: "pulse 2s infinite",
+                      }}
+                    />
+                    Nursery Start
+                  </label>{" "}
+                  <label className="subcontent">
+                    {" "}
+                    {cropInfo?.nurseryStartDate?.split("T")[0] || ""} (
+                    {cropInfo?.nurseryDays} days)
+                  </label>
+                </div>
+                <div className="info-item5">
+                  <label className="title2">
+                    <LuTreeDeciduous
+                      style={{
+                        marginRight: "5px",
+                        animation: "wiggle 2s linear infinite",
+                      }}
+                    />
+                    Planting to Ground
+                  </label>{" "}
+                  <label className="subcontent">
+                    {cropInfo?.plantingDate?.split("T")[0] || ""}
+                  </label>
+                </div>
+                <div className="info-item6">
+                  <label className="title2">
+                    <LuFlower
+                      style={{
+                        marginRight: "5px",
+                        animation: "rotate 2s linear infinite",
+                      }}
+                    />
+                    Estimated Harvest
+                  </label>{" "}
+                  <label className="subcontent">
+                    {cropInfo?.firstHarvestDay}({cropInfo?.daysToMature} days)
+                  </label>
+                </div>
+              </div>
+              <div className="info-item7">
+                <label className="title2">
+                  <MdOutlineBookmarkAdded
+                    style={{
+                      marginRight: "5px",
+                      animation: "pulse 1s infinite",
+                    }}
+                  />
+                  Marked Dates
+                </label>
+                <CalendarComponent
+                  markedDates={{
+                    harvest: cropInfo?.firstHarvestDay || "",
+                    plant: cropInfo?.plantingDate?.split("T")[0] || "",
+                    nursery: cropInfo?.nurseryStartDate?.split("T")[0] || "",
+                  }}
+                />{" "}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Important Dates */}
-        <div className="card">
-          <h2>Important Dates</h2>
-          <div className="info-item">
-            <label className="title">Nursery Start</label>{" "}
-            <label>March 20, 2024 (30 days)</label>
-          </div>
-          <div className="info-item">
-            <label className="title">Planting to Ground</label>{" "}
-            <label>April 20, 2024</label>
-          </div>
-          <div className="info-item">
-            <label className="title">Estimated Harvest</label>{" "}
-            <label>August 18, 2024 (120 days)</label>
-          </div>
-
-          <div className="info-item">
-            <label className="title">Marked Dates</label>
-            <CalendarComponent></CalendarComponent>
-          </div>
-        </div>
-        <div className="card">
-          <div className="harvest-table">
-            <h2>Harvest Records</h2>
-            <table>
+        <div className="card3">
+          <div className="harvest-tableDisplay">
+            <h2 className="subh2">Harvest Records</h2>
+            <table className="harvest-table">
               <thead>
                 <tr>
                   <th>ID</th>

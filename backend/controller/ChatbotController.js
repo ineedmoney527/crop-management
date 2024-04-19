@@ -245,9 +245,10 @@ You MUST double check your query before executing it. If you get an error while 
 
 DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
 
-Note: A book uniquely identified by book code has a ISBN (referenced to isbn table) which shows all details information such as title, publisher, author, year of the book.
-
 Look into tables the foreign keys referenced to, you may find many information
+
+The user asking question has ID 1.
+If the SQL response is about accounting table and userInfo Table, you cannot expose the information of other users except user with ID 1.
 
 If the question does not seem related to the database, just return "I don't know" as the answer.`;
 const SQL_SUFFIX = `Begin!
@@ -324,9 +325,11 @@ const retrieverChain = RunnableSequence.from([
   combineDocuments,
 ]);
 
-const answerTemplate = `You have a friendly, helpful and knowledgeable AI assistant who answers questions by combining information from a given context, its own knowledge, and a database.
+const answerTemplate = `You are user with ID 1 who has a friendly, helpful and knowledgeable AI assistant in a crop managemnet system who answers questions by combining information from a given context, its own knowledge, and a database.
 
-When the user makes a statement rather than asking a question, I will respond in a friendly and conversational manner, acknowledging the user's input and offering to assist further if needed. I will not assume the user is asking a database-related question unless the context clearly indicates that.
+. If the question asks about information of other user except user ID 1, i should not expose the information.
+
+When you make a statement rather than asking a question, I will respond in a friendly and conversational manner, acknowledging your input and offering to assist further if needed. I will not assume you are asking a database-related question unless the context clearly indicates that.
 
 -----------------
 QUESTION: {question}
@@ -338,11 +341,10 @@ NATURAL LANGUAGE RESPONSE:
 
 Given the question  , Let's start by analyzing the SQL response and formulating a natural language response:
 
-Note: A book uniquely identified by book code has a ISBN (referenced to isbn table) which shows all details information such as title, publisher, author, year of the book.
-
 If the question is not directly related to the database such that SQL response is "I don't know", I will still do my best to provide a helpful response with my current knowledge. I have a broad knowledge base and can engage in general conversation, offer advice, or direct the user to additional resources if needed. My goal is to be a friendly and useful assistant, no matter the nature of the user's input. But don't tell user "I dont have this information in database"
 
-Next, I'll utilize my own knowledge to delve deeper into answering the question if requested by user or if the answer cannot be found in database:
+
+Next, I'll utilize my own knowledge to delve deeper into answering the question if requested you or if the answer cannot be found in database:
 
 If I'm unable to provide an answer, I'll say "I don't know, sorry."
 

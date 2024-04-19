@@ -51,7 +51,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Paper,
 } from "@material-ui/core";
 
 function TabPanel(props) {
@@ -88,9 +87,9 @@ function a11yProps(index) {
 }
 
 function MarketStore() {
-  const theme = useTheme();
   const [openAlert, setOpenAlert] = useState(false);
   const [value, setValue] = React.useState(1);
+  const theme = useTheme();
   const handleChangeTab = (event, newValue) => {
     setValue(newValue);
   };
@@ -639,131 +638,129 @@ function MarketStore() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Box sx={{ width: "100%", overflowX: "auto" }}>
-            <Paper sx={{ width: "100%", mb: 2 }}>
-              <EnhancedTableToolbar numSelected={selectedRows?.length} />
-              <TableContainer>
-                <DataGrid
-                  rows={myItem}
-                  checkboxSelection
-                  disableRowSelectionOnClick
-                  headerClassName="header-center"
-                  disableSelectionOnClick
-                  // onRowClick={(row) => {
-                  //   console.log("haha");
-                  // }}
-                  onRowSelectionModelChange={(ids) => {
-                    setSelectedRows(
-                      ids.map((id) => myItem.find((row) => row.id === id))
-                    );
-                  }}
-                  pageSize={rowsPerPage}
-                  rowsPerPageOptions={[5, 10, 25]}
-                  pagination
-                  autoHeight
-                  slots={{
-                    toolbar: GridToolbar,
-                  }}
-                  {...myItem}
-                  columns={[
-                    {
-                      field: "id",
-                      headerName: "ID",
-                      width: 100,
-                      align: "center",
-                      headerAlign: "center",
-                    },
-                    {
-                      field: "image_url",
-                      headerName: "Image",
-                      width: 150,
-                      align: "center",
-                      headerAlign: "center",
-                      renderCell: (params) => {
-                        // Convert the Buffer array to a base64 string
+            <EnhancedTableToolbar numSelected={selectedRows?.length} />
+            <TableContainer>
+              <DataGrid
+                rows={myItem}
+                checkboxSelection
+                disableRowSelectionOnClick
+                headerClassName="header-center"
+                disableSelectionOnClick
+                // onRowClick={(row) => {
+                //   console.log("haha");
+                // }}
+                onRowSelectionModelChange={(ids) => {
+                  setSelectedRows(
+                    ids.map((id) => myItem.find((row) => row.id === id))
+                  );
+                }}
+                pageSize={rowsPerPage}
+                rowsPerPageOptions={[5, 10, 25]}
+                pagination
+                autoHeight
+                slots={{
+                  toolbar: GridToolbar,
+                }}
+                {...myItem}
+                columns={[
+                  {
+                    field: "id",
+                    headerName: "ID",
+                    width: 100,
+                    align: "center",
+                    headerAlign: "center",
+                  },
+                  {
+                    field: "image_url",
+                    headerName: "Image",
+                    width: 150,
+                    align: "center",
+                    headerAlign: "center",
+                    renderCell: (params) => {
+                      // Convert the Buffer array to a base64 string
 
-                        // Use the base64 string as the src attribute for the img tag
-                        return (
-                          <Avatar
-                            sx={{
-                              width: 56,
-                              height: 56,
-                              margin: "auto", // Center the avatar within the cell
-                            }}
-                            src={`./images/${params.value}`}
-                            alt="Image"
-                          />
-                        );
-                      },
+                      // Use the base64 string as the src attribute for the img tag
+                      return (
+                        <Avatar
+                          sx={{
+                            width: 56,
+                            height: 56,
+                            margin: "auto", // Center the avatar within the cell
+                          }}
+                          src={`./images/${params.value}`}
+                          alt="Image"
+                        />
+                      );
                     },
-                    {
-                      field: "name",
-                      headerName: "Name",
-                      headerAlign: "center",
-                      width: 150,
-                      align: "center",
-                      flex: 1,
-                    },
-                    {
-                      field: "category",
-                      headerName: "Category",
-                      headerAlign: "center",
-                      width: 200,
-                      align: "center",
-                      flex: 1,
-                    },
-                    {
-                      field: "price_per_unit",
-                      headerName: "Price/Unit",
-                      headerAlign: "center",
-                      width: 150,
-                      align: "center",
-                      flex: 1,
-                    },
-                    {
-                      field: "quantity",
-                      headerName: "Quantity",
-                      headerAlign: "center",
-                      width: 150,
-                      align: "center",
-                      flex: 1,
-                    },
-                    {
-                      field: "description",
-                      headerName: "Description",
-                      headerAlign: "center",
-                      width: 150,
-                      align: "center",
-                      flex: 1,
-                    },
-                    {
-                      field: "acti",
-                      headerName: "Action",
-                      headerAlign: "center",
-                      width: 100,
-                      align: "center",
-                      renderCell: (params) => (
-                        <>
-                          <IconButton
-                            aria-label="edit"
-                            onClick={() => handleEditProduct(params.id)}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            aria-label="delete"
-                            onClick={() => handleDeleteClick(params.id)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </>
-                      ),
-                      disableSelectionOnClick: false, // Enable selection for this column
-                    },
-                    // Columns definition
-                  ]}
-                />
-              </TableContainer>
-            </Paper>
+                  },
+                  {
+                    field: "name",
+                    headerName: "Name",
+                    headerAlign: "center",
+                    width: 150,
+                    align: "center",
+                    flex: 1,
+                  },
+                  {
+                    field: "category",
+                    headerName: "Category",
+                    headerAlign: "center",
+                    width: 200,
+                    align: "center",
+                    flex: 1,
+                  },
+                  {
+                    field: "price_per_unit",
+                    headerName: "Price/Unit",
+                    headerAlign: "center",
+                    width: 150,
+                    align: "center",
+                    flex: 1,
+                  },
+                  {
+                    field: "quantity",
+                    headerName: "Quantity",
+                    headerAlign: "center",
+                    width: 150,
+                    align: "center",
+                    flex: 1,
+                  },
+                  {
+                    field: "description",
+                    headerName: "Description",
+                    headerAlign: "center",
+                    width: 150,
+                    align: "center",
+                    flex: 1,
+                  },
+                  {
+                    field: "acti",
+                    headerName: "Action",
+                    headerAlign: "center",
+                    width: 100,
+                    align: "center",
+                    renderCell: (params) => (
+                      <>
+                        <IconButton
+                          aria-label="edit"
+                          onClick={() => handleEditProduct(params.id)}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => handleDeleteClick(params.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </>
+                    ),
+                    disableSelectionOnClick: false, // Enable selection for this column
+                  },
+                  // Columns definition
+                ]}
+              />
+            </TableContainer>
           </Box>
         </TabPanel>
       </SwipeableViews>

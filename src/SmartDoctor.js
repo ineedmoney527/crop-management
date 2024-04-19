@@ -156,11 +156,13 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import "./SmartDoctor.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const SmartDoctor = () => {
   const [image, setImage] = useState(null);
   const [value, setValue] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const surpriseOptions = [
     "Does the image have a whale?",
@@ -214,51 +216,70 @@ const SmartDoctor = () => {
     setResponse("");
     setError("");
   };
-  return (
-    <div className="app">
-      <section className="search-section">
-        <div className="image-container">
-          {image && <img className="image" src={URL.createObjectURL(image)} />}
-        </div>
-        <p className="extra-info">
-          <span>
-            <label htmlFor="files" className="upload">
-              {" "}
-              upload an image{" "}
-            </label>
-            <input
-              onChange={uploadImage}
-              id="files"
-              accept="image/*"
-              type="file"
-              hidden
-            />
-          </span>
-          to ask questions about.
-        </p>
-        <p>
-          What do you want to know about the image?
-          <button className="surprise" onClick={surprise} disabled={response}>
-            Surprise me
-          </button>
-        </p>
-        <div className="input-container">
-          <input
-            value={value}
-            placeholder="What is in the image..."
-            onChange={(e) => setValue(e.target.value)}
-          />
-          {!response && !error && (
-            <button onClick={analyzeImage}>Ask me</button>
-          )}
-          {(response || error) && <button onClick={clear}>Clear</button>}
-        </div>
 
-        {error && <p>{""}</p>}
-        {response && (
-          <ReactMarkdown className="answer">{response}</ReactMarkdown>
-        )}
-      </section>
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.value;
+    if (selectedOption === "ChatBot") {
+      navigate("/ChatBot"); // Navigate to Smart Doctor page
+    }
+  };
+  return (
+    <div style={{ backgroundColor: "#fafafc", padding: "30px" }}>
+      <select
+        className="select-page"
+        style={{ fontSize: "24px", width: "200px" }}
+        onChange={handleSelectChange}
+      >
+        <option value="Smart Doctor">Smart Doctor</option>
+        <option value="ChatBot">ChatBot</option>
+      </select>
+      <div className="app">
+        <section className="search-section">
+          <div className="image-container">
+            {image && (
+              <img className="image" src={URL.createObjectURL(image)} />
+            )}
+          </div>
+          <p className="extra-info">
+            <span>
+              <label htmlFor="files" className="upload">
+                {" "}
+                upload an image{" "}
+              </label>
+              <input
+                onChange={uploadImage}
+                id="files"
+                accept="image/*"
+                type="file"
+                hidden
+              />
+            </span>
+            to ask questions about.
+          </p>
+          <p>
+            What do you want to know about the image?
+            <button className="surprise" onClick={surprise} disabled={response}>
+              Surprise me
+            </button>
+          </p>
+          <div className="input-container">
+            <input
+              value={value}
+              placeholder="What is in the image..."
+              onChange={(e) => setValue(e.target.value)}
+            />
+            {!response && !error && (
+              <button onClick={analyzeImage}>Ask me</button>
+            )}
+            {(response || error) && <button onClick={clear}>Clear</button>}
+          </div>
+
+          {error && <p>{""}</p>}
+          {response && (
+            <ReactMarkdown className="answer">{response}</ReactMarkdown>
+          )}
+        </section>
+      </div>
     </div>
   );
 };
