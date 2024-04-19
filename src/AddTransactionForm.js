@@ -4,11 +4,11 @@ import { TextField, Button, Grid } from "@mui/material";
 const AddTransactionForm = ({ onAddTransaction }) => {
   const [transaction, setTransaction] = useState({
     date: new Date().toISOString().substr(0, 10),
-    payee: "",
-    category: "",
-    description: "",
-    type: "",
-    amount: "",
+    payee: "ABC Company",
+    category: "Utilities",
+    description: "Land Rental",
+    type: "Expense",
+    amount: "150",
   });
   const userId = 1;
 
@@ -41,7 +41,7 @@ const AddTransactionForm = ({ onAddTransaction }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container spacing={2} sx={{pt:'10px'}} >
+      <Grid container spacing={2} sx={{ pt: "10px" }}>
         <Grid item xs={12}>
           <TextField
             className="date-input"
@@ -108,16 +108,19 @@ const AddTransactionForm = ({ onAddTransaction }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" fullWidth
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
             sx={{
-              mb: '10px',
-              bgcolor: '#9FC173',
-              height: '40px',
+              mb: "10px",
+              bgcolor: "#9FC173",
+              height: "40px",
               "&:hover": {
                 bgcolor: "#495D44",
-                opacity: '70%',
-                color: 'white'
-            },
+                opacity: "70%",
+                color: "white",
+              },
             }}
           >
             Add Transaction

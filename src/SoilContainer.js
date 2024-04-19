@@ -2,10 +2,64 @@ import React, { useEffect, useState, useRef } from "react";
 import { Chart } from "chart.js/auto";
 import { Radar } from "react-chartjs-2";
 import GaugeComponent from "react-gauge-component";
-import ReactApexChart from "react-apexcharts";
+import "./SoilContainer.css";
+import PHChart from "./PHChart.js";
+// import ReactApexChart from "react-apexcharts";
 
 const SoilContainer = () => {
   const [soilData, setSoilData] = useState(null);
+  const [alert_message, setAlertMessage] = useState("");
+  const [moisture, setMoisture] = useState(0); // Soil moisture percentage
+  const [isRotating, setIsRotating] = useState(false);
+
+  const handleAlert = (humidity) => {
+    // Define threshold values for alert messages
+    const suitableMin = 20;
+    const suitableMax = 80;
+
+    if (humidity < suitableMin) {
+      setAlertMessage("Soil moisture is too low!"); // Show alert for low humidity
+    } else if (humidity > suitableMax) {
+      setAlertMessage("Soil moisture is too high!"); // Show alert for very high humidity
+    } else {
+      setAlertMessage(""); // Reset alert message
+    }
+  };
+
+  // Check for alerts when the component renders
+  useEffect(() => {
+    handleAlert(moisture);
+  }, [moisture]);
+
+  const getMoisture = () => {
+    setIsRotating(true);
+    // fetch("http://raspberrypi.local:3000/api/getHumidity/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     setMoisture(data.humidity);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error.message);
+    //   });
+    setMoisture(Math.floor(Math.random() * 100)); // Simulate random soil moisture data
+    setTimeout(() => {
+      setIsRotating(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    getMoisture();
+  }, []);
 
   useEffect(() => {
     // Simulate fetching detailed soil data from an API or database
@@ -119,8 +173,8 @@ const SoilContainer = () => {
   };
 
   return (
-    <div style={{ margin: "10px" }}>
-      <h1 style={{ marginBottom: "20px" }}>Soil Management Dashboard</h1>
+    <div style={{ paddingLeft: "50px", paddingRight: "50px" }}>
+      <h1>Soil Management Dashboard</h1>
 
       {soilData && (
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -130,28 +184,54 @@ const SoilContainer = () => {
               className="gauge-container"
               style={{
                 borderRadius: "15px",
-                flex: "1",
-                display: "flex",
+                border: "2px solid #000",
+                padding: "25px",
                 flexDirection: "column",
-                justifyContent: "center",
-                border: "1px solid #d2d2d2",
-                boxShadow: "5px 8px 30px rgba(0, 0, 0, 0.2)",
+                justifyContent: "flex-start",
+                gap: "10px",
+                border: "1px solid #000",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+                height: "90vh",
+                width: "40vw",
               }}
             >
-              <div>
-                <h2 style={{ marginLeft: "30px", fontWeight: "bold" }}>
-                  pH value
-                </h2>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <label className="card-header">Soil moisture value</label>
+                <button
+                  className={`${isRotating ? "rotate-animation" : ""}`}
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "none",
+                  }}
+                  onClick={getMoisture}
+                >
+                  <img
+                    className="refresh-button"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      backgroundColor: "transparent",
+                    }}
+                    src="refresh.svg"
+                    alt="refresh"
+                  />
+                </button>
               </div>
               <GaugeComponent
                 style={{
-                  marginBottom: "100px",
+                  marginBottom: "50px",
+                  marginTop: "50px",
                 }}
                 minValue={0}
-                maxValue={14}
-                height={200}
-                width={200}
-                value={3}
+                maxValue={100}
+                height={100}
+                width={100}
+                value={moisture}
                 type="radial"
                 labels={{
                   tickLabels: {
@@ -160,13 +240,27 @@ const SoilContainer = () => {
                 }}
                 arc={{
                   subArcs: [
-                    { limit: 2, color: "red", showTick: true }, // pH between 0 and 3 (Red)
-                    { limit: 4, color: "orange", showTick: true }, // pH between 3 and 5 (Orange)
-                    { limit: 6, color: "yellow", showTick: true }, // pH between 5 and 7 (Yellow)
-                    { limit: 8, color: "green", showTick: true }, // pH between 7 and 9 (Green)
-                    { limit: 10, color: "#0496C7", showTick: true }, // pH between 9 and 11 (Blue)
-                    { limit: 12, color: "BLUE", showTick: true }, // pH between 11 and 14 (Violet)
-                    { limit: 14, color: "purple", showTick: true },
+                    {
+                      limit: 20,
+                      color: "red",
+                      showTick: true,
+                    }, // Customize your arc colors and limits as needed
+                    {
+                      limit: 40,
+                      color: "orange",
+                      showTick: true,
+                    },
+                    {
+                      limit: 60,
+                      color: "yellow",
+                      showTick: true,
+                    },
+                    {
+                      limit: 80,
+                      color: "green",
+                      showTick: true,
+                    },
+                    { limit: 100, color: "blue", showTick: true },
                   ],
                 }}
                 pointer={{
@@ -174,45 +268,74 @@ const SoilContainer = () => {
                   animationDelay: 0.3,
                 }}
               />
-              <div
-                class="alert-container"
-                style={{
-                  width: "80%",
-                  marginLeft: "45px",
-                  backgroundColor: "#f0f0f0",
-                  border: "3px solid #ccc",
-                  borderRadius: "10px",
-                  backgroundColor: "lightyellow",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <h3 style={{ color: "red", fontWeight: "bolder" }}>
-                  Alert : ph Value too low !
-                </h3>
-              </div>
+              {alert_message && (
+                <div
+                  class="alert-container"
+                  style={{
+                    width: "80%",
+                    marginLeft: "45px",
+                    backgroundColor: "#f0f0f0",
+                    border: "3px solid #ccc",
+                    borderRadius: "10px",
+                    backgroundColor: "lightyellow",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img
+                      className="alert-icon"
+                      src="alert.svg"
+                      alt="alert"
+                      style={{
+                        height: "30px",
+                        width: "30px",
+                        backgroundColor: "transparent",
+                      }}
+                    />
+                    <label
+                      style={{
+                        color: "red",
+                        fontWeight: "bolder",
+                        fontSize: "x-large",
+                      }}
+                    >
+                      {alert_message}
+                    </label>
+                  </div>
+                </div>
+              )}
             </div>
             <div
               style={{
                 borderRadius: "15px",
-                border: "1px solid #d2d2d2",
-                padding: "10px",
-                flex: "1",
+                padding: "25px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                // gap: "10px",
-                boxShadow: "5px 8px 30px rgba(0, 0, 0, 0.2)",
+                alignItems: "center", // Horizontally center content
+                border: "1px solid #000",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                width: "60vw",
+                height: "90vh",
               }}
             >
-              <div>
-                <h2 style={{ fontWeight: "bold", marginBottom: "5px" }}>
-                  Soil Health Indicators
-                </h2>
+              <div style={{ alignSelf: "flex-start" }}>
+                <label className="card-header">Soil Health Indicators</label>
               </div>
               <Radar
-                style={{ flex: "1", height: "300px" }}
+                style={{
+                  width: "30%",
+                  height: "80%",
+                  maxHeight: "90%",
+                }}
                 title="Soil Nutrient Content"
                 data={chartData}
               />
@@ -222,25 +345,53 @@ const SoilContainer = () => {
           {/* Temperature and Moisture Chart */}
           <div
             style={{
-              borderRadius: "15px",
-              border: "2px solid #000",
-              padding: "50px",
-              flex: "1",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              gap: "10px",
-              border: "1px solid #000",
-              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+              gap: "20px",
+              flexDirection: "row",
+              width: "100%",
             }}
           >
-            <h2 style={{ fontWeight: "bold" }}>
-              Soil Moisture and Temperature
-            </h2>
-            <p>Moisture: {soilData.soilMoisture}%</p>
-            <p>Temperature: {soilData.soilTemperature}°C</p>
-            <div style={{ width: "100%", height: "100%" }}>
+            <div
+              style={{
+                borderRadius: "15px",
+                border: "2px solid #000",
+                padding: "25px",
+                flex: "1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "10px",
+                border: "1px solid #000",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+                width: "70%",
+              }}
+            >
+              <label className="card-header">
+                Soil Moisture and Temperature
+              </label>
+              <p>Moisture: {soilData.soilMoisture}%</p>
+              <p>Temperature: {soilData.soilTemperature}°C</p>
               <TemperatureMoistureChart data={soilData.tempMoisture} />
+            </div>
+            <div
+              style={{
+                borderRadius: "15px",
+                border: "2px solid #000",
+                padding: "25px",
+                flex: "1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "10px",
+                border: "1px solid #000",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow
+                width: "30%",
+              }}
+            >
+              <div style={{ flex: "1" }}>
+                <label className="card-header">Soil pH Value</label>
+              </div>
+              <PHChart />
             </div>
           </div>
         </div>

@@ -26,9 +26,9 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Farmer Quest",
-    path: "/game",
-    icon: <FaIcons.FaGamepad style={style} />,
+    title: "Scheduler",
+    path: "/Scheduler",
+    icon: <AiIcons.AiFillCalendar style={style} />,
     cName: "nav-text",
   },
   {
@@ -38,22 +38,22 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Market",
-    path: "/Market",
-    icon: <AiIcons.AiFillShop style={style} />,
-    cName: "nav-text",
-  },
-  {
     title: "Forum",
     path: "/Forum",
     icon: <FaIcons.FaForumbee style={style} />,
     cName: "nav-text",
   },
+  {
+    title: "Farmer Quest",
+    path: "/game",
+    icon: <FaIcons.FaGamepad style={style} />,
+    cName: "nav-text",
+  },
 
   {
-    title: "Scheduler",
-    path: "/Scheduler",
-    icon: <AiIcons.AiFillCalendar style={style} />,
+    title: "Market",
+    path: "/Market",
+    icon: <AiIcons.AiFillShop style={style} />,
     cName: "nav-text",
   },
 ];

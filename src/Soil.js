@@ -4,16 +4,16 @@ import { Button } from "@mui/material";
 
 export default function Soil({ open, onSoilInfoSubmit, onClose }) {
   const [soilInfo, setSoilInfo] = useState({
-    texture: "",
-    ph: "",
-    nitrogen: "",
-    potassium: "",
-    phosphorus: "",
-    tilage: "",
-    depth: "",
-    time: "",
-    name: "",
-    address: "",
+    texture: "Loamy soil",
+    ph: "6.5",
+    nitrogen: "20 ppm",
+    potassium: "15 ppm",
+    phosphorus: "10 ppm",
+    tilage: "plowing",
+    depth: "12 inches",
+    time: "Spring planting season",
+    name: "John Doe",
+    address: "123 Farm Road, Anytown, USA",
   });
 
   const [activeTab, setActiveTab] = useState("soilInfo"); // Active tab state

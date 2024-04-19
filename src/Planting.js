@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Planting.css";
 
 const Planting = ({ open, onCropSubmit, onClose }) => {
-  const [cropName, setCropName] = useState("");
-  const [cultivar, setCultivar] = useState("");
-  const [plantingMethod, setPlantingMethod] = useState("");
-  const [seedTreatment, setSeedTreatment] = useState("");
-  const [plantingAmount, setPlantingAmount] = useState(0);
-  const [nurseryStartDate, setNurseryStartDate] = useState("");
-  const [nurseryDays, setNurseryDays] = useState(0);
-  const [plantingDate, setPlantingDate] = useState("");
-  const [daysToMature, setDaysToMature] = useState(0);
-  const [firstHarvestDay, setFirstHarvestDay] = useState("");
+  const [cropName, setCropName] = useState("Tomato");
+  const [cultivar, setCultivar] = useState("Cherry Tomato");
+  const [plantingMethod, setPlantingMethod] = useState("Broadcasting");
+  const [seedTreatment, setSeedTreatment] = useState("Coating");
+  const [plantingAmount, setPlantingAmount] = useState(500);
+  const [nurseryStartDate, setNurseryStartDate] = useState("2024-05-01");
+  const [nurseryDays, setNurseryDays] = useState(30);
+  const [plantingDate, setPlantingDate] = useState("2024-06-01");
+  const [daysToMature, setDaysToMature] = useState(90);
+  const [firstHarvestDay, setFirstHarvestDay] = useState("2024-09-01");
 
-  const [noOfRows, setNoOfRows] = useState(0);
-  const [rowSpacing, setRowSpacing] = useState(0);
-  const [spacingOnRows, setSpacingOnRows] = useState(0);
+  const [noOfRows, setNoOfRows] = useState(10);
+  const [rowSpacing, setRowSpacing] = useState(30);
+  const [spacingOnRows, setSpacingOnRows] = useState(15);
   const [bedVisualization, setBedVisualization] = useState("");
 
   useEffect(() => {
@@ -115,11 +115,11 @@ const Planting = ({ open, onCropSubmit, onClose }) => {
             name="plantingMethod"
             onChange={(e) => setPlantingMethod(e.target.value)}
           >
-            <option value="broadcasting">Broadcasting</option>
-            <option value="rowPlanting">Row Planting</option>
-            <option value="drilling">Drilling</option>
-            <option value="transplanting">Transplanting</option>
-            <option value="ridgeAndFurrow">Ridge and Furrow Planting</option>
+            <option value="Broadcasting">Broadcasting</option>
+            <option value="Row Planting">Row Planting</option>
+            <option value="Drilling">Drilling</option>
+            <option value="Transplanting">Transplanting</option>
+            <option value="Ridge&Furrow">Ridge and Furrow Planting</option>
           </select>
         </div>
         <div>
@@ -129,11 +129,11 @@ const Planting = ({ open, onCropSubmit, onClose }) => {
             value={seedTreatment}
             onChange={(e) => setSeedTreatment(e.target.value)}
           >
-            <option value="treatment1">Treatment 1 - Seed Coating</option>
-            <option value="treatment2">Treatment 2 - Seed Priming</option>
-            <option value="treatment3">Treatment 3 - Seed Pelleting</option>
-            <option value="treatment4">Treatment 4 - Seed Inoculation</option>
-            <option value="treatment5">Treatment 5 - Seed Disinfection</option>
+            <option value="Coating">Seed Coating</option>
+            <option value="Priming">Seed Priming</option>
+            <option value="Pelleteing">Seed Pelleting</option>
+            <option value="Inoculation">Seed Inoculation</option>
+            <option value="Disinfection">Seed Disinfection</option>
           </select>
         </div>
         <div>

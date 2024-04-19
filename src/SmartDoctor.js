@@ -152,7 +152,7 @@
 
 // export default SmartDoctor;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import "./SmartDoctor.css";
 import axios from "axios";
@@ -162,7 +162,9 @@ const SmartDoctor = () => {
   const [value, setValue] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [rotation, setRotation] = useState(0);
 
   const surpriseOptions = [
     "Does the image have a whale?",
@@ -190,6 +192,7 @@ const SmartDoctor = () => {
   };
 
   const analyzeImage = async () => {
+    setIsLoading(true);
     setResponse("");
     if (!image) {
       setError("Error ! Must have an existing image");
@@ -208,6 +211,7 @@ const SmartDoctor = () => {
     } catch (e) {
       setError("Error. Please check your network/server");
     }
+    setIsLoading(false);
   };
 
   const clear = () => {
@@ -223,6 +227,16 @@ const SmartDoctor = () => {
       navigate("/ChatBot"); // Navigate to Smart Doctor page
     }
   };
+  useEffect(() => {
+    if (isLoading) {
+      const rotationInterval = setInterval(() => {
+        setRotation((prevRotation) => (prevRotation + 1) % 360);
+      }, 1);
+
+      // Clean up the interval when the component unmounts
+      return () => clearInterval(rotationInterval);
+    }
+  }, [isLoading]);
   return (
     <div style={{ backgroundColor: "#fafafc", padding: "30px" }}>
       <select
@@ -243,8 +257,7 @@ const SmartDoctor = () => {
           <p className="extra-info">
             <span>
               <label htmlFor="files" className="upload">
-                {" "}
-                upload an image{" "}
+                Upload an image
               </label>
               <input
                 onChange={uploadImage}
@@ -253,7 +266,7 @@ const SmartDoctor = () => {
                 type="file"
                 hidden
               />
-            </span>
+            </span>{" "}
             to ask questions about.
           </p>
           <p>
@@ -269,8 +282,32 @@ const SmartDoctor = () => {
               onChange={(e) => setValue(e.target.value)}
             />
             {!response && !error && (
-              <button onClick={analyzeImage}>Ask me</button>
+              <div
+                className="button-container"
+                style={{
+                  display: "flex",
+                  flex: "1",
+                  justifyContent: "center", // Horizontally center the items
+                  alignContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {isLoading ? (
+                  <img
+                    src="loading.svg"
+                    alt="loading"
+                    style={{
+                      transform: `rotate(${rotation}deg)`,
+                      width: "30px",
+                      height: "30px",
+                    }}
+                  />
+                ) : (
+                  <button onClick={analyzeImage}>Ask me</button>
+                )}
+              </div>
             )}
+
             {(response || error) && <button onClick={clear}>Clear</button>}
           </div>
 

@@ -149,12 +149,12 @@ const Weather = () => {
   }, [isHourly]);
 
   return (
-    <div >
+    <div>
       <select
         className="select-pageWeather"
         value={pageTitle}
         onChange={handleTitleChange}
-        style={{  fontSize: "24px" }}
+        style={{ fontSize: "24px" }}
       >
         <option value="Accounting">Accounting</option>
         <option value="Crop Summary">Farm Summary</option>
@@ -192,8 +192,8 @@ const Weather = () => {
           <Stack className="detail-right">
             <div className="frequency-container">
               <button
-                  className={`frequency-button ${isHourly ? "isHourly" : ""}`}
-                  onClick={() => setIsHourly(true)}
+                className={`frequency-button ${isHourly ? "isHourly" : ""}`}
+                onClick={() => setIsHourly(true)}
                 // className="frequency-button"
                 // onClick={() => setIsHourly(true)}
                 // style={{
@@ -212,8 +212,8 @@ const Weather = () => {
                 Hourly
               </button>
               <button
-                  className={`frequency-button ${isHourly ? "" : "isHourly"}`}
-                  onClick={() => setIsHourly(false)}
+                className={`frequency-button ${isHourly ? "" : "isHourly"}`}
+                onClick={() => setIsHourly(false)}
                 // className="frequency-button"
                 // onClick={() => setIsHourly(false)}
                 // style={{
@@ -243,7 +243,10 @@ const Weather = () => {
                       key={isHourly ? data.timestamp : index}
                       className="detail-right-card"
                     >
-                      <div className="time" style={{color:'grey',fontSize:'19px'}}>
+                      <div
+                        className="time"
+                        style={{ color: "grey", fontSize: "19px" }}
+                      >
                         {isHourly
                           ? new Date(data.timestamp).toLocaleTimeString([], {
                               hour: "2-digit",

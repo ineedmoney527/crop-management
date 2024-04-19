@@ -4,12 +4,15 @@
 }
 
 .gauge-radar-container {
-  width: 100%;
+  width: 50%;
   display: flex;
-
   flex: 1;
 }
-
+.card-header {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: xx-large;
+}
 .gauge-container,
 .radar-container {
   border-radius: 20%;
@@ -34,4 +37,17 @@
 .icon {
   font-size: 24px;
   margin-right: 10px;
+}
+/* YourComponent.css */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-animation {
+  animation: rotate 1s linear infinite; /* Adjust duration and timing as needed */
 }
